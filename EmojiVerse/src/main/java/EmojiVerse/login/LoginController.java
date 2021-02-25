@@ -1,5 +1,6 @@
 package EmojiVerse.login;
 
+import EmojiVerse.user.UserUtil;
 import spark.*;
 
 public class LoginController {
@@ -10,8 +11,13 @@ public class LoginController {
     public static Route handleLoginPost = (Request request, Response response) -> {
     	String user = request.queryParams("username");
     	String psw = request.queryParams("password");
-    	// do authentication function
-    	return "Authentication failed for " + user;
+    	if (!UserUtil.auth(user, psw)) {
+    		return "Authentication failed for " + user;
+    	} else {
+    		request.session().attribute("currentUser", user);
+    		response.redirect(request.queryParams("loginRedirect")); //wtf is this
+    		return "Authentication successful, redirecting.";
+    	}
     };
     
     public static Route handleLogoutPost = (Request request, Response response) -> {

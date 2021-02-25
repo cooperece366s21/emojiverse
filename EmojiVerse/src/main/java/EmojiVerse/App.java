@@ -2,6 +2,7 @@ package EmojiVerse;
 import static spark.Spark.*;
 
 import EmojiVerse.login.LoginController;
+import EmojiVerse.user.UserDummy;
 
 /**
  * Hello world!
@@ -9,6 +10,7 @@ import EmojiVerse.login.LoginController;
  */
 public class App 
 {
+	public static UserDummy userDummy;
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
