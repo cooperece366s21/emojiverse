@@ -15,7 +15,9 @@ public class App
         
         port(4567);
         get("/ping", (req, res) -> "OK");
-        get("/hello", (req, res) -> "Hello World Test");
-        get("/login", LoginController.serveLoginPage);
+        get("/hello", (req, res) -> "Hello World");
+        get("/login", 		LoginController.serveLoginPage);
+        post("/login",      LoginController.handleLoginPost);
+        post("/logout",     LoginController.handleLogoutPost);
     }
 }
