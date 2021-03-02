@@ -10,7 +10,7 @@ import EmojiVerse.user.UserDummy;
  */
 public class App 
 {
-	public static UserDummy userDummy;
+	public static UserDummy userDummy = new UserDummy();
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
@@ -20,6 +20,7 @@ public class App
         get("/hello", (req, res) -> "Hello World");
         get("/login", 		LoginController.serveLoginPage);
         post("/login",      LoginController.handleLoginPost);
+        //post("/login",(req, res) -> "logined");
         post("/logout",     LoginController.handleLogoutPost);
     }
 }

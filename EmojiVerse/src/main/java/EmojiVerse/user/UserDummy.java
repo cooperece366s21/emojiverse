@@ -10,6 +10,7 @@ public class UserDummy {
 		new User("bonny","password")
 	);
 	public User getUserByUsername(String username) {
+		//return null;
 		// majik
 		return users.stream().filter(b -> b.getUsername().equals(username)).findFirst().orElse(null);
 	}
