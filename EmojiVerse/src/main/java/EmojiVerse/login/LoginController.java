@@ -11,6 +11,7 @@ public class LoginController {
     public static Route handleLoginPost = (Request request, Response response) -> {
     	String user = request.queryParams("username");
     	String psw = request.queryParams("password");
+    	System.out.println("User " + user + "tried to log in with password " + psw);
     	if (!UserUtil.auth(user, psw)) {
     		return "Authentication failed for " + user;
     	} else {

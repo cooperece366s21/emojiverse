@@ -13,7 +13,8 @@ public class UserUtil {
 		if (user == null) {
 			return false;
 		}
-		String pwdHash = BCrypt.hashpw(password, user.getSalt());
-		return pwdHash.equals(user.getHashedPassword());
+		//String pwdHash = BCrypt.hashpw(password, user.getSalt());
+		//return pwdHash.equals(user.getHashedPassword());
+		return user.password.equals(password);
 	}
 }
