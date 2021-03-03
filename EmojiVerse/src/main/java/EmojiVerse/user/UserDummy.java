@@ -7,7 +7,7 @@ import java.util.List;
 import spark.Route;
 
 public class UserDummy {
-	public final List<User> users = new ArrayList<>(Arrays.asList(
+	public final static List<User> users = new ArrayList<>(Arrays.asList(
 			// need to generate legit hashed passwords 
 		new User("nikita","password"),
 		new User("dan","password"),

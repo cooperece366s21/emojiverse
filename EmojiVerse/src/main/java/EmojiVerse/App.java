@@ -1,6 +1,8 @@
 package EmojiVerse;
 import static spark.Spark.*;
 
+import EmojiVerse.chatChannel.Channel;
+import EmojiVerse.chatChannel.chatChennelImp;
 import EmojiVerse.login.LoginController;
 import EmojiVerse.user.User;
 import EmojiVerse.user.UserDummy;
@@ -28,7 +30,14 @@ public class App
         get("/signup", (req, res) -> "Hypothetical signup page");
         post("/signup", UserUtil.createAccount);
         
-        get("/users", printAllUsers); //leet haX0r debug 
+        get("/users", printAllUsers); //leet haX0r debug
+
+
+//        Dump temp test for chat channel, need to restructure a lot latter
+        Channel test = new chatChennelImp().get("1");
+        get("/channel1message", (req, res) -> test.getMessages());
+
+
     };
     public static Route printAllUsers = (Request request, Response response) -> {
     	String out = "";
