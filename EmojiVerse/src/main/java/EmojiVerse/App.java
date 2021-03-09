@@ -20,7 +20,11 @@ public class App
     {
         System.out.println( "Hello World!" );
         
-        port(4567);
+        staticFiles.location("/public"); //index.html is served at localhost:4567 (default port)
+        staticFiles.expireTime(600);
+        webSocket("/chat", ChatWebSocketHandler.class);
+        init();
+	    
         get("/ping", (req, res) -> "OK");
         get("/hello", (req, res) -> "Hello World");
         get("/login", 		LoginController.serveLoginPage);
