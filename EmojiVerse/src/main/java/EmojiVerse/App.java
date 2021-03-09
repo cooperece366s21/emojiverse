@@ -54,6 +54,13 @@ public class App
         
         get("/users", printAllUsers); //leet haX0r debug
 
+	get("/addFriends/:id/:username/:friend_username", (req,res) -> friend.addToFriendsList(req,res));
+        get("/getFriendsList/:username", (req,res) -> friend.getFriendsList(req,res));
+
+        get("/getFriendsPhotos/:username", (req,res) -> friend.getFriendsImages(req,res));
+
+        get("/blockFriends/:id/:username/:friend_username", (req,res) -> friend.BlockFriend(req,res));
+        get("/getBlockedList/:username", (req,res) -> friend.getBlockedList(req,res));
 
 //        Test for Messaging Channels
 
