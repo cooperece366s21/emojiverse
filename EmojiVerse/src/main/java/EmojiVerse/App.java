@@ -8,6 +8,10 @@ import EmojiVerse.user.User;
 import EmojiVerse.user.UserDummy;
 import EmojiVerse.user.UserUtil;
 import spark.*;
+import EmojiVerse.messaging.ChatWebSocketHandler;
+import org.eclipse.jetty.websocket.api.Session;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Hello world!
@@ -15,7 +19,9 @@ import spark.*;
  */
 public class App 
 {
-	public static UserDummy userDummy = new UserDummy();
+    public static UserDummy userDummy = new UserDummy();
+    static Map<Session, String> userUsernameMap = new ConcurrentHashMap<>();
+    static int nextUserNumber = 1; //Assign to username for next connecting user
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
