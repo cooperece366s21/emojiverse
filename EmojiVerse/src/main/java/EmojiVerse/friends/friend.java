@@ -19,8 +19,12 @@ public class friend implements friendUtils{
         String friend_username = request.params(":friend_username");
         User friend = userDummy.getUserByUsername(friend_username);
         User user = userDummy.getUserByUsername(username);
-        user.addFriendtoFriendsList(id, friend);
-        return "Authorized";
+        if(userList.contains(user) && userList.contains(friend))
+        {
+            user.addFriendtoFriendsList(id, friend);
+            return "Authorized";
+        }
+        return "Username or friend does not exist.";
     }
 
 
@@ -58,8 +62,12 @@ public class friend implements friendUtils{
         String friend_username = request.params(":friend_username");
         User friend = userDummy.getUserByUsername(friend_username);
         User user = userDummy.getUserByUsername(username);
-        user.blockFriendtoBlockedList(id, friend);
-        return "Authorized";
+        if(userList.contains(user) && userList.contains(friend))
+        {
+            user.blockFriendtoBlockedList(id, friend);
+            return "Authorized";
+        }
+        return "Username or friend does not exist.";
 
     }
 
