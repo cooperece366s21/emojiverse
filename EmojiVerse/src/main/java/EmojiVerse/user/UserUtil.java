@@ -25,7 +25,7 @@ public class UserUtil {
     	String psw = request.queryParams("password");
     	String email = request.queryParams("email");
     	
-    	User newUser = new User(username, psw);
+    	User newUser = new User(username, psw,"");
     	
     	userDummy.addUser(newUser);
 		return null;
