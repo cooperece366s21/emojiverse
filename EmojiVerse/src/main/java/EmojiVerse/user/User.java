@@ -18,7 +18,7 @@ public class User {
 		this.password = password;
 	}
 
-	public static void setFriendsList(HashMap<Integer, User> friendsList) { this.friendsList = friendsList; }
+	public void setFriendsList(HashMap<Integer, User> friendsList) { this.friendsList = friendsList; }
 	public HashMap<Integer, User> getFriendsList() { return friendsList; }
 	public static void addFriendtoFriendsList(int id, User friend){ friendsList.put(id, friend);}
 
