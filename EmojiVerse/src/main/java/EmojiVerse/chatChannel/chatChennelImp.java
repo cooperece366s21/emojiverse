@@ -21,7 +21,7 @@ public class chatChennelImp implements chatChannel {
 
     static{
         channelMap = List.of(
-                new Channel("1", UserDummy.users, List.of("Hi","How are you"), Time.valueOf(LocalTime.MAX), true))
+                new Channel("1", UserDummy.users, List.of("\uD83E\uDD2F \u0030\uFE0F\u20E3","\u0030\uFE0F\u20E3 \u0023\uFE0F\u20E3"), Time.valueOf(LocalTime.MAX), true))
                 .stream()
                 .collect(Collectors.toMap(Channel::getId, Function.identity()));
 
