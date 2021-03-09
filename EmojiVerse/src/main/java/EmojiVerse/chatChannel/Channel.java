@@ -1,7 +1,6 @@
 package EmojiVerse.chatChannel;
 
 import EmojiVerse.user.User;
-import EmojiVerse.emoji.emojiMessage;
 
 import java.sql.Time;
 import java.time.LocalTime;
@@ -13,7 +12,7 @@ public class Channel {
 
     List<User> userList;
 
-//    TODO: this message should be combination of emoji ids?
+//    TODO: this message should be combination of Emoji ids?
     List<String> messages;
 
     //    Use to track last updated message

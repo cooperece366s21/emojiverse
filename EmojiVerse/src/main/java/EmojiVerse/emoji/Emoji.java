@@ -3,17 +3,17 @@ package EmojiVerse.emoji;
 import java.net.URL;
 
 
-public class emoji {
+public class Emoji {
 
     String name;
     String img;
 
-    public emoji(String name, String img){
+    public Emoji(String name, String img){
         this.name = name;
         this.img = img;
     }
 
-    public emoji(){ }
+    public Emoji(){ }
 
     public String getName() {
         return name;

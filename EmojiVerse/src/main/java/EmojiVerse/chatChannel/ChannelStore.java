@@ -1,21 +1,13 @@
 package EmojiVerse.chatChannel;
 
-import EmojiVerse.emoji.emoji;
-import EmojiVerse.emoji.emojiMessage;
-import EmojiVerse.user.User;
 import EmojiVerse.user.UserDummy;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.sql.Time;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-public class chatChennelImp implements chatChannel {
+public class ChannelStore{
 
     private static Map<String, Channel> channelMap;
 
@@ -26,7 +18,7 @@ public class chatChennelImp implements chatChannel {
                 .collect(Collectors.toMap(Channel::getId, Function.identity()));
 
     }
-    @Override
+
     public Channel get(String id) {
         return channelMap.get(id);
     }

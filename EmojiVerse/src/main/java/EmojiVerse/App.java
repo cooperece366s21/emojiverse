@@ -1,9 +1,8 @@
 package EmojiVerse;
 import static spark.Spark.*;
 
-import EmojiVerse.Handler.handler;
-import EmojiVerse.chatChannel.Channel;
-import EmojiVerse.chatChannel.chatChennelImp;
+import EmojiVerse.Handler.Handler;
+import EmojiVerse.chatChannel.ChannelStore;
 import EmojiVerse.login.LoginController;
 import EmojiVerse.user.User;
 import EmojiVerse.user.UserDummy;
@@ -16,7 +15,6 @@ import EmojiVerse.messaging.ChatWebSocketHandler;
 import org.eclipse.jetty.websocket.api.Session;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Handler;
 
 /**
  * Hello world!
@@ -50,11 +48,11 @@ public class App
         get("/users", printAllUsers); //leet haX0r debug
 
 
-//        Dump temp test for chat channel, need to restructure a lot latter
+//        Test for Messaging Channels
 
-        chatChennelImp chatChennelImp= new chatChennelImp();
-        handler handler = new handler(chatChennelImp);
-        get("/channel/:name", (req, res) ->  handler.getChannel(req));
+        ChannelStore channelStore= new ChannelStore();
+        Handler handler = new Handler(channelStore);
+        get("/channel/:id", (req, res) ->  handler.getChannel(req));
 
         get("/createChannel/:id/:user1/:user2", (req, res) -> handler.createChannel(req));
 
