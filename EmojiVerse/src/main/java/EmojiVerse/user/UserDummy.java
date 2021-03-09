@@ -9,9 +9,9 @@ import spark.Route;
 public class UserDummy {
 	public final static List<User> users = new ArrayList<>(Arrays.asList(
 			// need to generate legit hashed passwords 
-		new User("nikita","password"),
-		new User("dan","password"),
-		new User("bonny","password")
+		new User("nikita","password", "https://emojiverse.s3.us-east-2.amazonaws.com/boy-2.png"),
+		new User("dan","password", "https://emojiverse.s3.us-east-2.amazonaws.com/boy-1.png"),
+		new User("bonny","password","https://emojiverse.s3.us-east-2.amazonaws.com/girl-1.png")
 	));
 	public User getUserByUsername(String username) {
 		//return null;
