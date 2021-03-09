@@ -54,6 +54,9 @@ public class App
         
         get("/users", printAllUsers); //leet haX0r debug
 
+	    
+//username is username of the current user, friend_username is the username of the friend to block or add, and id is the id of the user in the friends list or blocked list.
+	    
 	get("/addFriends/:id/:username/:friend_username", (req,res) -> friend.addToFriendsList(req,res));
         get("/getFriendsList/:username", (req,res) -> friend.getFriendsList(req,res));
 
