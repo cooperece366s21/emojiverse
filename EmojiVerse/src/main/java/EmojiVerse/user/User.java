@@ -37,7 +37,7 @@ public class User {
 		this.picture_link = picture_link;
 	}
 	String username;
-    String password;
+        String password;
 	static HashMap<Integer, User> friendsList = new HashMap<Integer, User>();
 	String picture_link;
 	static HashMap<Integer, User> blockedList = new HashMap<Integer, User>();
