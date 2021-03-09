@@ -1,17 +1,22 @@
 package EmojiVerse;
 import static spark.Spark.*;
 
+import EmojiVerse.Handler.handler;
 import EmojiVerse.chatChannel.Channel;
 import EmojiVerse.chatChannel.chatChennelImp;
 import EmojiVerse.login.LoginController;
 import EmojiVerse.user.User;
 import EmojiVerse.user.UserDummy;
 import EmojiVerse.user.UserUtil;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import io.norberg.automatter.gson.AutoMatterTypeAdapterFactory;
 import spark.*;
 import EmojiVerse.messaging.ChatWebSocketHandler;
 import org.eclipse.jetty.websocket.api.Session;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Handler;
 
 /**
  * Hello world!
@@ -24,7 +29,9 @@ public class App
     static int nextUserNumber = 1; //Assign to username for next connecting user
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+
+        Gson gson =
+                new GsonBuilder().registerTypeAdapterFactory(new AutoMatterTypeAdapterFactory()).create();
         
         staticFiles.location("/public"); //index.html is served at localhost:4567 (default port)
         staticFiles.expireTime(600);
@@ -44,8 +51,12 @@ public class App
 
 
 //        Dump temp test for chat channel, need to restructure a lot latter
-        Channel test = new chatChennelImp().get("1");
-        get("/channel1message", (req, res) -> test.getMessages());
+
+        chatChennelImp chatChennelImp= new chatChennelImp();
+        handler handler = new handler(chatChennelImp);
+        get("/channel/:name", (req, res) ->  handler.getChannel(req));
+
+        get("/createChannel/:id/:user1/:user2", (req, res) -> handler.createChannel(req));
 
 
     };

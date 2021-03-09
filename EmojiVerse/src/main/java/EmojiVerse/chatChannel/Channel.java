@@ -4,6 +4,7 @@ import EmojiVerse.user.User;
 import EmojiVerse.emoji.emojiMessage;
 
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.List;
 
 public class Channel {
@@ -27,11 +28,11 @@ public class Channel {
         return messages;
     }
 
-    public Channel(String id, List<User> userList, List<String> messages, Time timestamp, boolean active) {
+    public Channel(String id, List<User> userList, List<String> messages) {
         this.id = id;
         this.userList = userList;
         this.messages = messages;
-        this.timestamp = timestamp;
-        this.active = active;
+        timestamp = Time.valueOf(LocalTime.MAX);
+        active = true;
     }
 }

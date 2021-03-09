@@ -60,7 +60,17 @@
       <artifactId>jbcrypt</artifactId>
       <version>0.4</version>
     </dependency>
-
+    <dependency>
+      <groupId>io.norberg</groupId>
+      <artifactId>auto-matter</artifactId>
+      <version>0.16.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.norberg</groupId>
+      <artifactId>auto-matter-gson</artifactId>
+      <version>0.13.3</version>
+    </dependency>
   </dependencies>
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
