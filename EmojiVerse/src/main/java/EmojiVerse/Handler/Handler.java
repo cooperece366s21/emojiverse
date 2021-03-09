@@ -3,12 +3,14 @@ package EmojiVerse.Handler;
 import EmojiVerse.App;
 import EmojiVerse.chatChannel.Channel;
 import EmojiVerse.chatChannel.ChannelStore;
+import EmojiVerse.emoji.EmojiMessage;
 import EmojiVerse.user.User;
 import spark.Request;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class Handler {
 
@@ -23,7 +25,9 @@ public class Handler {
         return channelStore.get(channelName);
     }
 
-//    public List<>
+    public Map<String, Channel> getAllChannels(){
+        return  channelStore.getChannelMap();
+    }
 
     public Channel createChannel(Request request){
 //        TODO:Need to guranteer the user exists
@@ -32,8 +36,19 @@ public class Handler {
                 App.userDummy.getUserByUsername(request.params(":user2"))
         ));
 
-        Channel newChannel = new Channel(request.params(":id"), users,List.of("New Channel Created"));
+        Channel newChannel = new Channel(request.params(":id"), users, App.emojiMessageStore.getMessages());
         channelStore.addChannel(newChannel);
         return newChannel;
+    }
+
+    public Channel addMessage(Request request){
+        Channel current = App.channelStore.get(request.params(":channelID"));
+        String userId = request.params(":userID");
+
+//        TODO:In this way only one emoji is supported
+        EmojiMessage message = new EmojiMessage(App.emojiStore.get(request.params(":emoji")),userId);
+        current.addMessage(userId,message);
+
+        return current;
     }
 }

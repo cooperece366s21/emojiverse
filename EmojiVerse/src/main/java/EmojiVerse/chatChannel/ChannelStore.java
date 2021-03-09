@@ -1,5 +1,8 @@
 package EmojiVerse.chatChannel;
 
+import EmojiVerse.App;
+import EmojiVerse.emoji.Emoji;
+import EmojiVerse.emoji.EmojiMessage;
 import EmojiVerse.user.UserDummy;
 
 import java.util.List;
@@ -13,7 +16,7 @@ public class ChannelStore{
 
     static{
         channelMap = List.of(
-                new Channel("1", UserDummy.users, List.of("\uD83E\uDD2F \u0030\uFE0F\u20E3","\u0030\uFE0F\u20E3 \u0023\uFE0F\u20E3")))
+                new Channel("1", UserDummy.users, App.emojiMessageStore.getMessages()))
                 .stream()
                 .collect(Collectors.toMap(Channel::getId, Function.identity()));
 
@@ -25,5 +28,9 @@ public class ChannelStore{
 
     public void addChannel(Channel channel){
         channelMap.put(channel.id, channel);
+    }
+
+    public Map<String, Channel> getChannelMap() {
+        return channelMap;
     }
 }

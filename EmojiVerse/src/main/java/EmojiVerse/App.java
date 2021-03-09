@@ -3,6 +3,9 @@ import static spark.Spark.*;
 
 import EmojiVerse.Handler.Handler;
 import EmojiVerse.chatChannel.ChannelStore;
+import EmojiVerse.emoji.Emoji;
+import EmojiVerse.emoji.EmojiMessageStore;
+import EmojiVerse.emoji.EmojiStore;
 import EmojiVerse.login.LoginController;
 import EmojiVerse.user.User;
 import EmojiVerse.user.UserDummy;
@@ -23,6 +26,10 @@ import java.util.concurrent.ConcurrentHashMap;
 public class App 
 {
     public static UserDummy userDummy = new UserDummy();
+    public static EmojiStore emojiStore = new EmojiStore();
+    public static EmojiMessageStore emojiMessageStore = new EmojiMessageStore();
+    public static ChannelStore channelStore= new ChannelStore();
+
     static Map<Session, String> userUsernameMap = new ConcurrentHashMap<>();
     static int nextUserNumber = 1; //Assign to username for next connecting user
     public static void main( String[] args )
@@ -50,11 +57,13 @@ public class App
 
 //        Test for Messaging Channels
 
-        ChannelStore channelStore= new ChannelStore();
-        Handler handler = new Handler(channelStore);
-        get("/channel/:id", (req, res) ->  handler.getChannel(req));
 
+        Handler handler = new Handler(channelStore);
+
+        get("/channel/:id", (req, res) ->  handler.getChannel(req));
         get("/createChannel/:id/:user1/:user2", (req, res) -> handler.createChannel(req));
+        get("/channelList",(req, res) -> handler.getAllChannels());
+        get("/sendMessage/:channelID/:userID/:emoji",(req, res) -> handler.addMessage(req));
 
 
     };

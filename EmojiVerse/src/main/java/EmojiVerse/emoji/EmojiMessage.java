@@ -4,15 +4,19 @@ import java.util.List;
 
 public class EmojiMessage {
     List<Emoji> Emojis;
+    String UserID;
 
-//    TODO: need to have a Emoji builder to build Emoji message
-//    TODO: May be we dont need this just use string list to contain the Emoji name?
-//    Currently only take one Emoji to test
-    public EmojiMessage(Emoji emoji1) {
-        Emojis.add(emoji1);
+    public EmojiMessage(Emoji emoji1, String userId) {
+        Emojis = List.of(emoji1);
+        this.UserID = userId;
     }
 
     public List<Emoji> getEmojis() {
         return Emojis;
+    }
+
+    public EmojiMessage add(Emoji emoji){
+        Emojis.add(emoji);
+        return this;
     }
 }
