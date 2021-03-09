@@ -18,6 +18,7 @@ import EmojiVerse.messaging.ChatWebSocketHandler;
 import org.eclipse.jetty.websocket.api.Session;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import EmojiVerse.friends.friend;
 
 /**
  * Hello world!
