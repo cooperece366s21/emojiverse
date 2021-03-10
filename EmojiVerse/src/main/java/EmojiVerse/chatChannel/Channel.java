@@ -34,7 +34,7 @@ public class Channel {
         this.id = id;
         this.userList = userList;
         this.messages = messages;
-        timestamp = Time.valueOf(LocalTime.MAX);
+        timestamp = Time.valueOf(LocalTime.now());
         active = true;
     }
 
