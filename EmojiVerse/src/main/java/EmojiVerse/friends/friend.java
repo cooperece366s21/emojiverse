@@ -5,6 +5,7 @@ import java.util.*;
 import EmojiVerse.user.User;
 import EmojiVerse.user.UserDummy;
 import spark.*;
+import com.google.gson.Gson;
 
 import static EmojiVerse.App.userDummy;
 import EmojiVerse.user.*;
@@ -29,7 +30,7 @@ public class friend implements friendUtils{
     }
 
 
-    public static HashMap<Integer, String> getFriendsList(Request request, Response response) {
+    public static String getFriendsList(Request request, Response response) {
         HashMap<Integer,String> userList = new HashMap<Integer,String>();
         String username = request.params(":username");
         User user = userDummy.getUserByUsername(username);
@@ -40,7 +41,9 @@ public class friend implements friendUtils{
             System.out.println((Integer) key);
             userList.put((Integer) key, friendsList.get(key).getUsername());
         }
-        return userList;
+        Gson gson = new Gson();
+        return gson.toJson(userList);
+       
     }
 
 
