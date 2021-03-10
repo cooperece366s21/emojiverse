@@ -76,6 +76,7 @@ public class App
 
 //        Test for emojis
         get("/emojis", (req, res) ->  handler.showEmojis());
+        get("/emoji/:id", (req, res) ->  handler.getEmoji(req));
 
     };
     public static Route printAllUsers = (Request request, Response response) -> {

@@ -64,4 +64,8 @@ public class Handler {
     public String showEmojis(){
         return gson.toJson(emojiStore.getEmojiMap());
     }
+
+    public String getEmoji(Request request){
+        return gson.toJson( emojiStore.get(request.params(":id")));
+    }
 }
