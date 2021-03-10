@@ -16,6 +16,7 @@ characters you can ensure to have the most fun.
     * curl -s localhost:4567/sendMessage/:channelID/:userID/:emoji
   * Commands about emojis
     * curl -s localhost:4567/emojis
+    * curl -s localhost:4567/emoji/:id
   * Commands about friends <i>(assigning id to friend)</i>
     * curl -s localhost:4567/getFriendsList/:username
     * curl -s localhost:4567/addFriends/:id/:username/:friend_username
