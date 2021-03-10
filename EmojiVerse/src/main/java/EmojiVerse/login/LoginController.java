@@ -1,5 +1,7 @@
 package EmojiVerse.login;
 
+import static spark.Spark.halt;
+
 import EmojiVerse.user.UserUtil;
 import spark.*;
 
@@ -14,27 +16,19 @@ public class LoginController {
     	if (UserUtil.auth(user, psw)) {
     		request.session().attribute("currentUser", user);
     		System.out.println("Authentication successful for " + user);
-    		//return "Authentication successful for " + user;
-    		response.redirect(""); 
+    		// redirect to user homepage?
+    		response.redirect("/"); 
+    		return "Authentication Success";
     	}
-    	return "Authentication failed for " + user;
-    	/*
-    	System.out.println("User " + user + " tried to log in with password " + psw);
-    	if (!UserUtil.auth(user, psw)) {
-    		System.out.println("Authentication failed");
-    		return "Authentication failed for " + user;
-    	} else {
-    		System.out.println("Authentication success");
-    		request.session().attribute("currentUser", user);
-    		response.redirect(request.queryParams("loginRedirect")); //wtf is this
-    		return "Authentication successful, redirecting.";
-    	}*/
+    	System.out.println("Authentication failed for " + user);
+    	halt(401, "Authentication failed");
+    	return null;
     };
     
     public static Route handleLogoutPost = (Request request, Response response) -> {
     	request.session().removeAttribute("currentUser");
-        request.session().attribute("loggedOut", true);
-        response.redirect("/login");
+        request.session().attribute("loggedOut", true); //why is this?
+        response.redirect("/");
         return null;
     };
 }

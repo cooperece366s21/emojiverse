@@ -46,10 +46,18 @@ public class App
 	    
         get("/ping", (req, res) -> "OK");
         get("/hello", (req, res) -> "Hello World");
+        
         get("/login", 		LoginController.serveLoginPage);
         post("/login",      LoginController.handleLoginPost);
-        //post("/login",(req, res) -> "logined");
+        get("/testlogin", (req, res) -> {
+        	if (req.session().attribute("currentUser") != null) {
+        		System.out.println("User session active");
+        		return "User session active";
+        	}
+        	return "User session inactive";
+        });
         post("/logout",     LoginController.handleLogoutPost);
+        
         get("/signup", (req, res) -> "Hypothetical signup page");
         post("/signup", UserUtil.createAccount);
         
