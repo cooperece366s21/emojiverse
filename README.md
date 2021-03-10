@@ -14,5 +14,5 @@ characters you can ensure to have the most fun.
     * curl -s localhost:4567/createChannel/:id/:user1/:user2
     * curl -s localhost:4567/channel/:id
     * curl -s localhost:4567/sendMessage/:channelID/:userID/:emoji
-  *  Commands about emojis
+  * Commands about emojis
     * curl -s localhost:4567//emojis
