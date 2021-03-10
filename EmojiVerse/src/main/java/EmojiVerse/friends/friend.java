@@ -11,7 +11,8 @@ import EmojiVerse.user.*;
 
 public class friend implements friendUtils{
 
-
+    static List<User> userList = userDummy.users;
+    
     public static String addToFriendsList(Request request, Response response) {
         System.out.println(request.params(":id"));
         int id = Integer.parseInt(request.params(":id"));
