@@ -5,20 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8dcee704-464d-48d8-90c7-e9ecb95aedc4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/EmojiVerse/emoji/EmojiMessageStore.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/EmojiVerse/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmojiVerse/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/EmojiVerse/Handler/Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmojiVerse/Handler/Handler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/EmojiVerse/chatChannel/Channel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmojiVerse/chatChannel/Channel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/EmojiVerse/chatChannel/ChannelStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmojiVerse/chatChannel/ChannelStore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/EmojiVerse/emoji/EmojiMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmojiVerse/emoji/EmojiMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/EmojiVerse/emoji/EmojiStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmojiVerse/emoji/EmojiStore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/EmojiVerse/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/EmojiVerse/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/EmojiVerse/Handler/handler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/EmojiVerse/Handler/handler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/EmojiVerse/chatChannel/Channel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/EmojiVerse/chatChannel/Channel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/EmojiVerse/chatChannel/ChannelStore.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/EmojiVerse/chatChannel/ChannelStore.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/EmojiVerse/emoji/emojiMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/EmojiVerse/emoji/emojiMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/EmojiVerse/emoji/emojiStore.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/EmojiVerse/emoji/emojiStore.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +40,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="nodejs_package_manager_path" value="yarn" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -71,13 +61,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -99,6 +91,7 @@
       <workItem from="1614715058900" duration="2263000" />
       <workItem from="1614771498313" duration="4708000" />
       <workItem from="1615299488718" duration="6887000" />
+      <workItem from="1615345977286" duration="8196000" />
     </task>
     <servers />
   </component>

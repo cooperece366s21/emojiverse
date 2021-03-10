@@ -75,15 +75,16 @@ public class App
         get("/getBlockedList/:username", (req,res) -> friend.getBlockedList(req,res));
 
 //        Test for Messaging Channels
-
-
-        Handler handler = new Handler(channelStore);
+        Handler handler = new Handler(channelStore, emojiStore);
 
         get("/channel/:id", (req, res) ->  handler.getChannel(req));
         get("/createChannel/:id/:user1/:user2", (req, res) -> handler.createChannel(req));
         get("/channelList",(req, res) -> handler.getAllChannels());
         get("/sendMessage/:channelID/:userID/:emoji",(req, res) -> handler.addMessage(req));
 
+//        Test for emojis
+        get("/emojis", (req, res) ->  handler.showEmojis());
+        get("/emoji/:id", (req, res) ->  handler.getEmoji(req));
 
     };
     public static Route printAllUsers = (Request request, Response response) -> {

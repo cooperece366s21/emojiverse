@@ -4,7 +4,9 @@ import EmojiVerse.App;
 import EmojiVerse.chatChannel.Channel;
 import EmojiVerse.chatChannel.ChannelStore;
 import EmojiVerse.emoji.EmojiMessage;
+import EmojiVerse.emoji.EmojiStore;
 import EmojiVerse.user.User;
+import com.google.gson.Gson;
 import spark.Request;
 
 import java.util.ArrayList;
@@ -15,21 +17,26 @@ import java.util.Map;
 public class Handler {
 
     ChannelStore channelStore;
+    EmojiStore emojiStore;
+    Gson gson;
 
 //    TODO: Need to have more stores
-    public Handler(ChannelStore channelStore){
+    public Handler(ChannelStore channelStore, EmojiStore emojiStore){
+
         this.channelStore = channelStore;
+        this.emojiStore = emojiStore;
+        gson = new Gson();
     }
-    public Channel getChannel(Request request) {
+    public String getChannel(Request request) {
         String channelName = request.params(":id");
-        return channelStore.get(channelName);
+        return gson.toJson(channelStore.get(channelName));
     }
 
-    public Map<String, Channel> getAllChannels(){
-        return  channelStore.getChannelMap();
+    public String getAllChannels(){
+        return  gson.toJson(channelStore.getChannelMap());
     }
 
-    public Channel createChannel(Request request){
+    public String createChannel(Request request){
 //        TODO:Need to guranteer the user exists
         List<User> users = new ArrayList<>(Arrays.asList(
                 App.userDummy.getUserByUsername(request.params(":user1")),
@@ -38,10 +45,10 @@ public class Handler {
 
         Channel newChannel = new Channel(request.params(":id"), users, App.emojiMessageStore.getMessages());
         channelStore.addChannel(newChannel);
-        return newChannel;
+        return "Channel "+ request.params(":id")+" created";
     }
 
-    public Channel addMessage(Request request){
+    public String addMessage(Request request){
         Channel current = App.channelStore.get(request.params(":channelID"));
         String userId = request.params(":userID");
 
@@ -49,6 +56,16 @@ public class Handler {
         EmojiMessage message = new EmojiMessage(App.emojiStore.get(request.params(":emoji")),userId);
         current.addMessage(userId,message);
 
-        return current;
+        return gson.toJson(current);
+    }
+
+
+//    Handlers for Emojis
+    public String showEmojis(){
+        return gson.toJson(emojiStore.getEmojiMap());
+    }
+
+    public String getEmoji(Request request){
+        return gson.toJson( emojiStore.get(request.params(":id")));
     }
 }
