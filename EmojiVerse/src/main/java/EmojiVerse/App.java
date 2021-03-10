@@ -40,7 +40,7 @@ public class App
                 new GsonBuilder().registerTypeAdapterFactory(new AutoMatterTypeAdapterFactory()).create();
         
         staticFiles.location("/public"); //index.html is served at localhost:4567 (default port)
-        staticFiles.expireTime(600);
+        staticFiles.expireTime(600000);
         webSocket("/chat", ChatWebSocketHandler.class);
         init();
 	    
