@@ -8,7 +8,7 @@ interface friendUtils{
         return null;
     }
 
-    public static HashMap<Integer, String> getFriendsList(Request request, Response response) {
+    public static String getFriendsList(Request request, Response response) {
         return null;
     }
 
