@@ -45,7 +45,7 @@ public class Handler {
 
         Channel newChannel = new Channel(request.params(":id"), users, App.emojiMessageStore.getMessages());
         channelStore.addChannel(newChannel);
-        return gson.toJson(newChannel);
+        return "Channel "+ request.params(":id")+" created";
     }
 
     public String addMessage(Request request){
