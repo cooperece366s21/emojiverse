@@ -32,4 +32,17 @@ public class User {
 	static HashMap<Integer, User> friendsList = new HashMap<Integer, User>();
 	String picture_link;
 	static HashMap<Integer, User> blockedList = new HashMap<Integer, User>();
+	
+	public String validate() {
+		String error = null;
+		
+		if (username.isEmpty()) {
+			error = "You must enter a username";
+		} else if (password.isEmpty()) {
+			error = "You must enter a password";
+		} else if (email.isEmpty()) {
+			error = "You must enter an email";
+		}
+		return error;
+	}
 }
