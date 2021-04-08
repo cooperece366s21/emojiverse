@@ -12,4 +12,5 @@ public interface ChatDao {
 	void addMessage(Channel channel, EmojiMessage message);
 	void addUser(Channel channel, User user);
 	void removeUser(Channel channel, User user);
+	Channel createChannel(List<User> users); //I assume that ID selection occurs automagically
 }

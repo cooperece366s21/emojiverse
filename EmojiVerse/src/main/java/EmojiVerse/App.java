@@ -2,13 +2,19 @@ package EmojiVerse;
 
 import static spark.Spark.*;
 
+import EmojiVerse.chatChannel.Channel;
+import EmojiVerse.dao.ChannelDummy;
+import EmojiVerse.dao.ChatDao;
 import EmojiVerse.dao.UserDao;
 import EmojiVerse.dao.UserDummy;
 import EmojiVerse.user.LoginResult;
 import EmojiVerse.user.User;
 import EmojiVerse.user.UserUtil;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -35,6 +41,7 @@ public class App
 	private static void setup_routes()
 	{
 		UserDao userDao = new UserDummy();
+		ChatDao chatDao = new ChannelDummy();
 		UserUtil userUtil = new UserUtil();
 		
 		get("/ping", (req, res) -> "OK");
@@ -101,9 +108,17 @@ public class App
 		post("/new", (req, res) -> {
 			MultiMap<String> params = new MultiMap<String>();
 			UrlEncoded.decodeTo(req.body(), params, "UTF-8");
-			System.out.println(params);
-			System.out.println("Hello");
-			System.out.println(params.getString("users").split(" "));
+			List<String> unameList = Arrays.asList(params.getString("users").split(" "));
+			System.out.println(unameList);
+			List<User> userList = new ArrayList<User>();
+			for (String uname : unameList) {
+				User newUser = userDao.getUserByUsername(uname);
+				if (newUser != null) {
+					userList.add(newUser);
+				}
+			}
+			//add creator user implicitly 
+			Channel newChannel = chatDao.createChannel(userList);
 			return null;
 		});
 	}

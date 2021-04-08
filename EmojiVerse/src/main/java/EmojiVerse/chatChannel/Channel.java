@@ -38,6 +38,11 @@ public class Channel {
     	this.id = id;
     }
     
+    public Channel(String id, List<User> userList) {
+    	this.id = id;
+    	this.userList = userList;
+    }
+    
     public Channel(String id, List<User> userList, List<EmojiMessage> messages) {
         this.id = id;
         this.userList = userList;
