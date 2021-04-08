@@ -1,5 +1,6 @@
 package EmojiVerse.dao;
 
+import EmojiVerse.chatChannel.Channel;
 import EmojiVerse.user.LoginResult;
 import EmojiVerse.user.User;
 
@@ -62,6 +63,17 @@ public class UserDummy implements UserDao{
 			result.setUser(userFound);
 		}
 		return result;
+	}
+	
+	@Override
+	public void addChannel(Channel channel) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void removeChannel(Channel channel) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

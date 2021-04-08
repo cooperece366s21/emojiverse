@@ -1,5 +1,6 @@
 package EmojiVerse.dao;
 
+import EmojiVerse.chatChannel.Channel;
 import EmojiVerse.user.LoginResult;
 import EmojiVerse.user.User;
 
@@ -18,5 +19,9 @@ public interface UserDao {
 	
 	void registerUser(User user);
 	
-	LoginResult authUser(User user);
+	void addChannel(Channel channel);
+	
+	void removeChannel(Channel channel);
+	
+	LoginResult authUser(User user); //should this be here
 }

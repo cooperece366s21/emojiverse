@@ -97,5 +97,14 @@ public class App
 			return null;
 			//return req; //this isn't a possible condition, refactor code?
 		});
+		
+		post("/new", (req, res) -> {
+			MultiMap<String> params = new MultiMap<String>();
+			UrlEncoded.decodeTo(req.body(), params, "UTF-8");
+			System.out.println(params);
+			System.out.println("Hello");
+			System.out.println(params.getString("users").split(" "));
+			return null;
+		});
 	}
 }

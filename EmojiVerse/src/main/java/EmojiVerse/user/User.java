@@ -1,6 +1,7 @@
 package EmojiVerse.user;
 
 import java.util.HashMap;
+import java.util.List;
 
 // generate getter values for all of these
 // really better off using code generation for this crap 
@@ -37,14 +38,23 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public List<String> getChannelIDList() {
+		return channelIDList;
+	}
+	public void removeChannel(String id) {
+		this.channelIDList.remove(id); //I hope this works 
+	}
+	public void addChannel(String id) {
+		this.channelIDList.add(id);
+	}
 	
 	private String username;
 	private String email;
     private String password;
     
-	static HashMap<Integer, User> friendsList = new HashMap<Integer, User>();
-	String picture_link;
-	static HashMap<Integer, User> blockedList = new HashMap<Integer, User>();
+    private List<String> channelIDList;
+	//static HashMap<Integer, User> friendsList = new HashMap<Integer, User>();
+	//static HashMap<Integer, User> blockedList = new HashMap<Integer, User>();
 	
 	public String validate() {
 		String error = "";
@@ -58,4 +68,6 @@ public class User {
 		}
 		return error;
 	}
+
+	
 }
