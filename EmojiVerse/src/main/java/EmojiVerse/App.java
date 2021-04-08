@@ -26,6 +26,7 @@ public class App
 	
 	public static void main ( String[] args ) 
 	{
+		staticFiles.location("/public/SimpleFrontend");
 		get("/hello", (req, res) -> "Hello World");
 		System.out.println("This is a test");
 		setup_routes();
@@ -39,14 +40,15 @@ public class App
 		get("/ping", (req, res) -> "OK");
 		get("/hello", (req, res) -> "Hello World");
 		
-		get("/login", (req,res) -> "Hypothetical login page");
 		post("/login", (req,res) -> {
+			System.out.println(req.body());
 			Map<String, Object> map = new HashMap<>();
 			User user = new User();
 			try {
 				MultiMap<String> params = new MultiMap<String>();
 				UrlEncoded.decodeTo(req.body(), params, "UTF-8");
 				BeanUtils.populate(user, params);
+				System.out.println(params);
 				System.out.println(user.getUsername());
 			} catch (Exception e) {
 				halt(501);
