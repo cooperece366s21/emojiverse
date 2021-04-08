@@ -6,6 +6,19 @@ import java.util.HashMap;
 // really better off using code generation for this crap 
 public class User {
 	
+	public User(String username, String password, String email) {
+		this.username = username;
+		this.password = password;
+		this.email = email;
+	}
+	
+	public User() {
+		this.username = "";
+		this.password = "";
+		this.email = ""; 
+		//unclear if this is the correct method
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -34,7 +47,7 @@ public class User {
 	static HashMap<Integer, User> blockedList = new HashMap<Integer, User>();
 	
 	public String validate() {
-		String error = null;
+		String error = "";
 		
 		if (username.isEmpty()) {
 			error = "You must enter a username";

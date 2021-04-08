@@ -4,7 +4,9 @@ import EmojiVerse.dao.UserDao;
 
 public class UserUtil {
 	
-	private UserDao userDao;
+	private UserDao userDao; //this is a meaningless statement
+	//this is a completely unused class
+	
 	
 	public LoginResult authUser(User user) {
 		LoginResult result = new LoginResult();

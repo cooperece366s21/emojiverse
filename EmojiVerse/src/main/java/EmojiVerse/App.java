@@ -3,6 +3,7 @@ package EmojiVerse;
 import static spark.Spark.*;
 
 import EmojiVerse.dao.UserDao;
+import EmojiVerse.dao.UserDummy;
 import EmojiVerse.user.LoginResult;
 import EmojiVerse.user.User;
 import EmojiVerse.user.UserUtil;
@@ -22,16 +23,19 @@ import org.eclipse.jetty.util.UrlEncoded;
 public class App 
 {
 	private static final String USER_SESSION_ID = "user";
-	private UserDao userDao;
-	private UserUtil userUtil;
 	
-	public void main ( String[] args ) 
+	public static void main ( String[] args ) 
 	{
+		get("/hello", (req, res) -> "Hello World");
+		System.out.println("This is a test");
 		setup_routes();
 	}
 	
-	private void setup_routes()
+	private static void setup_routes()
 	{
+		UserDao userDao = new UserDummy();
+		UserUtil userUtil = new UserUtil();
+		
 		get("/ping", (req, res) -> "OK");
 		get("/hello", (req, res) -> "Hello World");
 		
@@ -43,11 +47,12 @@ public class App
 				MultiMap<String> params = new MultiMap<String>();
 				UrlEncoded.decodeTo(req.body(), params, "UTF-8");
 				BeanUtils.populate(user, params);
+				System.out.println(user.getUsername());
 			} catch (Exception e) {
 				halt(501);
 				return null;
 			}
-			LoginResult result = userUtil.authUser(user);
+			LoginResult result = userDao.authUser(user);
 			if (result.getUser() != null) {
 				req.session().attribute(USER_SESSION_ID, result.getUser());
 				res.redirect("/");
@@ -71,15 +76,14 @@ public class App
 				return null;
 			}
 			String error = user.validate();
-			
 			if (error.isEmpty()) {
 				User existingUser = userDao.getUserByUsername(user.getUsername());
 				if (existingUser == null) {
 					userDao.registerUser(user);
-					res.redirect("/login?r=1"); //what does that mean?
+					res.redirect("/login"); //what does that mean?
 					halt();
 				} else {
-					error = "Username is already taken";
+					return "Username is already taken";
 				}
 			} else {
 				Map<String, Object> map = new HashMap<>();
@@ -88,7 +92,8 @@ public class App
 				map.put("email", user.getEmail());
 				return(map);
 			}
-			return req; //this isn't a possible condition, refactor code?
+			return null;
+			//return req; //this isn't a possible condition, refactor code?
 		});
 	}
 }

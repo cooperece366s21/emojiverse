@@ -1,5 +1,6 @@
 package EmojiVerse.dao;
 
+import EmojiVerse.user.LoginResult;
 import EmojiVerse.user.User;
 
 public interface UserDao {
@@ -16,4 +17,6 @@ public interface UserDao {
 	void removeFromBlockList(User source, User target);
 	
 	void registerUser(User user);
+	
+	LoginResult authUser(User user);
 }
