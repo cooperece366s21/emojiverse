@@ -7,10 +7,30 @@ import java.util.List;
 // really better off using code generation for this crap 
 public class User {
 	
+	public static final int OWNER = 0;
+	public static final int ADMIN = 1;
+	public static final int USER = 2;
+	
+	
+	private int permissionLevel;
+	private String displayname;
+	private String username;
+	private String email;
+    private String password;
+    
+    private List<String> channelIDList;
+	//static HashMap<Integer, User> friendsList = new HashMap<Integer, User>();
+	//static HashMap<Integer, User> blockedList = new HashMap<Integer, User>();
+	
 	public User(String username, String password, String email) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
+	}
+	
+	public User(String username) {
+		this.username = username;
+		this.displayname = username;
 	}
 	
 	public User() {
@@ -22,9 +42,6 @@ public class User {
 
 	public String getUsername() {
 		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
 	}
 	public String getEmail() {
 		return email;
@@ -47,14 +64,18 @@ public class User {
 	public void addChannel(String id) {
 		this.channelIDList.add(id);
 	}
-	
-	private String username;
-	private String email;
-    private String password;
-    
-    private List<String> channelIDList;
-	//static HashMap<Integer, User> friendsList = new HashMap<Integer, User>();
-	//static HashMap<Integer, User> blockedList = new HashMap<Integer, User>();
+	public int getPermissionLevel() {
+		return permissionLevel;
+	}
+	public void setPermissionLevel(int permissionLevel) {
+		this.permissionLevel = permissionLevel;
+	}
+	public String getDisplayname() {
+		return displayname;
+	}
+	public void setDisplayname(String displayname) {
+		this.displayname = displayname;
+	}
 	
 	public String validate() {
 		String error = "";

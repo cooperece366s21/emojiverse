@@ -113,7 +113,9 @@ public class App
 			System.out.println(authUser.getUsername() + " looking to create a new chat");
 			
 			MultiMap<String> params = new MultiMap<String>();
-			UrlEncoded.decodeTo(req.body(), params, "UTF-8");
+			UrlEncoded.decodeTo(req.body(), params, "UTF-8"); //decode url to usernames string 
+			// should be replaced with json I guess
+			// this is all parsing code to be replaced 
 			List<String> unameList = Arrays.asList(params.getString("users").split(" "));
 			System.out.println(unameList);
 			List<User> userList = new ArrayList<User>();
@@ -124,8 +126,13 @@ public class App
 				}
 			}
 			//add creator user implicitly 
+			authUser.setPermissionLevel(authUser.OWNER);
 			userList.add(authUser);
+
 			Channel newChannel = chatDao.createChannel(userList);
+			for (User u : userList) {
+				u.addChannel(newChannel.getId());
+			}
 			res.redirect("/");
 			halt();
 			return null;
@@ -137,6 +144,7 @@ public class App
 				return "Unauthenticated";
 			}
 			System.out.println("Getting chat list for " + authUser.getUsername());
+			return authUser.getChannelIDList();
 		});
 	}
 }

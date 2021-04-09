@@ -11,15 +11,19 @@ public class ChannelDummy implements ChatDao{
 
 	private List<Channel> channels = new ArrayList<Channel>();
 	private int newChanID = 1;
-	Channel dummyChannel = new Channel("0");
 	
+	@Override
+	public Channel createChannel(List<User> users) {
+		Channel newChannel = new Channel(Integer.toString(newChanID), users);
+		// users should be added in to both DAOs in external code
+		channels.add(newChannel);
+		newChanID++;
+		return newChannel;
+	}
 	
 	@Override
 	public Channel getChannelByID(String id) {
-		if (id.equals("0")) { // we need to standardize on a chat id format
-			return dummyChannel;
-		}
-		return null;
+		return channels.stream().filter(c -> c.getId().equals(id)).findFirst().orElse(null);
 	}
 
 	@Override
@@ -29,25 +33,14 @@ public class ChannelDummy implements ChatDao{
 	}
 
 	@Override
-	public void addUser(Channel channel, User user) {
-		// TODO Auto-generated method stub
-		// There need to be permissions for this kind of thing
-		channel.addUser(user);
+	public void addUser(Channel channel, User requester, User target) {
+		// Can regular users add other users? Should that be configurable?
+		channel.addUser(target);
 	}
 
 	@Override
-	public void removeUser(Channel channel, User user) {
+	public void removeUser(Channel channel, User requester, User target) {
 		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Channel createChannel(List<User> users) {
-		Channel newChannel = new Channel(Integer.toString(newChanID), users);
-		channels.add(newChannel);
-		System.out.println("Added new channel with");
-		System.out.println(users);
-		newChanID++;
-		return newChannel;
+		// not gonna implement rn
 	}	
 }

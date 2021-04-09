@@ -71,7 +71,7 @@ public class UserDummy implements UserDao{
 	}
 	
 	@Override
-	public void addChannel(Channel channel) {
+	public void addChannel(User user, Channel channel) {
 		// TODO Auto-generated method stub
 		
 	}

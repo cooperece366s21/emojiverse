@@ -19,7 +19,7 @@ public interface UserDao {
 	
 	void registerUser(User user);
 	
-	void addChannel(Channel channel);
+	void addChannel(User user, Channel channel);
 	
 	void removeChannel(Channel channel);
 	
