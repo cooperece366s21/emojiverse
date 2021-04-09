@@ -106,6 +106,12 @@ public class App
 		});
 		
 		post("/new", (req, res) -> {
+			User authUser = req.session().attribute(USER_SESSION_ID);
+			if (authUser == null) {
+				return "Unauthenticated";
+			}
+			System.out.println(authUser.getUsername() + " looking to create a new chat");
+			
 			MultiMap<String> params = new MultiMap<String>();
 			UrlEncoded.decodeTo(req.body(), params, "UTF-8");
 			List<String> unameList = Arrays.asList(params.getString("users").split(" "));
@@ -118,8 +124,19 @@ public class App
 				}
 			}
 			//add creator user implicitly 
+			userList.add(authUser);
 			Channel newChannel = chatDao.createChannel(userList);
+			res.redirect("/");
+			halt();
 			return null;
+		});
+		
+		get("/chats", (req, res) -> {
+			User authUser = req.session().attribute(USER_SESSION_ID);
+			if (authUser == null) {
+				return "Unauthenticated";
+			}
+			System.out.println("Getting chat list for " + authUser.getUsername());
 		});
 	}
 }

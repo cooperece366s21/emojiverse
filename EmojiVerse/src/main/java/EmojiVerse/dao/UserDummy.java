@@ -1,5 +1,9 @@
 package EmojiVerse.dao;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import EmojiVerse.chatChannel.Channel;
 import EmojiVerse.user.LoginResult;
 import EmojiVerse.user.User;
@@ -7,16 +11,17 @@ import EmojiVerse.user.User;
 public class UserDummy implements UserDao{
 	
 	private static User nikita = new User("nikita","password", "nikita@cooper.edu");
-	//public final static List<User> users = new ArrayList<>(Arrays.asList());
+	private static User bonny = new User("bonny","password", "bonny@cooper.edu");
+	private static User dan = new User("dan","password", "dan@cooper.edu");
+	private List<User> userList = Arrays.asList(nikita,bonny,dan);
 	//can make a cutesy map thing 
 	
 	@Override
 	public User getUserByUsername(String username) {
-		if (username.equals("nikita")) {
-			System.out.println("Call for nikita");
-			return nikita;
-		} 
-		return null;
+		// do I want username or User object?
+		// want consistent behavior
+		// see channel get user implementation 
+		return userList.stream().filter(u -> u.getUsername().equals(username)).findFirst().orElse(null);
 	}
 	@Override
 	public void addFriend(User user, User friend) {

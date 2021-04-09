@@ -1,5 +1,6 @@
 package EmojiVerse.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import EmojiVerse.chatChannel.Channel;
@@ -8,7 +9,7 @@ import EmojiVerse.user.User;
 
 public class ChannelDummy implements ChatDao{
 
-	private List<Channel> channels;
+	private List<Channel> channels = new ArrayList<Channel>();
 	private int newChanID = 1;
 	Channel dummyChannel = new Channel("0");
 	
