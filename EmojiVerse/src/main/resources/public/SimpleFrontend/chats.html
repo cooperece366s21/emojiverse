@@ -41,5 +41,8 @@
 </html>
 <script>
 	let chatList = document.getElementByTagName("nav");
+	$.get("/chats", function(data) {
+		console.log(data);
+	});
 	
 </script>

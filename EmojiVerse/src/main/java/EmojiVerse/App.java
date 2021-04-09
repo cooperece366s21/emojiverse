@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.eclipse.jetty.util.MultiMap;
@@ -42,7 +41,7 @@ public class App
 	{
 		UserDao userDao = new UserDummy();
 		ChatDao chatDao = new ChannelDummy();
-		UserUtil userUtil = new UserUtil();
+		//UserUtil userUtil = new UserUtil();
 		
 		get("/ping", (req, res) -> "OK");
 		get("/hello", (req, res) -> "Hello World");
@@ -126,7 +125,7 @@ public class App
 				}
 			}
 			//add creator user implicitly 
-			authUser.setPermissionLevel(authUser.OWNER);
+			authUser.setPermissionLevel(User.OWNER);
 			userList.add(authUser);
 
 			Channel newChannel = chatDao.createChannel(userList);
@@ -144,7 +143,20 @@ public class App
 				return "Unauthenticated";
 			}
 			System.out.println("Getting chat list for " + authUser.getUsername());
-			return authUser.getChannelIDList();
+			return authUser.getChannelIDList(); //this really ought to be json
+		});
+		
+		get("/channelinfo", (req, res) -> {
+			try {
+				MultiMap<String> params = new MultiMap<String>();
+				UrlEncoded.decodeTo(req.body(), params, "UTF-8");
+				Channel channel = chatDao.getChannelByID(params.get("channelID").get(0));
+				// shoddy parsing 
+				return channel.getChannelName(); // should serialize object to json and return 
+			} catch (Exception e) {
+				halt(501);
+				return null;
+			}
 		});
 	}
 }

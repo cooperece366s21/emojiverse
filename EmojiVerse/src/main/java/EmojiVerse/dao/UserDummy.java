@@ -1,7 +1,6 @@
 package EmojiVerse.dao;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import EmojiVerse.chatChannel.Channel;
@@ -10,10 +9,18 @@ import EmojiVerse.user.User;
 
 public class UserDummy implements UserDao{
 	
-	private static User nikita = new User("nikita","password", "nikita@cooper.edu");
-	private static User bonny = new User("bonny","password", "bonny@cooper.edu");
-	private static User dan = new User("dan","password", "dan@cooper.edu");
-	private List<User> userList = Arrays.asList(nikita,bonny,dan);
+	private List<User> userList;// = new ArrayList<User>;
+	
+	public UserDummy() {
+		User nikita = new User("nikita","password", "nikita@cooper.edu");
+		User bonny = new User("bonny","password", "bonny@cooper.edu");
+		User dan = new User("dan","password", "dan@cooper.edu");
+		userList = new ArrayList<User>();
+		userList.add(nikita);
+		userList.add(bonny);
+		userList.add(dan);
+	}
+	
 	//can make a cutesy map thing 
 	
 	@Override

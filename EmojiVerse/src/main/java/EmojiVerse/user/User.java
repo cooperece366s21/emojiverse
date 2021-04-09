@@ -1,6 +1,6 @@
 package EmojiVerse.user;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 // generate getter values for all of these
@@ -18,7 +18,7 @@ public class User {
 	private String email;
     private String password;
     
-    private List<String> channelIDList;
+    private List<String> channelIDList = new ArrayList<String>();
 	//static HashMap<Integer, User> friendsList = new HashMap<Integer, User>();
 	//static HashMap<Integer, User> blockedList = new HashMap<Integer, User>();
 	
@@ -42,6 +42,11 @@ public class User {
 
 	public String getUsername() {
 		return username;
+	}
+	public void setUsername(String username) { 
+		//this is required by BeanUtil populate
+		// It isn't ideal
+		this.username = username;
 	}
 	public String getEmail() {
 		return email;
