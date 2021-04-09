@@ -1,5 +1,7 @@
 package EmojiVerse.dao;
 
+import java.util.List;
+
 import EmojiVerse.chatChannel.Channel;
 import EmojiVerse.user.LoginResult;
 import EmojiVerse.user.User;
@@ -23,5 +25,8 @@ public interface UserDao {
 	
 	void removeChannel(Channel channel);
 	
+	List<String> getChannelList(User user);
+	
 	LoginResult authUser(User user); //should this be here
+	// should authentication be done elsewhere?
 }

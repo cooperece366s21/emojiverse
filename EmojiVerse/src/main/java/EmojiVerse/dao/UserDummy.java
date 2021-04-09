@@ -87,6 +87,12 @@ public class UserDummy implements UserDao{
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
+
+	@Override
+	public List<String> getChannelList(User user) {
+		// The user object being passed in will not have correct channel list
+		// therefore it must be fetched from the database 
+		user = getUserByUsername(user.getUsername());
+		return user.getChannelIDList();
+	}
 }

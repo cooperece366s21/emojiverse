@@ -125,6 +125,7 @@ public class App
 				}
 			}
 			//add creator user implicitly 
+			// this will choke on my user accessing code.
 			authUser.setPermissionLevel(User.OWNER);
 			userList.add(authUser);
 
@@ -143,7 +144,8 @@ public class App
 				return "Unauthenticated";
 			}
 			System.out.println("Getting chat list for " + authUser.getUsername());
-			return authUser.getChannelIDList(); //this really ought to be json
+			//return authUser.getChannelIDList(); //this really ought to be json
+			return userDao.getChannelList(authUser); 
 		});
 		
 		get("/channelinfo", (req, res) -> {
