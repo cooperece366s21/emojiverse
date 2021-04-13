@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head> 
+
+  <header>
+    <h2>EmojiVerse</h2>
+    <h3>List users you want in your chat</h3>
+  </header>
+  <body>
+    <form action="/new" method="POST" name="userlist">
+      <input type="text" id="users" name="users" value=""><br>
+      <input type="submit" value="Create Chat">
+    </form>
+  </body>
+</html>
+<script>
+	console.log("Hello there");
+	let form = document.forms.namedItem("userlist");
+	form.addEventListener('submit', function(ev) {
+		console.log("submit clicked");
+		let formData = new FormData(form);
+		console.log(formData);
+		//ev.preventDefault();
+	}, false);
+</script>

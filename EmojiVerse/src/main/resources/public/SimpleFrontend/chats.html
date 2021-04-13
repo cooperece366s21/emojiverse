@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head> 
+<style>
+	nav {
+	float: left;
+	width: 20%;
+	background: #ccc;
+	padding: 20px;
+	}
+	
+	nav ul {
+	list-style-type: none;
+	padding: 0;
+	}
+	
+	article {
+	float: left;
+	padding: 20px;
+	width: 70%;
+	background-color: #f1f1f1;
+	}
+</style>
+<body>
+	<header>
+		<h2>EmojiVerse</h2>
+		<h3>You should see your chats here</h3>
+</header>
+	<section>
+	<nav>
+	<ul>
+		<li><a href="#">London</a></li>
+		<li><a href="#">Paris</a></li>
+		<li><a href="#">Tokyo</a></li>
+	</ul>
+	</nav>
+	</section>
+</body>
+</html>
+<script>
+	let chatList = document.getElementByTagName("nav");
+	$.get("/chats", function(data) {
+		console.log(data);
+	});
+	
+</script>
