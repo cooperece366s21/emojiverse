@@ -17,6 +17,7 @@ public class User {
 	private String username;
 	private String email;
     private String password;
+    private String profile_img;
     
     private List<String> channelIDList = new ArrayList<String>();
 	//static HashMap<Integer, User> friendsList = new HashMap<Integer, User>();
@@ -40,6 +41,7 @@ public class User {
 		//unclear if this is the correct method
 	}
 
+
 	public String getUsername() {
 		return username;
 	}
@@ -48,6 +50,8 @@ public class User {
 		// It isn't ideal
 		this.username = username;
 	}
+	public void setProfile_img(String profile_img){this.profile_img = profile_img;}
+	public String getProfile_img(){return profile_img;}
 	public String getEmail() {
 		return email;
 	}
