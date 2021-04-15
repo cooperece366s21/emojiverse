@@ -47,3 +47,11 @@ create table if not exists friends(
     foreign key(username) references users(username),
     friend_profile_img varchar(100)
 );
+
+create table if not exists blocked(
+    blocked_username varchar(50) primary key not null,
+    blocked_public_name varchar(50),
+    blocked_profile_img varchar(100),
+    username varchar(50),
+    foreign key(username) references users(username)
+)
