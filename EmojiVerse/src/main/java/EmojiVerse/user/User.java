@@ -18,15 +18,20 @@ public class User {
 	private String email;
     private String password;
     private String profile_img;
+    private int emoji_coins;
     
     private List<String> channelIDList = new ArrayList<String>();
 	//static HashMap<Integer, User> friendsList = new HashMap<Integer, User>();
 	//static HashMap<Integer, User> blockedList = new HashMap<Integer, User>();
 	
-	public User(String username, String password, String email) {
+	public User(String username, String password, String email,int permissionLevel, String displayname, String profile_img, int emoji_coins) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
+		this.permissionLevel = permissionLevel;
+		this.displayname = displayname;
+		this.profile_img = profile_img;
+		this.emoji_coins = emoji_coins;
 	}
 	
 	public User(String username) {
@@ -40,6 +45,14 @@ public class User {
 		this.email = ""; 
 		//unclear if this is the correct method
 	}
+
+	public User(String username, String password, String email)
+	{
+		this.username = username;
+		this.password = password;
+		this.email = email;
+	}
+
 
 
 	public String getUsername() {
@@ -85,7 +98,9 @@ public class User {
 	public void setDisplayname(String displayname) {
 		this.displayname = displayname;
 	}
-	
+	public int getEmoji_coins() { return emoji_coins; }
+	public void setEmoji_coins(int emoji_coins) { this.emoji_coins = emoji_coins; }
+
 	public String validate() {
 		String error = "";
 		
