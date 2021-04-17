@@ -106,7 +106,7 @@ public class UserMapper implements UserDao {
                     handle ->
                             handle.createQuery("select user_id from users where username = :username")
                                     .bind("username",u.getUsername())
-                                    .map((rs, ctx) -> rs.getInt("chat_id"))
+                                    .map((rs, ctx) -> rs.getInt("user_id"))
                                     .one());
             
             jdbi.withHandle(h -> h.createUpdate("INSERT INTO chat_participants (chat_id, user_id) VALUES (:chat_id, :user_id)  ")
