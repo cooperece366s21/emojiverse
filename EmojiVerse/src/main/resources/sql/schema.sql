@@ -2,9 +2,17 @@
 /* username : root */
 /* password : new_password */
 
-create table if not exists message_list(
-    message_id int primary key not null,
-    message_name varchar(50)
+create table if not exists chat_participants(
+    chat_id int,
+    user_id int,
+    foreign key(user_id) references users(user_id),
+    foreign key(chat_id) references chat_list(chat_id),
+    primary key(user_id,chat_id)
+);
+
+create table if not exists chat_list(
+    chat_id int primary key not null,
+    chat_name varchar(50)                              
 );
 
 create table if not exists emoji_store(
@@ -15,36 +23,39 @@ create table if not exists emoji_store(
 
 
 create table if not exists users(
-    username varchar(50) primary key not null,
+    user_id int primary key not null,
+    username varchar(50) not null unique,
+    email varchar(50) not null unique,
     public_name varchar(50),
-    hashed_psw varchar(50),
+    hashed_psw varchar(50) not null,
     profile_img varchar(100), /* using aws s3 urls loaded thru boto*/
+    permission_level int,
     emoji_coins int
 );
 
 create table if not exists emojis(
-    username varchar(50),
+    user_id int,
     emoji_id int,
-    foreign key(username) references users(username),
+    foreign key(user_id) references users(user_id),
     foreign key(emoji_id) references emoji_store(emoji_id),
-    primary key(username,emoji_id)
+    primary key(user_id,emoji_id)
 
 );
 
 create table if not exists user_messages(
-    user_message_id int,
-    message_id int,
-    username varchar(50),
-    foreign key(username) references users(username),
-    foreign key(message_id) references message_list(message_id),
+    user_message_id int primary key not null,
+    chat_id int,
+    user_id int,
+    foreign key(user_id) references users(user_id),
+    foreign key(chat_id) references chat_list(chat_id),
     message varchar(1000)
 );
 
 create table if not exists friends(
     friend_username varchar(50) primary key not null,
     friend_public_name varchar(50),
-    username varchar(50),
-    foreign key(username) references users(username),
+    user_id int,
+    foreign key(user_id) references users(user_id),
     friend_profile_img varchar(100)
 );
 
@@ -52,6 +63,6 @@ create table if not exists blocked(
     blocked_username varchar(50) primary key not null,
     blocked_public_name varchar(50),
     blocked_profile_img varchar(100),
-    username varchar(50),
-    foreign key(username) references users(username)
+    user_id int,
+    foreign key(user_id) references users(user_id)
 )
