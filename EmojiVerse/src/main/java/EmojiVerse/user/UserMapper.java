@@ -87,30 +87,24 @@ public class UserMapper implements UserDao {
                 .execute());
     }
 
-    @Override
+@Override
     public void addChannel(User user, Channel channel) {
-        jdbi.withHandle(h -> h.createUpdate("INSERT INTO chat_list (chat_name) VALUES (:chat_name)  ")
+        jdbi.withHandle(h -> h.createUpdate("INSERT INTO chat_list (chat_id,chat_name) VALUES (:chat_id,:chat_name)  ")
                 .bind("chat_name",channel.getChannelName())
+                .bind("chat_id",channel.getId())
                 .execute());
 
-        int chat_id =  jdbi.withHandle(
-                handle ->
-                        handle.createQuery("select chat_id from chat_list where chat_name = :chat_name")
-                                .bind("chat_name",channel.getChannelName())
-                                .map((rs, ctx) -> rs.getInt("chat_id"))
-                                .one());
-        
         for(User u : channel.getUserList())
         {
             int user_id =  jdbi.withHandle(
                     handle ->
                             handle.createQuery("select user_id from users where username = :username")
                                     .bind("username",u.getUsername())
-                                    .map((rs, ctx) -> rs.getInt("user_id"))
+                                    .map((rs, ctx) -> rs.getInt("chat_id"))
                                     .one());
-            
+
             jdbi.withHandle(h -> h.createUpdate("INSERT INTO chat_participants (chat_id, user_id) VALUES (:chat_id, :user_id)  ")
-                    .bind("chat_id",chat_id)
+                    .bind("chat_id",channel.getId())
                     .bind("user_id",user_id)
                     .execute());
         }
