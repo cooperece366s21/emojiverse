@@ -16,7 +16,7 @@ function App() {
       <header className="App-header">
         <Switch>
 			<Route exact path = "/" component = {Login} />
-			<Route exact path = "/signup" component = {SignUp} />
+			<Route path = "/signup" component = {SignUp} />
 		</Switch>
       </header>
     </div>
