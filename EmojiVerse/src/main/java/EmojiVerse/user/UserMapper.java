@@ -138,7 +138,7 @@ public class UserMapper implements UserDao {
                                 "inner join chat_participants" +
                                 "where username = :username")
                                 .bind("username",user.getUsername())
-                                .map((rs, ctx) -> rs.getString("chat_id"))
+                                .map((rs, ctx) -> rs.getString("chat_name"))
                                 .list());
     }
 
