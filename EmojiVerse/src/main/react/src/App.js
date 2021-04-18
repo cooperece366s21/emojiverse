@@ -2,11 +2,12 @@ import logo from './logo.svg';
 import './App.css';
 import React, { useState } from 'react';
 import {
-  BrowserRouter as Router,
+  Router,
   Route,
   Switch,
-} from 'react-router-dom';
+} from 'react-router';
 import {Login} from './components/login';
+import {SignUp} from './components/signup';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <header className="App-header">
         <Switch>
 			<Route exact path = "/" component = {Login} />
+			<Route exact path = "/signup" component = {SignUp} />
 		</Switch>
       </header>
     </div>
