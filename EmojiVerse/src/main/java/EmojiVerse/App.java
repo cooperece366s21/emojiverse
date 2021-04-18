@@ -9,6 +9,7 @@ import EmojiVerse.dao.UserDao;
 import EmojiVerse.dao.UserDummy;
 import EmojiVerse.user.LoginResult;
 import EmojiVerse.user.User;
+import EmojiVerse.user.UserMapper;
 import EmojiVerse.user.UserUtil;
 
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ import java.util.Map;
 import org.apache.commons.beanutils.BeanUtils;
 import org.eclipse.jetty.util.MultiMap;
 import org.eclipse.jetty.util.UrlEncoded;
+import com.google.gson.Gson;
+import org.json.JSONObject;
 
 /**
  * Hello world!
@@ -36,9 +39,35 @@ public class App
 		System.out.println("This is a test");
 		setup_routes();
 	}
-	
+
 	private static void setup_routes()
 	{
+		options(
+				"/*",
+				(request, response) -> {
+					String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
+					if (accessControlRequestHeaders != null) {
+						//            response.header("Access-Control-Allow-Headers",
+						// accessControlRequestHeaders);
+						response.header("Access-Control-Allow-Headers", "*");
+					}
+
+					String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
+					if (accessControlRequestMethod != null) {
+						response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
+						response.header("Access-Control-Allow-Methods", "*");
+					}
+
+					return "OK";
+				});
+
+		before(
+				(req, res) -> {
+					res.header("Access-Control-Allow-Origin", "*");
+					res.header("Access-Control-Allow-Headers", "*");
+					res.type("application/json");
+				});
+		Gson gson = new Gson();
 		UserDao userDao = new UserDummy();
 		ChatDao chatDao = new ChannelDummy();
 		//UserUtil userUtil = new UserUtil();
@@ -48,41 +77,37 @@ public class App
 		
 		post("/login", (req,res) -> {
 			System.out.println(req.body());
+			JSONObject json = new JSONObject(req.body());
+			System.out.println(json.getString("username"));
 			Map<String, Object> map = new HashMap<>();
-			User user = new User();
-			try {
-				MultiMap<String> params = new MultiMap<String>();
-				UrlEncoded.decodeTo(req.body(), params, "UTF-8");
-				BeanUtils.populate(user, params);
-				System.out.println(params);
-				System.out.println(user.getUsername());
-			} catch (Exception e) {
-				halt(501);
-				return null;
-			}
+			String username = json.getString("username");
+			String password = json.getString("user_password");
+			User user = new User(username,password);
+
 			LoginResult result = userDao.authUser(user);
 			if (result.getUser() != null) {
+				map.put("authorized","true");
 				req.session().attribute(USER_SESSION_ID, result.getUser());
 				res.redirect("/");
 				halt();
 			} else {
-				map.put("error:", result.getError());
+
+				map.put("authorized", "false");
 			}
-			map.put("username", user.getUsername());
-			return map;
+			map.put("username", username);
+			return gson.toJson(map);
 		});
 
 		get("/signup", (req, res) -> "Hypothetical signup page");
 		post("/signup", (req, res) -> {
-			User user = new User();
-			try {
-				MultiMap<String> params = new MultiMap<String>();
-				UrlEncoded.decodeTo(req.body(), params, "UTF-8");
-				BeanUtils.populate(user, params);
-			} catch (Exception e) {
-				halt(501);
-				return null;
-			}
+
+			JSONObject json = new JSONObject(req.body());
+			String username = json.getString("username");
+			String password = json.getString("user_password");
+			String email = json.getString("email");
+			User user = new User(username,password,email);
+			UserMapper usermapper = new UserMapper("jdbc:mysql://localhost:3306/emojiverse");
+			System.out.println(usermapper.isDuplicate(user));
 			String error = user.validate();
 			if (error.isEmpty()) {
 				User existingUser = userDao.getUserByUsername(user.getUsername());
