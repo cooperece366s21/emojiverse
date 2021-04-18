@@ -42,6 +42,9 @@ export const Login = ()  => {
               JSON.stringify({
 			  username: user,user_password:new_password})
             })
+		 
+		 
+		  
           if (response.ok) {
             console.log("Response Worked! ");
 			response.json().then(data=>{
@@ -56,7 +59,7 @@ export const Login = ()  => {
 				});
           }
           else {
-            console.log("Title not found") 
+            console.log("not found") 
           }
 		   console.log(verified);
         }}> Sign In </Button>
