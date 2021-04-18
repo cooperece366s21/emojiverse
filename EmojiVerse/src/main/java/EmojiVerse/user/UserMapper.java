@@ -3,16 +3,20 @@ package EmojiVerse.user;
 import EmojiVerse.chatChannel.Channel;
 import EmojiVerse.dao.UserDao;
 import org.jdbi.v3.core.Jdbi;
+import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 
 import java.util.List;
 
 public class UserMapper implements UserDao {
 
-    private final Jdbi jdbi;
+    private Jdbi jdbi;
+    private String jdbcUrl;
     private List<User> userList;
 
-    public UserMapper(Jdbi jdbi) {
-        this.jdbi = jdbi;
+    public UserMapper(String jdbcUrl) {
+        Jdbi jdbi_prelim = Jdbi.create(jdbcUrl, "root", "new_password");
+        jdbi_prelim.installPlugin(new SqlObjectPlugin());
+        this.jdbi = jdbi_prelim;
     }
 
     @Override
@@ -138,7 +142,7 @@ public class UserMapper implements UserDao {
                                 "inner join chat_participants" +
                                 "where username = :username")
                                 .bind("username",user.getUsername())
-                                .map((rs, ctx) -> rs.getString("chat_name"))
+                                .map((rs, ctx) -> rs.getString("chat_id"))
                                 .list());
     }
 
@@ -154,5 +158,16 @@ public class UserMapper implements UserDao {
             result.setUser(userFound);
         }
         return result;
+    }
+
+    @Override
+    public boolean isDuplicate(User user) {
+        List<String> users = jdbi.withHandle(
+                handle ->
+                        handle.createQuery("select username from users where username = :username")
+                                .bind("username",user.getUsername())
+                                .map((rs, ctx) -> rs.getString("username"))
+                                .list());
+        return users.isEmpty();
     }
 }
