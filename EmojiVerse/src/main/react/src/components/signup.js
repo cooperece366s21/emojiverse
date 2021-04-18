@@ -12,7 +12,7 @@ export const SignUp = ()  => {
   return (
   
     <Form className = "login-container">
-	  <h1>hello</h1>
+	  
 	  <h1>emojiverse</h1>
       <Form.Field>
         <Input
@@ -40,45 +40,39 @@ export const SignUp = ()  => {
       <Form.Field>
 	  
         
-		<Button onClick = {async () => {
+		<Button onClick= {async () => {
           const user = username;
 		  const new_password = user_password;
-          const response = await fetch("/login", {
+		  const new_email = email;
+          const response = await fetch("/signup", {
             method: "POST",
             headers: {
               "Content_Type": "application/json"
             },
             body:
               JSON.stringify({
-			  username: user,user_password:new_password})
+			  username: user,user_password:new_password,email:new_email})
             })
-		 
-		 
-		  
           if (response.ok) {
             console.log("Response Worked! ");
-			response.json().then(data=>{
-				setVerified(data.authorized)
-				console.log(data)
-				if(data.authorized===true)
-				{
-					
-					localStorage.setItem('access_token', data.access_token);
-					localStorage.setItem('username', data.username);
-				}
-				});
+			setVerified(true)
+            
+            
           }
           else {
-            console.log("not found") 
+            console.log("not found")
+            
           }
-		   console.log(verified);
-        }}> Sign In </Button>
-		{verified === true ? <Redirect to='/home' /> :<Redirect to='/' />}
+		  
+        }}>
+        Sign Up</Button>
+		{verified === true ? <Redirect to='/login' /> :<Redirect to='/' />}
 		
       </Form.Field>
-	  {verified !== '' ? <p className = 'alert'>Incorrect username and/or password </p>:<p> </p>}
-	  <p className = 'default'>Please enter a username (an email) and a password. If you do not already have an account sign up but if you do have one sign in. Note that passwords are not stored and 
-	  any and all actions made on this webapp will be anonymous. It is preferred to use an unidentifying email for username. </p>
+	  {verified !== '' ? <p className = 'alert'>User already exists</p>:<p> </p>}
+	  <p className = 'default'>Please enter a username, password, and email. If you are a returning user go to the sign in page. 
+	  Two usernames or emails cannot be used at the same time so both must be unique. It is preferable to label your username as your email.
+	  You can later set your public name to something different.</p>
     </Form>
   );
 };
