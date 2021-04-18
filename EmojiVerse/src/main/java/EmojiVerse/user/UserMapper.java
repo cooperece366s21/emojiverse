@@ -87,7 +87,7 @@ public class UserMapper implements UserDao {
                 .execute());
     }
 
-@Override
+    @Override
     public void addChannel(User user, Channel channel) {
         jdbi.withHandle(h -> h.createUpdate("INSERT INTO chat_list (chat_id,chat_name) VALUES (:chat_id,:chat_name)  ")
                 .bind("chat_name",channel.getChannelName())
@@ -116,16 +116,43 @@ public class UserMapper implements UserDao {
 
     @Override
     public void removeChannel(Channel channel) {
+        jdbi.withHandle(h -> h.createUpdate("DELETE FROM chat_list where chat_id = :chat_id")
+                .bind("chat_id",channel.getId())
+                .execute());
+
+        jdbi.withHandle(h -> h.createUpdate("DELETE FROM chat_participants where chat_id = :chat_id")
+                .bind("chat_id",channel.getId())
+                .execute());
+
+        jdbi.withHandle(h -> h.createUpdate("DELETE FROM user_messages where chat_id = :chat_id")
+                .bind("chat_id",channel.getId())
+                .execute());
 
     }
 
     @Override
     public List<String> getChannelList(User user) {
-        return null;
+        return jdbi.withHandle(
+                handle ->
+                        handle.createQuery("select chat_id, chat_name from chat_list " +
+                                "inner join chat_participants" +
+                                "where username = :username")
+                                .bind("username",user.getUsername())
+                                .map((rs, ctx) -> rs.getString("chat_id"))
+                                .list());
     }
 
     @Override
     public LoginResult authUser(User user) {
-        return null;
+        LoginResult result = new LoginResult();
+        User userFound = getUserByUsername(user.getUsername());
+        if(userFound == null) {
+            result.setError("Invalid username");
+            //} else if(!PasswordUtil.verifyPassword(user.getPassword(), userFound.getPassword())) {
+            //result.setError("Invalid password");
+        } else {
+            result.setUser(userFound);
+        }
+        return result;
     }
 }
