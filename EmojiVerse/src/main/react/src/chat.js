@@ -1,3 +1,5 @@
+/*https://github.com/react-z/react-emojipicker/blob/master/src/Picker.js*/
+
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import emojione from 'emojione'
