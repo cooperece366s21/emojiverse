@@ -8,7 +8,7 @@ export const SignUp = ()  => {
   const [user_password,setPassword] = useState('')
   const [title,setTitle] = useState('')
   const [email,setEmail] = useState('')
-  const[verified,setVerified] = useState('')
+  const[verified,setVerified] = useState(false)
   return (
   
     <Form className = "login-container">
@@ -56,7 +56,8 @@ export const SignUp = ()  => {
           if (response.ok) {
             console.log("Response Worked! ");
 			setVerified(true)
-            
+			window.location.replace("http://localhost:3000/")
+           
             
           }
           else {
@@ -64,12 +65,14 @@ export const SignUp = ()  => {
             
           }
 		  
+		  
+		  
         }}>
         Sign Up</Button>
-		{verified === true ? <Redirect to='/login' /> :<Redirect to='/' />}
+		
 		
       </Form.Field>
-	  {verified !== '' ? <p className = 'alert'>User already exists</p>:<p> </p>}
+	  
 	  <p className = 'default'>Please enter a username, password, and email. If you are a returning user go to the sign in page. 
 	  Two usernames or emails cannot be used at the same time so both must be unique. It is preferable to label your username as your email.
 	  You can later set your public name to something different.</p>
