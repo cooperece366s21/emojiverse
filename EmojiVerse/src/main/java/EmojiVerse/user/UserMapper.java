@@ -14,9 +14,23 @@ public class UserMapper implements UserDao {
     private List<User> userList;
 
     public UserMapper(String jdbcUrl) {
+
         Jdbi jdbi_prelim = Jdbi.create(jdbcUrl, "root", "new_password");
         jdbi_prelim.installPlugin(new SqlObjectPlugin());
         this.jdbi = jdbi_prelim;
+    }
+
+    public void testJDBI(){
+        System.out.println(1);
+        jdbi.withHandle(h -> h.createUpdate("INSERT INTO users " +
+                "(username, public_name, profile_img,email,hashed_psw) " +
+                "VALUES (:username, :public_name, :profile_img,:email, :hashed_psw) ")
+                .bind("username","xxxedf")
+                .bind("public_name","dgyugewf")
+                .bind("profile_img","dygdfew")
+                .bind("email","fhuiewfewfy")
+                .bind("hashed_psw","gfewfgef")
+                .execute());
     }
 
     @Override
@@ -79,20 +93,21 @@ public class UserMapper implements UserDao {
 
     @Override
     public void registerUser(User user) {
+
         jdbi.withHandle(h -> h.createUpdate("INSERT INTO users " +
-                "(username, public_name, hashed_psw, profile_img,permission_level, emoji_coins) " +
-                "VALUES (:username, :public_name, :hashed_psw, :profile_img,:permission_level, :emoji_coins)  ")
+                "(username, hashed_psw, email,permission_level, emoji_coins) " +
+                "VALUES (:username, :hashed_psw, :email,:permission_level, :emoji_coins)  ")
                 .bind("username",user.getUsername())
-                .bind("public_name",user.getDisplayname())
                 .bind("hashed_psw",user.getPassword())
-                .bind("profile_img",user.getProfile_img())
-                .bind("permission_level",user.getPermissionLevel())
-                .bind("emoji_coins",user.getEmoji_coins())
+                .bind("email",user.getEmail())
+                .bind("permission_level",2)
+                .bind("emoji_coins",0)
                 .execute());
+
     }
 
     @Override
-    public void addChannel(User user, Channel channel) {
+    public void addChannel(Channel channel) {
         jdbi.withHandle(h -> h.createUpdate("INSERT INTO chat_list (chat_id,chat_name) VALUES (:chat_id,:chat_name)  ")
                 .bind("chat_name",channel.getChannelName())
                 .bind("chat_id",channel.getId())
@@ -147,27 +162,32 @@ public class UserMapper implements UserDao {
     }
 
     @Override
-    public LoginResult authUser(User user) {
-        LoginResult result = new LoginResult();
-        User userFound = getUserByUsername(user.getUsername());
-        if(userFound == null) {
-            result.setError("Invalid username");
-            //} else if(!PasswordUtil.verifyPassword(user.getPassword(), userFound.getPassword())) {
-            //result.setError("Invalid password");
-        } else {
-            result.setUser(userFound);
-        }
-        return result;
+    public boolean authUser(String username) {
+        List<String> users = jdbi.withHandle(
+                handle ->
+                        handle.createQuery("select username from users where username = :username")
+                                .bind("username",username)
+                                .map((rs, ctx) -> rs.getString("username"))
+                                .list());
+        return !(users.isEmpty());
     }
 
     @Override
     public boolean isDuplicate(User user) {
+        System.out.println(jdbi);
         List<String> users = jdbi.withHandle(
                 handle ->
                         handle.createQuery("select username from users where username = :username")
                                 .bind("username",user.getUsername())
                                 .map((rs, ctx) -> rs.getString("username"))
                                 .list());
-        return users.isEmpty();
+        List<String> emails = jdbi.withHandle(
+                handle ->
+                        handle.createQuery("select email from users where email = :email")
+                                .bind("username",user.getEmail())
+                                .map((rs, ctx) -> rs.getString("email"))
+                                .list());
+        return !(users.isEmpty()) && !(emails.isEmpty());
     }
 }
+
