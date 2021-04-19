@@ -84,13 +84,13 @@ public class App
 			boolean result = usermapper.authUser(username);
 			System.out.println(result);
 			if (result==true) {
-				map.put("authorized","true");
+				map.put("authorized",true);
 				req.session().attribute(USER_SESSION_ID);
 
-				halt();
+
 			} else {
 
-				map.put("authorized", "false");
+				map.put("authorized", false);
 			}
 			map.put("username", username);
 			return gson.toJson(map);
@@ -104,20 +104,23 @@ public class App
 			String password = json.getString("user_password");
 			String email = json.getString("email");
 			User user = new User(username,password,email);
-
+			System.out.println(username);
+			System.out.println(password);
+			System.out.println(email);
 			boolean error = usermapper.isDuplicate(user);
 			Map<String, Object> map = new HashMap<>();
 			System.out.println(error);
 			if (error==false) {
 				System.out.println("hello");
 				usermapper.registerUser(user);
-				map.put("authorized","true");
+				map.put("authorized",true);
 				//what does that mean?
-				halt();
+
 				}
 			else
 				{
-					map.put("authorized","false");
+					map.put("authorized",false);
+					halt(404);
 				}
 
 				return gson.toJson(map);
@@ -125,32 +128,30 @@ public class App
 		});
 		
 		post("/new", (req, res) -> {
-			User authUser = req.session().attribute(USER_SESSION_ID);
-			if (authUser == null) {
-				return gson.toJson("{'authorized':'false'}");
-			}
-		
+
+
 			JSONObject json = new JSONObject(req.body());
+
 			String username = json.getString("username");
 			System.out.println(username + " looking to create a new chat");
-			List<String> unameList = Arrays.asList(json.getString("users").split(" "));
+			List<String> unameList = Arrays.asList(json.getString("users").split(","));
+			String chat_name = json.getString("chatName");
 			System.out.println(unameList);
-			List<User> userList = new ArrayList<User>();
-			Channel channel = new Channel(0,userList);
-			
-			usermapper.addChannel(channel);
-			halt();
-			return null;
+
+			int id = chatDao.getNextChatId();
+			System.out.println(id);
+			Channel channel = new Channel(id,unameList,chat_name);
+			Map<String, Object> map = new HashMap<>();
+			usermapper.addChannel(channel,username);
+			return usermapper.getChannelList(username);
 		});
 		
-		get("/chats", (req, res) -> {
-			User authUser = req.session().attribute(USER_SESSION_ID);
-			if (authUser == null) {
-				return "Unauthenticated";
-			}
-			System.out.println("Getting chat list for " + authUser.getUsername());
+		post("/chats", (req, res) -> {
+			JSONObject json = new JSONObject(req.body());
+			String username = json.getString("username");
+			System.out.println("Getting chat list for " + username);
 			//return authUser.getChannelIDList(); //this really ought to be json
-			return usermapper.getChannelList(authUser);
+			return usermapper.getChannelList(username);
 		});
 		
 		get("/channelinfo", (req, res) -> {
@@ -158,7 +159,7 @@ public class App
 				JSONObject json = new JSONObject(req.body());
 				int channel_id = json.getInt("channelID");
 				// shoddy parsing 
-				return chatDao.getChannelByID(channel_id); // should serialize object to json and return 
+				return chatDao.getChannelByID(channel_id); // should serialize object to json and return
 			} catch (Exception e) {
 				halt(501);
 				return null;
