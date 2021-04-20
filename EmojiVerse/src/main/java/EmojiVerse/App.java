@@ -165,5 +165,9 @@ public class App
 				return null;
 			}
 		});
+		post("/getMessages", (req, res) -> {
+			JSONObject json = new JSONObject(req.body());
+			String chat_name = json.getString("chatName");
+			return chatDao.getMessages(chat_name);});
 	}
 }
