@@ -182,14 +182,14 @@ public class UserMapper implements UserDao {
         List<Integer> channels = jdbi.withHandle(
                 handle ->
                         handle.createQuery("select distinct(chat_list.chat_id) from chat_list " +
-                                "inner join chat_participants where user_id = :user_id")
+                                "inner join chat_participants on chat_list.chat_id = chat_participants.chat_id where user_id = :user_id")
                                 .bind("user_id",user_id)
                                 .map((rs, ctx) -> rs.getInt("chat_id"))
                                 .list());
         List<String> chat_names = jdbi.withHandle(
                 handle ->
                         handle.createQuery("select distinct(chat_list.chat_name) from chat_list " +
-                                "inner join chat_participants where user_id = :user_id")
+                                "inner join chat_participants on chat_list.chat_id = chat_participants.chat_id where user_id = :user_id")
                                 .bind("user_id",user_id)
                                 .map((rs, ctx) -> rs.getString("chat_name"))
                                 .list());
@@ -265,3 +265,4 @@ public class UserMapper implements UserDao {
         return !(users.isEmpty()) && !(emails.isEmpty());
     }
 }
+
