@@ -21,6 +21,7 @@ function App() {
 			<Route exact path = "/" component = {Login}/>
 			<Route path = "/signup" component = {SignUp}/>
 			<Route path = "/chatList" component = {ChatList}/>
+
 		</Switch>
       </header>
     </div>
