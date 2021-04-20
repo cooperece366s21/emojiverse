@@ -1,10 +1,14 @@
 /*https://github.com/react-z/react-emojipicker/blob/master/src/Picker.js*/
+/*change send button to async post and get*/
 
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import emojione from 'emojione'
 import PropTypes from 'prop-types'
+import { Form, Input, Button } from 'semantic-ui-react';
 
+const username = localStorage.getItem("username")
+const chat = localStorage.getItem("chat")
 /* list of emoji's sourced from http://getemoji.com */
 const PEOPLE_EMOJIS = ['😀', '😃', '😄', '😁', '😆', '😅', '😂', '😇', '🤣', '☺️', '😊', '🙂', '🙃', '😉', '😌', '😍', '😘', '😗', '😙', '😚', '😋', '😜', '😝', '😛', '🤑', '🤗', '🤓', '😎', '🤡', '🤠', '😏', '😒', '😞', '😔', '😟', '😕', '🙁', '☹️', '😣', '😖', '😫', '😩', '😤', '😠', '😡', '😶', '😐', '😑', '😯', '😦', '😧', '😮', '😲', '😵', '😳', '😱', '😨', '😰', '😢', '😥', '🤤', '😭', '😓', '😪', '😴', '🙄', '🤔', '🤥', '😬', '🤐', '🤢', '🤧', '😷', '🤒', '🤕', '😈', '👿', '👹', '👺', '💩', '👻', '💀', '☠️', '👽', '👾', '🤖', '🎃', '😺', '😸', '😹', '😻', '😼', '😽', '🙀', '😿', '😾', '👐', '🙌', '👏', '🙏', '🤝', '👍', '👎', '👊', '✊', '🤛', '🤜', '🤞', '✌️', '🤘', '👌', '👈', '👉', '👆', '👇', '☝️', '✋', '🤚', '🖐', '🖖', '👋', '🤙', '💪', '🖕', '✍️', '🤳', '💅', '🖖', '💄', '💋', '👄', '👅', '👂', '👃', '👣', '👁', '👀', '👗', '👠', '👞', '👟', '👒', '🎩', '🎓', '👑', '⛑', '🎒', '👝', '👛', '👜', '💼', '👓', '🕶', '☂️']
 const ANIMALS_NATURE_EMOJIS = ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼', '🐨', '🐯', '🦁', '🐮', '🐷', '🐽', '🐸', '🐵', '🙊', '🙉', '🙊', '🐒', '🐔', '🐧', '🐦', '🐤', '🐣', '🐥', '🦆', '🦅', '🦉', '🦇', '🐺', '🐗', '🐴', '🦄', '🐝', '🐛', '🦋', '🐌', '🐚', '🐞', '🐜', '🕷', '🕸', '🐢', '🐍', '🦎', '🦂', '🦀', '🦑', '🐙', '🦐', '🐠', '🐟', '🐡', '🐬', '🦈', '🐳', '🐋', '🐊', '🐆', '🐅', '🐃', '🐂', '🐄', '🦌', '🐪', '🐫', '🐘', '🦏', '🦍', '🐎', '🐖', '🐐', '🐏', '🐑', '🐕', '🐩', '🐈', '🐓', '🦃', '🕊', '🐇', '🐁', '🐀', '🐿', '🐾', '🐉', '🐲', '🌵', '🎄', '🌲', '🌳', '🌴', '🌱', '🌿', '☘️', '🍀', '🎍', '🎋', '🍃', '🍂', '🍁', '🍄', '🌾', '💐', '🌷', '🌹', '🥀', '🌻', '🌼', '🌸', '🌺', '🌎', '🌍', '🌏', '🌕', '🌖', '🌔', '🌚', '🌝', '🌞', '🌛', '🌜', '🌙', '💫', '⭐️', '🌟', '✨', '⚡️', '🔥', '💥', '☄️', '☀️', '🌤', '⛅️', '🌥', '🌦', '🌈', '☁️', '🌧', '⛈', '🌩', '🌨', '☃️', '⛄️', '❄️', '🌬', '💨', '🌪', '🌫', '🌊', '💧', '💦', '☔️']
@@ -19,7 +23,8 @@ export default class ChatClass extends Component {
     this.state = {
       emojis: PEOPLE_EMOJIS,
       emojiCategory: 'PEOPLE_EMOJIS',
-	  message: ""
+	  message: "",
+	  username: username
     }
   }
 
@@ -110,8 +115,15 @@ export default class ChatClass extends Component {
   render() {
     const {emojis} = this.state
     const {visible, modal} = this.props
+	const {username} = this.state
+	
     return (
-	<div className = "white-box">
+	
+	<Form>
+	
+	
+	<Form.Field className = "white-box">
+	<h1>{chat}</h1>
       <Wrapper>
         <EmojiPickerWrapper visible={visible} modal={modal}>
           {this.renderTabs()}
@@ -123,7 +135,7 @@ export default class ChatClass extends Component {
                   key={index}
 					  
                   role='presentation'
-                  onClick={()=>{console.log((emojione.unicodeToImage(emoji)))}}
+                  onClick={()=>{this.setState({message : this.state.message + emojione.unicodeToImage(emoji)})}}
                   dangerouslySetInnerHTML={{__html: emojione.unicodeToImage(emoji)}} />
 				
               ))
@@ -131,9 +143,16 @@ export default class ChatClass extends Component {
           </EmojiWrapper>
         </EmojiPickerWrapper>
       </Wrapper>
-	 </div>
+	  <Input
+        placeholder="Enter Message"
+		value = {this.state.message}
+        />
+		<Button onClick = {()=>{this.setState({message : ''})}}>Send</Button> 
+	 </Form.Field>
+	 
+	 </Form>
     )
-	console.log(this.props.state.message);
+	
   }
 }
 
@@ -143,7 +162,7 @@ const Wrapper = styled.div`
 
 const EmojiPickerWrapper = styled.div`
   position: ${props => props.modal ? 'absolute' : 'static'};
-  
+  opacity: ${props => props.visible ? 1 : 0};
   transition: opacity 300ms linear;
   margin-top: 1rem;
   border: 1px solid #F1F1F1;
