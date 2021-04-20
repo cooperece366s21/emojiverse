@@ -6,7 +6,8 @@
 
 create table if not exists chat_list(
     chat_id int primary key not null auto_increment,
-    chat_name varchar(50)
+    chat_name varchar(50),
+    owner varchar(50)
 );
 
 create table if not exists emoji_store(
@@ -50,6 +51,7 @@ create table if not exists user_messages(
     user_message_id int primary key not null auto_increment,
     chat_id int,
     user_id int,
+    datetime varchar(100),
     foreign key(user_id) references users(user_id),
     foreign key(chat_id) references chat_list(chat_id),
     message varchar(1000)
