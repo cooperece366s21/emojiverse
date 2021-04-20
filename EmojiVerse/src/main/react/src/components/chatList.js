@@ -31,6 +31,7 @@ export const ChatList = ()  => {
           const user = username;
 		  const user_list = users;
 		  const chat_name = chatName
+		
           const response = await fetch("/new", {
             method: "POST",
             headers: {
@@ -56,9 +57,38 @@ export const ChatList = ()  => {
 				console.log("not found")
 			
 		}}}> Create Chat</Button>
+
 		<h1>{chat_names.map(name=>
 			<Form.Field>
-			<Button>{name}</Button>
+			<Button onClick = {async () => {
+          const chat = name
+		  const chat_name = name.split(" participants: ")[0]
+          const response = await fetch("/getMessages", {
+            method: "POST",
+            headers: {
+              "Content_Type": "application/json"
+            },
+            body:
+              JSON.stringify({
+			  chatName: chat_name})
+		  })
+			if (response.ok) {
+            console.log("Response Worked! ");
+			setVerified(true)
+			response.json().then(data=>{
+				console.log(data)
+				localStorage.setItem("messages",data.messages);
+				localStorage.setItem("usernames",data.usernames);
+				localStorage.setItem("chat",chat);
+				window.location.replace("http://localhost:3000/chat")
+			});
+				
+            }
+			else
+			{
+				console.log("not found")
+			
+		}}}>{name}</Button>
 			<Button>Remove</Button>
 			</Form.Field>
 		)}</h1>
