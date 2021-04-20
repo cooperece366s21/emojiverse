@@ -21,11 +21,11 @@ public interface UserDao {
 	
 	void registerUser(User user);
 	
-	void addChannel(Channel channel);
+	void addChannel(Channel channel, String requester_username);
 	
 	void removeChannel(Channel channel);
 	
-	List<String> getChannelList(User user);
+	String getChannelList(String username);
 	
 	boolean authUser(String username); //should this be here
 	// should authentication be done elsewhere?
