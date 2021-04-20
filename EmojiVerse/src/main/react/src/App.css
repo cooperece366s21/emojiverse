@@ -1,5 +1,16 @@
 .App {
   text-align: center;
+  background-image:url("https://hospital-bucket.s3.us-east-2.amazonaws.com/emoji_background.jpg");
+}
+
+.highlight
+{
+	border: 10px solid black;
+}
+
+
+h1,h2,h3{
+	color:black;
 }
 
 .App-logo {
@@ -14,7 +25,6 @@
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -37,61 +47,66 @@
   }
 }
 
-.message-body{
-  padding: 10px;
-  border: #f1f1f1 1px solid;
-  margin: 10px;
-  width: 250px;
-  margin-left: 30px;
+.login-container{
+  width: 800px;
+  border: 2px solid black;
+  padding: 30px;
+  margin: 20px;
+  background-color:white;
+  z-index:1;
 }
 
-.username h2{
-  size: 15px;
-  text-align: left;
-  color:white;
-  padding: 10px;
+.title{
+	z-index:2;
+	background-image:url("https://hospital-bucket.s3.us-east-2.amazonaws.com/rainbow_watercolor.jpg");
+	
 }
-
-
-
-.container{
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  width: 100%;
-  height: 100%;
-  padding: 100px;
+.alert{
+	color:red;
 }
-
-.messages{
-  text-align: left;
+.default{
+	color:black;
 }
-
-.message-time{
-  padding: 10px;
-  size: 10px;
-  color:grey;
-  font-size: 15px;
+.about-container{
+	width: 800px;
+	background-color:white;
+	color:black;
+	padding: 30px;
+	border: 2px solid black;
+	
 }
-
-input[type=text] {
-  border: 2px solid cornflowerblue;
-  border-radius: 4px;
-  left: 10px;
-  right: 10px;
-  width: 60%;
-  background-color: transparent;
-  color: white;
+.search-container{
+	width: 1000px;
+	background-color:azure;
+	color:black;
+	padding: 30px;
+	border: 2px solid black;
+	
 }
-
-input[type=submit] {
-  border: 2px solid cornflowerblue;
-  margin-left: 20px;
-  border-radius: 4px;
-  padding: 5px;
-  color: white;
-  background-color: transparent;
+.white-box{
+	width: 1000px;
+	background-color:white;
+	height:1000px;
+	color:black;
+	padding: 30px;
+	border: 2px solid black;
+	
+}
+.large{
+	width:800px;
+	font-size:70px;
+	background-color:white;
+	padding:30px;
+	color:black;
+	border:2px solid black;
+}
+	
+.rating-container{
+  width: 800px;
+  border: 2px solid black;
+  padding: 30px;
+  margin: 20px;
+  background-color:white;
+  z-index:1;
 }
 

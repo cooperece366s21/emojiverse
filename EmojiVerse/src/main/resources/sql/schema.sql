@@ -12,7 +12,8 @@ create table if not exists chat_list(
 create table if not exists emoji_store(
     emoji_id int primary key not null auto_increment,
     emoji varchar(10),
-    emoji_price int
+    emoji_price int,
+    category varchar(50)
 );
 
 
@@ -30,6 +31,7 @@ create table if not exists users(
 create table if not exists chat_participants(
     chat_id int,
     user_id int,
+    requester_username varchar(50),
     foreign key(user_id) references users(user_id),
     foreign key(chat_id) references chat_list(chat_id),
     primary key(user_id,chat_id)

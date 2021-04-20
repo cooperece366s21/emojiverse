@@ -7,7 +7,8 @@ export const Login = ()  => {
   const [username, setUsername] = useState(''); //  Empty String
   const [user_password,setPassword] = useState('')
   const [title,setTitle] = useState('')
-  const[verified,setVerified] = useState('')
+  const[verified,setVerified] = useState(false)
+  
   return (
     <Form className = "login-container">
 	  <h1>emojiverse</h1>
@@ -31,9 +32,9 @@ export const Login = ()  => {
 	  
         
 		<Button onClick = {async () => {
-          const user = username;
-		  const new_password = user_password;
-          const response = await fetch("/login", {
+		const user = username;
+		const new_password = user_password;
+		const get_response = await fetch("/chats", {
             method: "POST",
             headers: {
               "Content_Type": "application/json"
@@ -42,9 +43,32 @@ export const Login = ()  => {
               JSON.stringify({
 			  username: user,user_password:new_password})
             })
-          if (response.ok) {
+			if (get_response.ok) {
             console.log("Response Worked! ");
-			response.json().then(data=>{
+			get_response.json().then(data=>{
+				console.log(data)
+				
+					
+				localStorage.setItem('chat_names', data.chat_names);
+				
+				});
+          }
+          
+          const post_response = await fetch("/login", {
+            method: "POST",
+            headers: {
+              "Content_Type": "application/json"
+            },
+            body:
+              JSON.stringify({
+			  username: user,user_password:new_password})
+            })
+		 
+		 
+		  
+          if (post_response.ok) {
+            console.log("Response Worked! ");
+			post_response.json().then(data=>{
 				setVerified(data.authorized)
 				console.log(data)
 				if(data.authorized===true)
@@ -52,20 +76,23 @@ export const Login = ()  => {
 					
 					localStorage.setItem('access_token', data.access_token);
 					localStorage.setItem('username', data.username);
+					window.location.replace("http://localhost:3000/chatList")
 				}
 				});
           }
           else {
-            console.log("Title not found") 
+            console.log("not found") 
           }
-		   console.log(verified);
+
         }}> Sign In </Button>
-		{verified === true ? <Redirect to='/home' /> :<Redirect to='/' />}
 		
+		<a href="http://localhost:3000/signup">Sign Up</a>
       </Form.Field>
-	  {verified !== '' ? <p className = 'alert'>Incorrect username and/or password </p>:<p> </p>}
+	  
+	  
 	  <p className = 'default'>Please enter a username (an email) and a password. If you do not already have an account sign up but if you do have one sign in. Note that passwords are not stored and 
 	  any and all actions made on this webapp will be anonymous. It is preferred to use an unidentifying email for username. </p>
     </Form>
   );
 };
+

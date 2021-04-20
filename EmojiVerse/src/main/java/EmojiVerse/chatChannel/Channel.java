@@ -9,9 +9,9 @@ import java.util.List;
 
 public class Channel {
 
-    private String id;
+    private int id;
     private String channelName;
-	private List<User> userList; // This should be a unique collection 
+	private List<String> userList; // This should be a unique collection
     // TODO: this message should be combination of Emoji ids?
     List<EmojiMessage> messages;
     // we need to limit the number of messages fetched otherwise this gets expensive
@@ -19,17 +19,25 @@ public class Channel {
     Time timestamp;
     
     
-    public Channel(String id) {
+    public Channel(int id) {
     	this.id = id;
     }
-    public Channel(String id, List<User> userList) {
+    public Channel(int id, List<String> userList, String channelName) {
     	this.id = id;
     	this.userList = userList;
+    	this.channelName = channelName;
     	// for e in userList, send message to user dao to add to list
+    }
+
+    public Channel(int id, List<String> userList) {
+        this.id = id;
+        this.userList = userList;
+
+        // for e in userList, send message to user dao to add to list
     }
     
 
-    public String getId() {
+    public int getId() {
         return id;
     }
     public String getChannelName() {
@@ -42,7 +50,7 @@ public class Channel {
     public List<EmojiMessage> getMessages() {
         return messages;
     }
-    public List<User> getUserList() {
+    public List<String> getUserList() {
     	return userList;
     }
     // again, should messages even be here?
@@ -50,7 +58,5 @@ public class Channel {
     	this.messages.add(message);
     	// also update time here
     }
-    public void addUser(User user) {
-    	userList.add(user);
-    }
+
 }

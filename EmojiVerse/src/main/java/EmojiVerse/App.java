@@ -3,13 +3,10 @@ package EmojiVerse;
 import static spark.Spark.*;
 
 import EmojiVerse.chatChannel.Channel;
-import EmojiVerse.dao.ChannelDummy;
-import EmojiVerse.dao.ChatDao;
-import EmojiVerse.dao.UserDao;
-import EmojiVerse.dao.UserDummy;
-import EmojiVerse.user.LoginResult;
+import EmojiVerse.chatChannel.ChannelMapper;
+
 import EmojiVerse.user.User;
-import EmojiVerse.user.UserUtil;
+import EmojiVerse.user.UserMapper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,9 +14,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.eclipse.jetty.util.MultiMap;
 import org.eclipse.jetty.util.UrlEncoded;
+import com.google.gson.Gson;
+import org.json.JSONObject;
 
 /**
  * Hello world!
@@ -36,129 +34,140 @@ public class App
 		System.out.println("This is a test");
 		setup_routes();
 	}
-	
+
 	private static void setup_routes()
 	{
-		UserDao userDao = new UserDummy();
-		ChatDao chatDao = new ChannelDummy();
+		options(
+				"/*",
+				(request, response) -> {
+					String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
+					if (accessControlRequestHeaders != null) {
+						//            response.header("Access-Control-Allow-Headers",
+						// accessControlRequestHeaders);
+						response.header("Access-Control-Allow-Headers", "*");
+					}
+
+					String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
+					if (accessControlRequestMethod != null) {
+						response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
+						response.header("Access-Control-Allow-Methods", "*");
+					}
+
+					return "OK";
+				});
+
+		before(
+				(req, res) -> {
+					res.header("Access-Control-Allow-Origin", "*");
+					res.header("Access-Control-Allow-Headers", "*");
+					res.type("application/json");
+				});
+		Gson gson = new Gson();
+
+		ChannelMapper chatDao = new ChannelMapper("jdbc:mysql://localhost:3306/emojiverse");
 		//UserUtil userUtil = new UserUtil();
-		
+		UserMapper usermapper = new UserMapper("jdbc:mysql://localhost:3306/emojiverse");
+		//User new_user = new User("fgeyfg","gygdygw","wbdwgf",2,"egfiegfyiew","efigeyfewg",1);
+		//usermapper.registerUser(new_user);
 		get("/ping", (req, res) -> "OK");
 		get("/hello", (req, res) -> "Hello World");
 		
 		post("/login", (req,res) -> {
 			System.out.println(req.body());
+			JSONObject json = new JSONObject(req.body());
+			System.out.println(json.getString("username"));
 			Map<String, Object> map = new HashMap<>();
-			User user = new User();
-			try {
-				MultiMap<String> params = new MultiMap<String>();
-				UrlEncoded.decodeTo(req.body(), params, "UTF-8");
-				BeanUtils.populate(user, params);
-				System.out.println(params);
-				System.out.println(user.getUsername());
-			} catch (Exception e) {
-				halt(501);
-				return null;
-			}
-			LoginResult result = userDao.authUser(user);
-			if (result.getUser() != null) {
-				req.session().attribute(USER_SESSION_ID, result.getUser());
-				res.redirect("/");
-				halt();
+			String username = json.getString("username");
+			String password = json.getString("user_password");
+			User user = new User(username,password);
+
+			boolean result = usermapper.authUser(username);
+			System.out.println(result);
+			if (result==true) {
+				map.put("authorized",true);
+				req.session().attribute(USER_SESSION_ID);
+
+
 			} else {
-				map.put("error:", result.getError());
+
+				map.put("authorized", false);
 			}
-			map.put("username", user.getUsername());
-			return map;
+			map.put("username", username);
+			return gson.toJson(map);
 		});
 
 		get("/signup", (req, res) -> "Hypothetical signup page");
 		post("/signup", (req, res) -> {
-			User user = new User();
-			try {
-				MultiMap<String> params = new MultiMap<String>();
-				UrlEncoded.decodeTo(req.body(), params, "UTF-8");
-				BeanUtils.populate(user, params);
-			} catch (Exception e) {
-				halt(501);
-				return null;
-			}
-			String error = user.validate();
-			if (error.isEmpty()) {
-				User existingUser = userDao.getUserByUsername(user.getUsername());
-				if (existingUser == null) {
-					userDao.registerUser(user);
-					res.redirect("/login"); //what does that mean?
-					halt();
-				} else {
-					return "Username is already taken";
+
+			JSONObject json = new JSONObject(req.body());
+			String username = json.getString("username");
+			String password = json.getString("user_password");
+			String email = json.getString("email");
+			User user = new User(username,password,email);
+			System.out.println(username);
+			System.out.println(password);
+			System.out.println(email);
+			boolean error = usermapper.isDuplicate(user);
+			Map<String, Object> map = new HashMap<>();
+			System.out.println(error);
+			if (error==false) {
+				System.out.println("hello");
+				usermapper.registerUser(user);
+				map.put("authorized",true);
+				//what does that mean?
+
 				}
-			} else {
-				Map<String, Object> map = new HashMap<>();
-				map.put("error", error);
-				map.put("username", user.getUsername());
-				map.put("email", user.getEmail());
-				return(map);
-			}
-			return null;
+			else
+				{
+					map.put("authorized",false);
+					halt(404);
+				}
+
+				return gson.toJson(map);
 			//return req; //this isn't a possible condition, refactor code?
 		});
 		
 		post("/new", (req, res) -> {
-			User authUser = req.session().attribute(USER_SESSION_ID);
-			if (authUser == null) {
-				return "Unauthenticated";
-			}
-			System.out.println(authUser.getUsername() + " looking to create a new chat");
-			
-			MultiMap<String> params = new MultiMap<String>();
-			UrlEncoded.decodeTo(req.body(), params, "UTF-8"); //decode url to usernames string 
-			// should be replaced with json I guess
-			// this is all parsing code to be replaced 
-			List<String> unameList = Arrays.asList(params.getString("users").split(" "));
-			System.out.println(unameList);
-			List<User> userList = new ArrayList<User>();
-			for (String uname : unameList) {
-				User newUser = userDao.getUserByUsername(uname);
-				if (newUser != null) {
-					userList.add(newUser);
-				}
-			}
-			//add creator user implicitly 
-			// this will choke on my user accessing code.
-			authUser.setPermissionLevel(User.OWNER);
-			userList.add(authUser);
 
-			Channel newChannel = chatDao.createChannel(userList);
-			for (User u : userList) {
-				u.addChannel(newChannel.getId());
-			}
-			res.redirect("/");
-			halt();
-			return null;
+
+			JSONObject json = new JSONObject(req.body());
+
+			String username = json.getString("username");
+			System.out.println(username + " looking to create a new chat");
+			List<String> unameList = Arrays.asList(json.getString("users").split(","));
+			String chat_name = json.getString("chatName");
+			System.out.println(unameList);
+
+			int id = chatDao.getNextChatId();
+			System.out.println(id);
+			Channel channel = new Channel(id,unameList,chat_name);
+			Map<String, Object> map = new HashMap<>();
+			usermapper.addChannel(channel,username);
+			return usermapper.getChannelList(username);
 		});
 		
-		get("/chats", (req, res) -> {
-			User authUser = req.session().attribute(USER_SESSION_ID);
-			if (authUser == null) {
-				return "Unauthenticated";
-			}
-			System.out.println("Getting chat list for " + authUser.getUsername());
+		post("/chats", (req, res) -> {
+			JSONObject json = new JSONObject(req.body());
+			String username = json.getString("username");
+			System.out.println("Getting chat list for " + username);
 			//return authUser.getChannelIDList(); //this really ought to be json
-			return userDao.getChannelList(authUser); 
+			return usermapper.getChannelList(username);
 		});
 		
 		get("/channelinfo", (req, res) -> {
 			try {
-				MultiMap<String> params = new MultiMap<String>();
-				UrlEncoded.decodeTo(req.body(), params, "UTF-8");
-				Channel channel = chatDao.getChannelByID(params.get("channelID").get(0));
+				JSONObject json = new JSONObject(req.body());
+				int channel_id = json.getInt("channelID");
 				// shoddy parsing 
-				return channel.getChannelName(); // should serialize object to json and return 
+				return chatDao.getChannelByID(channel_id); // should serialize object to json and return
 			} catch (Exception e) {
 				halt(501);
 				return null;
 			}
 		});
+		post("/getMessages", (req, res) -> {
+			JSONObject json = new JSONObject(req.body());
+			String chat_name = json.getString("chatName");
+			return chatDao.getMessages(chat_name);});
 	}
 }

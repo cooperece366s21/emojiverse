@@ -7,7 +7,9 @@ import {
   Switch,
 } from 'react-router-dom';
 import {Login} from './components/login';
-import {chatChannel} from './components/chatChannel';
+import {SignUp} from './components/signup';
+import {Chat} from './chat';
+import {ChatList} from './components/chatList';
 
 function App() {
   return (
@@ -15,7 +17,11 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Switch>
-			<Route exact path = "/" component = {chatChannel} />
+			<Route path = "/chat" component = {Chat}/>
+			<Route exact path = "/" component = {Login}/>
+			<Route path = "/signup" component = {SignUp}/>
+			<Route path = "/chatList" component = {ChatList}/>
+
 		</Switch>
       </header>
     </div>
