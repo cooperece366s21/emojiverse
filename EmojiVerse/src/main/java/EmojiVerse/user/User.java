@@ -2,6 +2,7 @@ package EmojiVerse.user;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.google.gson.annotations.Expose;
 
 // generate getter values for all of these
 // really better off using code generation for this crap 
@@ -12,13 +13,13 @@ public class User {
 	public static final int USER = 2;
 	
 	
-	private int permissionLevel;
-	private String displayname;
-	private String username;
-	private String email;
-    private String password;
-    private String profile_img;
-    private int emoji_coins;
+	@Expose private int permissionLevel;
+	@Expose private String displayname;
+	@Expose private String username;
+	@Expose private String email;
+    @Expose private String password;
+    @Expose private String profile_img;
+    @Expose private int emoji_coins;
     
     private List<String> channelIDList = new ArrayList<String>();
 	//static HashMap<Integer, User> friendsList = new HashMap<Integer, User>();
@@ -35,6 +36,11 @@ public class User {
 	}
 	
 	public User(String username) {
+		this.username = username;
+		this.displayname = username;
+	}
+
+	public User(String username, String password) {
 		this.username = username;
 		this.displayname = username;
 	}
