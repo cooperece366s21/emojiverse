@@ -7,6 +7,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import {Login} from './components/login';
+import {chatChannel} from './components/chatChannel';
 
 function App() {
   return (

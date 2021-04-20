@@ -5,9 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8dcee704-464d-48d8-90c7-e9ecb95aedc4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/react/src/components/Message.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/react/src/components/Messages.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/react/src/components/chatChannel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/react/src/components/chatInput.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_1_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/EmojiVerse/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmojiVerse/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/EmojiVerse/Handler/Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmojiVerse/Handler/Handler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EmojiVerse.iml" beforeDir="false" afterPath="$PROJECT_DIR$/EmojiVerse.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/react/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/react/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/react/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/react/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/react/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/react/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/react/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/react/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +30,7 @@
         <option value="Kotlin Interface" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -40,14 +51,18 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="last_opened_file_path" value="$USER_HOME$/node_modules/yarn" />
+    <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/src/main/react/node_modules/react-scripts" />
+    <property name="nodejs_interpreter_path" value="node" />
+    <property name="nodejs_package_manager_path" value="C:\Users\Bonny\node_modules\yarn" />
+    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="EmojiVerse" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Node.js.App.js">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="EmojiVerse.App" />
       <module name="EmojiVerse" />
@@ -61,21 +76,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="App.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/src/main/react/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$/src/main/react" />
+      <envs />
+      <scope-kind value="TEST_FILE" />
+      <test-file value="$PROJECT_DIR$/src/main/react/src/App.test.js" />
+      <method v="2" />
+    </configuration>
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/EmojiVerse/public/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="App.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/main/react/src/App.js" working-dir="$PROJECT_DIR$/src/main/react/src">
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.App.js" />
+        <item itemvalue="Jest.App.test.js" />
+        <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="Application.App" />
       </list>
     </recent_temporary>
@@ -91,7 +123,14 @@
       <workItem from="1614715058900" duration="2263000" />
       <workItem from="1614771498313" duration="4708000" />
       <workItem from="1615299488718" duration="6887000" />
-      <workItem from="1615345977286" duration="8196000" />
+      <workItem from="1615345977286" duration="9845000" />
+      <workItem from="1615418172226" duration="3042000" />
+      <workItem from="1617984287870" duration="1938000" />
+      <workItem from="1618324688657" duration="1904000" />
+      <workItem from="1618328478293" duration="234000" />
+      <workItem from="1618328808849" duration="1603000" />
+      <workItem from="1618333178229" duration="102000" />
+      <workItem from="1618907765359" duration="6401000" />
     </task>
     <servers />
   </component>
@@ -109,5 +148,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
