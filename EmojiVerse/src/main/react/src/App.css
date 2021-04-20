@@ -3,7 +3,13 @@
   background-image:url("https://hospital-bucket.s3.us-east-2.amazonaws.com/emoji_background.jpg");
 }
 
-h1{
+.highlight
+{
+	border: 10px solid black;
+}
+
+
+h1,h2,h3{
 	color:black;
 }
 
@@ -80,9 +86,10 @@ h1{
 .white-box{
 	width: 1000px;
 	background-color:white;
+	height:1000px;
 	color:black;
 	padding: 30px;
-	border: 10px solid black;
+	border: 2px solid black;
 	
 }
 .large{
