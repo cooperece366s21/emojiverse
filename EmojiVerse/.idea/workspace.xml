@@ -5,19 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8dcee704-464d-48d8-90c7-e9ecb95aedc4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/react/src/components/Message.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/react/src/components/Messages.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/react/src/components/chatChannel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/react/src/components/chatInput.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_1_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EmojiVerse.iml" beforeDir="false" afterPath="$PROJECT_DIR$/EmojiVerse.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/react/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/react/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/react/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/react/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/react/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/react/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/react/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/react/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/react/src/components/chatChannel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/react/src/components/chatChannel.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,13 +67,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -131,6 +124,7 @@
       <workItem from="1618328808849" duration="1603000" />
       <workItem from="1618333178229" duration="102000" />
       <workItem from="1618907765359" duration="6401000" />
+      <workItem from="1618931333010" duration="2728000" />
     </task>
     <servers />
   </component>
