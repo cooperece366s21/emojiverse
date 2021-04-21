@@ -1,5 +1,7 @@
 <h1>Dependencies</h1>
 
+<li>npm>/li>
+<li>yarn</li>
 <li>react</li>
 <li>react-router-dom</li>
 <li>semantic-ui-react</li>
