@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="EmojiVerse" />
+        <module name="mysql-connector-java" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="EmojiVerse" target="11" />
+      <module name="mysql-connector-java" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
