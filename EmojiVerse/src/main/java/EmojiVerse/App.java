@@ -8,11 +8,7 @@ import EmojiVerse.chatChannel.ChannelMapper;
 import EmojiVerse.user.User;
 import EmojiVerse.user.UserMapper;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.eclipse.jetty.util.MultiMap;
 import org.eclipse.jetty.util.UrlEncoded;
@@ -81,7 +77,7 @@ public class App
 			String password = json.getString("user_password");
 			User user = new User(username,password);
 
-			boolean result = usermapper.authUser(username);
+			boolean result = usermapper.authUser(username,password);
 			System.out.println(result);
 			if (result==true) {
 				map.put("authorized",true);
@@ -142,8 +138,8 @@ public class App
 			System.out.println(id);
 			Channel channel = new Channel(id,unameList,chat_name);
 			Map<String, Object> map = new HashMap<>();
-			usermapper.addChannel(channel,username);
-			return usermapper.getChannelList(username);
+			chatDao.addChannel(channel,username);
+			return chatDao.getChannelList(username);
 		});
 		
 		post("/chats", (req, res) -> {
@@ -151,7 +147,7 @@ public class App
 			String username = json.getString("username");
 			System.out.println("Getting chat list for " + username);
 			//return authUser.getChannelIDList(); //this really ought to be json
-			return usermapper.getChannelList(username);
+			return chatDao.getChannelList(username);
 		});
 		
 		get("/channelinfo", (req, res) -> {
@@ -169,5 +165,48 @@ public class App
 			JSONObject json = new JSONObject(req.body());
 			String chat_name = json.getString("chatName");
 			return chatDao.getMessages(chat_name);});
+
+		post("/addMessage", (req, res) -> {
+			JSONObject json = new JSONObject(req.body());
+			String chat_name = json.getString("chatName");
+			String username = json.getString("username");
+			String message = json.getString("message");
+			System.out.println(message);
+			System.out.println(username);
+			System.out.println(chat_name);
+			Date date = new Date();
+			String date_time = date.toString();
+			chatDao.addMessage(chat_name,message,username,date_time);
+
+			return chatDao.getMessages(chat_name);
+		});
+
+		post("/getFriend", (req, res) -> {
+			JSONObject json = new JSONObject(req.body());
+			String username = json.getString("username");
+			return usermapper.getFriendList(username);
+		});
+
+
+		post("/addFriend", (req, res) -> {
+			JSONObject json = new JSONObject(req.body());
+			String friend_username = json.getString("friend_username");
+			String username = json.getString("username");
+			usermapper.addFriend(username, friend_username);
+			return usermapper.getFriendList(username);
+		});
+
+		post("/removeFriend", (req, res) -> {
+			JSONObject json = new JSONObject(req.body());
+			String friend_username = json.getString("friend_username");
+			String username = json.getString("username");
+			usermapper.removeFriend(username, friend_username);
+			return usermapper.getFriendList(username);
+		});
+		post("/getProfileImg", (req, res) -> {
+			JSONObject json = new JSONObject(req.body());
+			String username = json.getString("username");
+			return usermapper.getProfileImg(username);
+		});
 	}
 }
