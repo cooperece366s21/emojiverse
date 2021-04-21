@@ -6,10 +6,12 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import {Login} from './components/login';
-import {SignUp} from './components/signup';
-import {Chat} from './chat';
-import {ChatList} from './components/chatList';
+import {Login} from './components/authentication/login';
+import {SignUp} from './components/authentication/signup';
+import {Chat} from './components/chats/chat';
+import {ChatList} from './components/chats/chatList';
+import {Profile} from './components/user_interactions/profile';
+import {Store} from './components/user_interactions/store';
 
 function App() {
   return (
@@ -21,7 +23,8 @@ function App() {
 			<Route exact path = "/" component = {Login}/>
 			<Route path = "/signup" component = {SignUp}/>
 			<Route path = "/chatList" component = {ChatList}/>
-
+			<Route path = "/profile" component = {Profile} />
+			<Route path = "/store" component = {Store} />
 		</Switch>
       </header>
     </div>
