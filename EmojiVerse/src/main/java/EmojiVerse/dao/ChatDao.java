@@ -7,11 +7,27 @@ import EmojiVerse.emoji.EmojiMessage;
 import EmojiVerse.user.User;
 
 public interface ChatDao {
+	
+	/*basic funcs*/
+	
 	String getChannelByID(int id);
-	void addMessage(Channel channel, String message, String username);
+	int getNextChatId();
+	int getChatIdFromChatName(String chat_name);
+	
+	/*message funcs*/
+	
+	void addMessage(String chat_name, String message, String username, String datetime);
+	String getMessages(String chat_name);
+	
+	/*participant funcs*/
+	
 	void addUser(Channel channel, String target_username); //move authentication responsibility to DAO
 	void removeUser(Channel channel, String target_username);
-	int getNextChatId();
-	String getMessages(String chat_name);
-	int getChatIdFromChatName(String chat_name);
+	
+	/* channel funcs*/
+	
+	void addChannel(Channel channel, String requester_username);
+	String getChannelList(String username);
+	void removeChannel(Channel channel);
+
 }
