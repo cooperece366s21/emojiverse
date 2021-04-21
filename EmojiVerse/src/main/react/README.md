@@ -1,8 +1,6 @@
-<h1>In order to run , preliminary packages to npm install would be yarn, react, prop-types, react-router, typescript, @babel/runtime, and react-router-dom </h1>
+<h1>Dependencies</h1>
 
-
-
-
+<li>react-router-dom</li>
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
