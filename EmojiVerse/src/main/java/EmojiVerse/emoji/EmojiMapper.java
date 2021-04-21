@@ -1,5 +1,6 @@
 package EmojiVerse.emoji;
 
+import com.google.gson.Gson;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 
@@ -96,10 +97,11 @@ public class EmojiMapper implements EmojiJDBI{
     }
 
     @Override
-    public void populateEmojiStore(List<String> emojis, List<Integer> prices, String category)  {
+    public void populateEmojiStore(List<String> emojis, int price, String category)  {
+        System.out.println("hello");
         for(int i =0; i < emojis.size(); i++)
         {
-            addEmojiToStore(emojis.get(i), prices.get(i),category);
+            addEmojiToStore(emojis.get(i), price,category);
         }
 
     }
@@ -112,6 +114,24 @@ public class EmojiMapper implements EmojiJDBI{
                                 .bind("username",username)
                                 .map((rs, ctx) -> rs.getString("emoji"))
                                 .list());
+    }
+
+    @Override
+    public String getEmojisFromStore() {
+        System.out.println("hello");
+        Gson gson = new Gson();
+        Map<String, Object> map = new HashMap<>();
+        List<String> emoji_list = jdbi.withHandle(
+                handle ->
+                        handle.createQuery("select emoji from emoji_store")
+
+                                .map((rs, ctx) -> rs.getString("emoji"))
+                                .list());
+        map.put("emoji_list",emoji_list);
+        return gson.toJson(map);
+
+
+
     }
 
 

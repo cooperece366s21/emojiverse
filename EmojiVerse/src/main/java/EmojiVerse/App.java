@@ -218,7 +218,10 @@ public class App
 		post("/populateEmojiStore", (req, res) -> {
 			JSONObject json = new JSONObject(req.body());
 			List<String> emojis = Arrays.asList(json.getString("emojis").split(","));
-			return emojimapper.;
+			int price = json.getInt("price");
+			String category = json.getString("category");
+			emojimapper.populateEmojiStore(emojis,price,category);
+			return emojimapper.getEmojisFromStore();
 		});
 	}
 }

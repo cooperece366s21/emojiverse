@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import emojione from 'emojione'
 import PropTypes from 'prop-types'
 import { Form, Input, Button } from 'semantic-ui-react';
+import api from '../../services/api'
 
 
 
@@ -63,6 +64,8 @@ export default class ChatClass extends Component {
       modal: false
     }
   }
+  
+  
 
   toggleEmojis (emoji) {
     switch (emoji) {
