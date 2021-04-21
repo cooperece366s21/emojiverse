@@ -34,7 +34,7 @@ Additionally you should create a mysql database and put in JDBC_URL, USERNAME, a
 Afterwards you should run schema.sql to create the database structure.
 
 The implementation should go straight to a login page but there is a hyperlink to sign up. Click that.
-Once you sign up, given that you don't have the same username and email as another user, you will head straight to the login page and have a chance to login. Once you pass you can go to your profile to add friends or chat with a friend on the app. There is only one rule ..... EMOJIS ONLY.
+Once you sign up, given that you don't have the same username and email as another user, you will head straight to the login page and have a chance to login. Once you pass you can go to your profile to add friends or go to a different page to chat with a friend on the app. There is only one rule ..... EMOJIS ONLY.
 
 
 
