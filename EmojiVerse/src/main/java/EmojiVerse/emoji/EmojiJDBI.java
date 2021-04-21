@@ -10,7 +10,7 @@ public interface EmojiJDBI {
 
     void addEmojiToStore(String emoji,int price, String category);
 
-    void populateEmojiStore(List<String> emojis, List<Integer> prices, List<String> categories);
+    void populateEmojiStore(List<String> emojis, List<Integer> prices, String category);
 
     List<String> getEmojis(String username);
 

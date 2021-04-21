@@ -209,17 +209,18 @@ public class ChannelMapper implements ChatDao {
     }
     
     @Override
-    public void removeChannel(Channel channel) {
+    public void removeChannel(String chat_name) {
+        int chat_id = getChatIdFromChatName(chat_name);
         jdbi.withHandle(h -> h.createUpdate("DELETE FROM chat_list where chat_id = :chat_id")
-                .bind("chat_id",channel.getId())
+                .bind("chat_id",chat_id)
                 .execute());
 
         jdbi.withHandle(h -> h.createUpdate("DELETE FROM chat_participants where chat_id = :chat_id")
-                .bind("chat_id",channel.getId())
+                .bind("chat_id",chat_id)
                 .execute());
 
         jdbi.withHandle(h -> h.createUpdate("DELETE FROM user_messages where chat_id = :chat_id")
-                .bind("chat_id",channel.getId())
+                .bind("chat_id",chat_id)
                 .execute());
 
     }

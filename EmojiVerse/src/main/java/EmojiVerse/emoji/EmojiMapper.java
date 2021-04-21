@@ -96,10 +96,10 @@ public class EmojiMapper implements EmojiJDBI{
     }
 
     @Override
-    public void populateEmojiStore(List<String> emojis, List<Integer> prices, List<String> categories)  {
+    public void populateEmojiStore(List<String> emojis, List<Integer> prices, String category)  {
         for(int i =0; i < emojis.size(); i++)
         {
-            addEmojiToStore(emojis.get(i), prices.get(i),categories.get(i));
+            addEmojiToStore(emojis.get(i), prices.get(i),category);
         }
 
     }
