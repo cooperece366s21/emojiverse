@@ -1,6 +1,18 @@
 <h1>Dependencies</h1>
 
+<li>react</li>
 <li>react-router-dom</li>
+<li>semantic-ui-react</li>
+<li>semantic-ui-css</li>
+<li>styled-components</li>
+<li>emojione</li>
+<li>prop-types</li>
+<li>react-spring</li>
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
