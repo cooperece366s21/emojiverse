@@ -15,8 +15,11 @@ import { Form, Input, Button } from 'semantic-ui-react';
 
 const username = localStorage.getItem("username")
 const chat = localStorage.getItem("chat")
-const message_info = localStorage.getItem("message_info").split(',')
-
+var message_info = localStorage.getItem("message_info")
+if(message_info!= null)
+{
+	message_info = localStorage.getItem("message_info").split(',')
+}
 
 
 
@@ -199,7 +202,7 @@ export default class ChatClass extends Component {
 				console.log("not found")
 			
 		}}}>Send</Button> 
-		<h3>{message_info.map(info=>
+		<h3>{message_info == null ? message_info : message_info.map(info=>
 			<h3 className = "message">{info}</h3>
 		)}</h3>
 	 </Form.Field>
