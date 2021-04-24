@@ -38,7 +38,7 @@ export const ChatList = ()  => {
 		<h1>{chat_names.map(name=>
 			<Form.Field>
 			<Button onClick = {async () => api.getMessages(name,name.split(" participants: ")[0])}>{name}</Button>
-			<Button>Remove</Button>
+			<Button onClick={async () => api.removeChat(name.split(" participants: ")[1].split(",")[1].replace("]","").trim(), name.split(" ")[0])}>Remove</Button>
 			</Form.Field>
 		)}</h1>
 	</Form.Field>

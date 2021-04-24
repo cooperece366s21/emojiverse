@@ -28,6 +28,6 @@ public interface ChatDao {
 	
 	void addChannel(Channel channel, String requester_username);
 	String getChannelList(String username);
-	void removeChannel(String chat_name);
+	public void removeChannel(String chat_name);
 
 }

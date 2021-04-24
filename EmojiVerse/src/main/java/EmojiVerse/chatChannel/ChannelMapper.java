@@ -40,8 +40,7 @@ public class ChannelMapper implements ChatDao {
     public int getChatIdFromChatName(String chat_name) {
         int chat_id = jdbi.withHandle(
                 handle ->
-                        handle.createQuery("select chat_id from chat_list" +
-                                " where chat_name = :chat_name")
+                        handle.createQuery("select chat_id from chat_list where chat_name = :chat_name")
                                 .bind("chat_name",chat_name)
                                 .map((rs, ctx) -> rs.getInt("chat_id"))
                                 .one());
@@ -211,11 +210,11 @@ public class ChannelMapper implements ChatDao {
     @Override
     public void removeChannel(String chat_name) {
         int chat_id = getChatIdFromChatName(chat_name);
-        jdbi.withHandle(h -> h.createUpdate("DELETE FROM chat_list where chat_id = :chat_id")
+        jdbi.withHandle(h -> h.createUpdate("DELETE FROM chat_participants where chat_id = :chat_id")
                 .bind("chat_id",chat_id)
                 .execute());
 
-        jdbi.withHandle(h -> h.createUpdate("DELETE FROM chat_participants where chat_id = :chat_id")
+        jdbi.withHandle(h -> h.createUpdate("DELETE FROM chat_list where chat_id = :chat_id")
                 .bind("chat_id",chat_id)
                 .execute());
 
@@ -223,12 +222,13 @@ public class ChannelMapper implements ChatDao {
                 .bind("chat_id",chat_id)
                 .execute());
 
+        System.out.println("Chat channel " + chat_name + " remove successfully");
+
     }
 
     @Override
 
     public String getChannelList(String username) {
-        System.out.println(username);
         Gson gson = new Gson();
         List<List<String>> chat_participant_list = new ArrayList<List<String>>();
         int user_id =  jdbi.withHandle(
@@ -294,7 +294,7 @@ public class ChannelMapper implements ChatDao {
         map.put("chat_names",modified_chat_names);
         return gson.toJson(map);
     }
-    
+
 
 
 }

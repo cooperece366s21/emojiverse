@@ -85,7 +85,8 @@ export async function getMessages(chat : string , chat_name : string)
 				console.log("not found")
 			
 		
-		}}
+		}
+}
 	
 export async function createNewChat(user : string , user_list : string, chat_name : string)
 {
@@ -113,13 +114,39 @@ export async function createNewChat(user : string , user_list : string, chat_nam
 			{
 				console.log("not found")
 			
-		}}
+		}
+}
+
+export async function removeChat(user : string ,chat_name : string){
+	const response = await fetch("/removeChat", {
+		method: "POST",
+		headers: {
+			"Content_Type": "application/json"
+		},
+		body:
+			JSON.stringify({
+				username: user, chatName: chat_name})
+	})
+	if (response.ok) {
+		console.log("Removed chat channel -"+ chat_name);
+
+		response.json().then(data=>{
+			console.log(data)
+			localStorage.setItem("chat_names",data.chat_names);
+			window.location.replace("http://localhost:3000/chatList")
+		});
+	}
+	else {
+		console.log("Error removing" + chat_name)
+	}
+}
 	
 let exports = {
     addFriend,
 	removeFriend,
 	getMessages,
-	createNewChat
+	createNewChat,
+	removeChat
 }
 
 export default exports
