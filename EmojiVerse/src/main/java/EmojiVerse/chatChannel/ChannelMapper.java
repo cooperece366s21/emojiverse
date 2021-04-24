@@ -36,6 +36,10 @@ public class ChannelMapper implements ChatDao {
                                 .map((rs, ctx) -> rs.getString("chat_name"))
                                 .one());
     }
+
+
+//    TODO: This function should also check the name of the user? otherwise there will be expect one found multiple when different user have the same chat name
+//    TODO: This should also compare the participants in the chat
     @Override
     public int getChatIdFromChatName(String chat_name) {
         int chat_id = jdbi.withHandle(

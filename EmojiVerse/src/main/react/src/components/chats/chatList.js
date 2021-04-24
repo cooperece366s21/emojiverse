@@ -11,7 +11,7 @@ export const ChatList = ()  => {
   const[users,setUsers] = useState('')
   const[chatNames,setChatNames] = useState('')
   const username = localStorage.getItem("username")
-  const chat_names = localStorage.getItem("chat_names").split("$")
+  const chat_names = localStorage.getItem("chat_names").split("$,")
   return(
  
   
@@ -34,13 +34,14 @@ export const ChatList = ()  => {
 		<h3>Note: you must separate each username with a comma</h3>
 		
 <Button basic color = 'blue' onClick = {async () => api.createNewChat(username, users,chatName)}> Create Chat</Button>
-
-		<h1>{chat_names.map(name=>
-			<Form.Field>
-			<Button onClick = {async () => api.getMessages(name,name.split(" participants: ")[0])}>{name}</Button>
-			<Button onClick={async () => api.removeChat(name.split(" participants: ")[1].split(",")[1].replace("]","").trim(), name.split(" ")[0])}>Remove</Button>
-			</Form.Field>
-		)}</h1>
+        <div className= "chatListContainner">
+            <h1>{chat_names.map(name=>
+                <Form.Field>
+                    <Button onClick = {async () => api.getMessages(name,name.split(" participants: ")[0])}>{name.replace("$","")}</Button>
+                    <Button onClick={async () => api.removeChat(name.split(" participants: ")[1].split(",")[1].replace("$","").replace("]", "").trim(), name.split(" participants: ")[0])}>Remove</Button>
+                </Form.Field>
+            )}</h1>
+        </div>
 	</Form.Field>
    </Form>
   )

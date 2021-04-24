@@ -5,15 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8dcee704-464d-48d8-90c7-e9ecb95aedc4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/react/src/components/message/message.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/EmojiVerse/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmojiVerse/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/EmojiVerse/chatChannel/ChannelMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmojiVerse/chatChannel/ChannelMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/EmojiVerse/dao/ChatDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmojiVerse/dao/ChatDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/EmojiVerse/emoji/EmojiMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmojiVerse/emoji/EmojiMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/EmojiVerse/user/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmojiVerse/user/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/react/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/react/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/react/src/components/chats/chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/react/src/components/chats/chat.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/react/src/components/chats/chatList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/react/src/components/chats/chatList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/react/src/services/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/react/src/services/api.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,6 +74,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="App.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -124,6 +134,7 @@
       <workItem from="1619278722302" duration="217000" />
       <workItem from="1619279043195" duration="271000" />
       <workItem from="1619279367760" duration="6884000" />
+      <workItem from="1619287453529" duration="5459000" />
     </task>
     <servers />
   </component>
