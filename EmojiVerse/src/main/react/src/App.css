@@ -110,3 +110,42 @@ h1,h2,h3{
   z-index:1;
 }
 
+.chatListContainner{
+    margin: 30px;
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+.chatWindow{
+    margin: 30px;
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+.username h2 {
+    size: 15px;
+    text-align: left;
+    color: darkgray;
+    padding: 1px;
+    font-family: "Times New Roman";
+}
+
+.message-time {
+    padding: 10px;
+    size: 10px;
+    color: grey;
+    font-size: 15px;
+    color: black;
+}
+.message-body {
+    padding: 10px;
+    border: #f1f1f1 5px dotted;
+    margin: 10px;
+    width: 250px;
+    margin-left: 30px;
+}
+
+.messages{
+    text-align: left;
+}
+

@@ -65,7 +65,7 @@ public class App
 				});
 		Gson gson = new Gson();
 
-		ChannelMapper chatDao = new ChannelMapper("jdbc:mysql://localhost:3306/emojiverse");
+		ChannelMapper chatMapper = new ChannelMapper("jdbc:mysql://localhost:3306/emojiverse");
 		//UserUtil userUtil = new UserUtil();
 		UserMapper usermapper = new UserMapper("jdbc:mysql://localhost:3306/emojiverse");
 		EmojiMapper emojimapper = new EmojiMapper("jdbc:mysql://localhost:3306/emojiverse");
@@ -140,12 +140,15 @@ public class App
 			String chat_name = json.getString("chatName");
 			System.out.println(unameList);
 
-			int id = chatDao.getNextChatId();
+			int id = chatMapper.getNextChatId();
 			System.out.println(id);
 			Channel channel = new Channel(id,unameList,chat_name);
-			Map<String, Object> map = new HashMap<>();
-			chatDao.addChannel(channel,username);
-			return chatDao.getChannelList(username);
+
+			//			Map<String, Object> map = new HashMap<>();
+			// 			I think this line is not needed? --Bonny
+
+			chatMapper.addChannel(channel,username);
+			return chatMapper.getChannelList(username);
 		});
 		
 		post("/chats", (req, res) -> {
@@ -153,7 +156,7 @@ public class App
 			String username = json.getString("username");
 			System.out.println("Getting chat list for " + username);
 			//return authUser.getChannelIDList(); //this really ought to be json
-			return chatDao.getChannelList(username);
+			return chatMapper.getChannelList(username);
 		});
 		
 		get("/channelinfo", (req, res) -> {
@@ -161,7 +164,7 @@ public class App
 				JSONObject json = new JSONObject(req.body());
 				int channel_id = json.getInt("channelID");
 				// shoddy parsing 
-				return chatDao.getChannelByID(channel_id); // should serialize object to json and return
+				return chatMapper.getChannelByID(channel_id); // should serialize object to json and return
 			} catch (Exception e) {
 				halt(501);
 				return null;
@@ -170,7 +173,7 @@ public class App
 		post("/getMessages", (req, res) -> {
 			JSONObject json = new JSONObject(req.body());
 			String chat_name = json.getString("chatName");
-			return chatDao.getMessages(chat_name);});
+			return chatMapper.getMessages(chat_name);});
 
 		post("/addMessage", (req, res) -> {
 			JSONObject json = new JSONObject(req.body());
@@ -182,9 +185,9 @@ public class App
 			System.out.println(chat_name);
 			Date date = new Date();
 			String date_time = date.toString();
-			chatDao.addMessage(chat_name,message,username,date_time);
+			chatMapper.addMessage(chat_name,message,username,date_time);
 
-			return chatDao.getMessages(chat_name);
+			return chatMapper.getMessages(chat_name);
 		});
 
 		post("/getFriend", (req, res) -> {
@@ -209,6 +212,20 @@ public class App
 			usermapper.removeFriend(username, friend_username);
 			return usermapper.getFriendList(username);
 		});
+
+		post("/removeChat",(req,res) ->{
+			JSONObject json = new JSONObject(req.body());
+
+			System.out.println(json.toString());
+			String username = json.getString("username");
+			String chat_name = json.getString("chatName");
+
+			chatMapper.removeChannel(chat_name);
+
+
+			return chatMapper.getChannelList(username);
+		});
+
 		post("/getProfileImg", (req, res) -> {
 			JSONObject json = new JSONObject(req.body());
 			String username = json.getString("username");

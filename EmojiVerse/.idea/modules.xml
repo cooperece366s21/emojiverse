@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EmojiVerse.iml" filepath="$PROJECT_DIR$/EmojiVerse.iml" />
-      <module fileurl="file://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/8.0.22/mysql-connector-java.iml" filepath="$MAVEN_REPOSITORY$/mysql/mysql-connector-java/8.0.22/mysql-connector-java.iml" />
     </modules>
   </component>
 </project>

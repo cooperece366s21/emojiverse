@@ -6,8 +6,8 @@ import styled from 'styled-components'
 import emojione from 'emojione'
 import PropTypes from 'prop-types'
 import { Form, Input, Button } from 'semantic-ui-react';
-import api from '../../services/api'
-
+import api from '../../services/api';
+import {Message} from '../message/message';
 
 
 
@@ -156,7 +156,18 @@ export default class ChatClass extends Component {
 	<Form.Field className = "white-box">
 	<a href = "http://localhost:3000/chatList">BACK TO CHANNEL LIST</a>
 	<h1>{chat}</h1>
+
 	
+
+
+        <div className="chatWindow">
+
+            <div>{message_info == null ? message_info : message_info.map(info=>
+                    <Message username={info.split(":")[0].split("(")[0]} content={info.split(") :")[1]} timestamp={info.split(") :")[0].split("(")[1]}/>
+                // <h3 className = "message">{info}</h3>
+            )}</div>
+        </div>
+
 	
       <Wrapper>
         <EmojiPickerWrapper visible={visible} modal={modal}>
@@ -167,11 +178,11 @@ export default class ChatClass extends Component {
                 <Emoji
                   className='ld-emoji'
                   key={index}
-					  
+
                   role='presentation'
                   onClick={()=>{this.setState({message : this.state.message + emojione.unicodeToImage(emoji)})}}
                   dangerouslySetInnerHTML={{__html: emojione.unicodeToImage(emoji)}} />
-				
+
               ))
             }
           </EmojiWrapper>
@@ -182,7 +193,7 @@ export default class ChatClass extends Component {
 		value = {this.state.message}
         />
 		<Button onClick = {async () => {
-          
+
 		  const chat_name = chat.split(" participants: ")[0]
 		  const userName = username
 		  const Message = this.state.message
@@ -197,22 +208,21 @@ export default class ChatClass extends Component {
 		  })
 			if (response.ok) {
             console.log("Response Worked! ");
-			
+
 			response.json().then(data=>{
 				console.log(data)
 				localStorage.setItem("message_info",data.message_info);
 				window.location.replace("http://localhost:3000/chat")
 			});
-				
+
             }
 			else
 			{
 				console.log("not found")
-			
-		}}}>Send</Button> 
-		<h3>{message_info == null ? message_info : message_info.map(info=>
-			<h3 className = "message">{info}</h3>
-		)}</h3>
+
+		}}}>Send</Button>
+
+
 	 </Form.Field>
 	 
 	 </Form>
@@ -234,8 +244,8 @@ const EmojiPickerWrapper = styled.div`
   border-radius: 2px;
   background: white;
   box-shadow: 3px 3px 5px #BFBDBD;
-  width: 340px;
-  height: 350px;
+  width: 500px;
+  height: 150px;
   overflow-y: scroll;
   z-index: 100;
 `
