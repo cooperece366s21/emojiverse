@@ -65,6 +65,12 @@ export default class ChatClass extends Component {
     }
   }
   
+  componentDidMount()
+  {
+	  let res  = api.populateEmojiStore("hello", "PEOPLE_EMOJIS", 0)
+	
+  }
+  
   
 
   toggleEmojis (emoji) {
@@ -150,7 +156,6 @@ export default class ChatClass extends Component {
 	<Form.Field className = "white-box">
 	<a href = "http://localhost:3000/chatList">BACK TO CHANNEL LIST</a>
 	<h1>{chat}</h1>
-	
 	
 	
       <Wrapper>

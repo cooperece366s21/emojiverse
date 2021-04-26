@@ -114,12 +114,45 @@ export async function createNewChat(user : string , user_list : string, chat_nam
 				console.log("not found")
 			
 		}}
+		
+export async function populateEmojiStore(peopleEmojis : string , category : string, price : int)
+{
+		    const response = await fetch("/populateEmojiStore", {
+            method: "POST",
+            headers: {
+              "Content_Type": "application/json"
+            },
+            body:
+              JSON.stringify({
+			  PEOPLE_EMOJIS: peopleEmojis, Category : category, Price : price})
+		  })
+			if (response.ok) {
+            console.log("Response Worked! ");
+			
+			response.json().then(data=>{
+				console.log(data)
+				localStorage.setItem("emoji_list",data.emoji_list);
+			
+				
+			});
+			return 200;
+			
+            }
+			else
+			{
+				console.log("not found")
+				return 404;
+				
+			
+}}
+		
 	
 let exports = {
     addFriend,
 	removeFriend,
 	getMessages,
-	createNewChat
+	createNewChat,
+	populateEmojiStore
 }
 
 export default exports

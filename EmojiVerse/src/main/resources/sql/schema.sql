@@ -6,7 +6,7 @@
 
 create table if not exists chat_list(
     chat_id int primary key not null auto_increment,
-    chat_name varchar(50),
+    chat_name varchar(50) not null unique,
     owner varchar(50)
 );
 
@@ -22,7 +22,7 @@ create table if not exists users(
     user_id int primary key not null auto_increment,
     username varchar(50) not null unique,
     email varchar(50) not null unique,
-    public_name varchar(50),
+
     hashed_psw varchar(50) not null,
     profile_img varchar(100), /* using aws s3 urls loaded thru boto*/
     permission_level int,
