@@ -67,7 +67,24 @@ export default class ChatClass extends Component {
   
   componentDidMount()
   {
-	  let res  = api.populateEmojiStore("hello", "PEOPLE_EMOJIS", 0)
+	  PEOPLE_EMOJIS.map(emoji=>
+	  {api.populateEmojiStore(emoji, "PEOPLE_EMOJIS", 0)})
+	  
+	  ANIMALS_NATURE_EMOJIS.map(emoji=>
+	  {api.populateEmojiStore(emoji, "ANIMALS_NATURE_EMOJIS", Math.ceil(Math.random()*1000))})
+	  
+	  FOOD_SPORTS_EMOJIS.map(emoji=>
+	  {api.populateEmojiStore(emoji, "FOOD_SPORTS_EMOJIS", Math.ceil(Math.random()*1500))})
+	  
+	  TRAVEL_PLACES_EMOJIS.map(emoji=>
+	  {api.populateEmojiStore(emoji, "FOOD_SPORTS_EMOJIS", Math.ceil(Math.random()*2000))})
+	  
+	  OBJECTS_EMOJIS.map(emoji=>
+	  {api.populateEmojiStore(emoji, "FOOD_SPORTS_EMOJIS", Math.ceil(Math.random()*2500))})
+	  
+	  SYMBOLS_FLAGS_EMOJIS.map(emoji=>
+	  {api.populateEmojiStore(emoji, "SYMBOLS_FLAGS_EMOJIS", Math.ceil(Math.random()*3000))})
+	  
 	
   }
   
@@ -154,6 +171,7 @@ export default class ChatClass extends Component {
 	
 	
 	<Form.Field className = "white-box">
+	<h1>{Math.round(Math.random()*1000,3)}</h1>
 	<a href = "http://localhost:3000/chatList">BACK TO CHANNEL LIST</a>
 	<h1>{chat}</h1>
 
