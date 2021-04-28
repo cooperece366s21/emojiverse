@@ -67,7 +67,7 @@ export default class ChatClass extends Component {
   
   componentDidMount()
   {
-	  PEOPLE_EMOJIS.map(emoji=>
+	  /*PEOPLE_EMOJIS.map(emoji=>
 	  {api.populateEmojiStore(emoji, "PEOPLE_EMOJIS", 0)})
 	  
 	  ANIMALS_NATURE_EMOJIS.map(emoji=>
@@ -84,6 +84,8 @@ export default class ChatClass extends Component {
 	  
 	  SYMBOLS_FLAGS_EMOJIS.map(emoji=>
 	  {api.populateEmojiStore(emoji, "SYMBOLS_FLAGS_EMOJIS", Math.ceil(Math.random()*3000))})
+	  */
+	  
 	  
 	
   }

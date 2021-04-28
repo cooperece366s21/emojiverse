@@ -240,6 +240,11 @@ public class App
 			emojimapper.populateEmojiStore(emojis,price,category);
 			return emojimapper.getEmojisFromStore();
 		});
+
+		get("/getEmojisFromEmojiStore", (req,res)->{
+				JSONObject json = new JSONObject(req.body());
+				return emojimapper.getEmojisFromStore();
+		});
 	}
 }
 
