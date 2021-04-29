@@ -5,7 +5,8 @@ import {Redirect} from 'react-router-dom';
 import {NavBar} from '../navbar/navbar_implementation'
 import api from '../../services/api';
 import EmojiWrapper from '../chats/chat'
-import { Box, Image, Text, SimpleGrid } from "@chakra-ui/core";
+/*import { Box, Image, Text, SimpleGrid } from "@chakra-ui/core";*/
+
 
 const username = localStorage.getItem("username")
 
@@ -44,7 +45,7 @@ export const Store = ()  => {
 	<NavBar/>
 	  <h1>emojiverse store</h1>
 	  <EmojiStore/>
-	  <SimpleGrid>{emojis.map(emoji=> <Box><Button>{emoji}</Button></Box>)}</SimpleGrid>
+	  <h1>{emojis.map(emoji=> <Button>{emoji}</Button>)}</h1>
 	</Form>
 	  )
 }
