@@ -173,7 +173,7 @@ export default class ChatClass extends Component {
 	
 	
 	<Form.Field className = "white-box">
-	<h1>{Math.round(Math.random()*1000,3)}</h1>
+	
 	<a href = "http://localhost:3000/chatList">BACK TO CHANNEL LIST</a>
 	<h1>{chat}</h1>
 
@@ -281,7 +281,7 @@ const EmojiPicker = styled.div`
   }
 `
 
-const EmojiWrapper = styled.div`
+export const EmojiWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding: 0.8rem;

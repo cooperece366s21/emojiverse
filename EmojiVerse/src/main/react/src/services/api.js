@@ -147,6 +147,37 @@ export async function populateEmojiStore(peopleEmojis : string , category : stri
 				
 			
 }}
+
+export async function getEmojiStore(username : string)
+{
+		    const response = await fetch("/getEmojisFromEmojiStore", {
+            method: "POST",
+            headers: {
+              "Content_Type": "application/json"
+            },
+            body:
+              JSON.stringify({
+			  username : username})
+		  })
+			if (response.ok) {
+            console.log("Response Worked! ");
+			
+			response.json().then(data=>{
+				console.log(data)
+				localStorage.setItem("emoji_list",data.emoji_list);
+			
+				
+			});
+			return 200;
+			
+            }
+			else
+			{
+				console.log("not found")
+				return 404;
+				
+			
+}}
 		
 
 
@@ -182,6 +213,7 @@ let exports = {
 	getMessages,
 	createNewChat,
 	populateEmojiStore,
+	getEmojiStore,
 	removeChat
 
 }

@@ -241,8 +241,7 @@ public class App
 			return emojimapper.getEmojisFromStore();
 		});
 
-		get("/getEmojisFromEmojiStore", (req,res)->{
-				JSONObject json = new JSONObject(req.body());
+		post("/getEmojisFromEmojiStore", (req,res)->{
 				return emojimapper.getEmojisFromStore();
 		});
 	}
