@@ -13,6 +13,14 @@ h1,h2,h3{
 	color:black;
 }
 
+.container-div{ 
+Display: flex;
+Height: 100vh;
+Width: 100vw; 
+Align-Items: center;
+Justify-Content: centre;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

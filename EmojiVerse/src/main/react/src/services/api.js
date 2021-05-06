@@ -174,13 +174,12 @@ export async function getEmojiStore(username : string)
 			
 				
 			});
-			return 200;
+	
 			
             }
 			else
 			{
 				console.log("not found")
-				return 404;
 				
 			
 }}

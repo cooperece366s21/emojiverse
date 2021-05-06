@@ -62,7 +62,10 @@ export default class ChatClass extends Component {
   
   componentDidMount()
   {
-	  /*PEOPLE_EMOJIS.map(emoji=>
+	  /*
+	  uncomment to populate. one-time code
+	  
+	  PEOPLE_EMOJIS.map(emoji=>
 	  {api.populateEmojiStore(emoji, "PEOPLE_EMOJIS", 0)})
 	  
 	  ANIMALS_NATURE_EMOJIS.map(emoji=>

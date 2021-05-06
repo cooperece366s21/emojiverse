@@ -52,7 +52,7 @@ public class UserMapper implements UserDao {
                                 " where username = :username")
                                 .bind("username",username)
                                 .map((rs, ctx) -> rs.getInt("user_id"))
-                                .one());
+                                .list().get(0));
         return chat_id;
 
     }
@@ -68,7 +68,7 @@ public class UserMapper implements UserDao {
                         handle.createQuery("select profile_img from users where user_id = :user_id")
                                 .bind("user_id",user_id)
                                 .map((rs, ctx) -> rs.getString("profile_img"))
-                                .one());
+                                .list().get(0));
         Map<String, Object> map = new HashMap<>();
         map.put("profile_img",profile_img);
         return gson.toJson(map);
@@ -171,7 +171,7 @@ public class UserMapper implements UserDao {
                             handle.createQuery("select hashed_psw from users where username = :username")
                                     .bind("username",username)
                                     .map((rs, ctx) -> rs.getString("hashed_psw"))
-                                    .one());
+                                    .list().get(0));
             ;
             //System.out.println(password.replaceAll("\\s+", "").compareTo(user_password.replaceAll("\\s+", "")));
 
@@ -204,6 +204,22 @@ public class UserMapper implements UserDao {
                 .bind("emoji_coins",0)
                 .bind("profile_img",img)
                 .execute());
+
+        int user_id = getUserIdFromUserName(user.getUsername());
+        List<Integer> user_emoji_id_list = jdbi.withHandle(
+                handle ->
+                        handle.createQuery("select emoji_store.emoji_id from emoji_store " +
+                                "where emoji_price = 0")
+                                .map((rs, ctx) -> rs.getInt("emoji_id"))
+                                .list());
+        for(int emoji_id : user_emoji_id_list)
+        {
+            jdbi.withHandle(h -> h.createUpdate("INSERT INTO emojis " +
+                    "(user_id, emoji_id) VALUES (:user_id, :emoji_id)")
+                    .bind("user_id",user_id)
+                    .bind("emoji_id",emoji_id)
+                    .execute());
+        }
 
     }
     

@@ -5,6 +5,8 @@ import EmojiVerse.emoji.EmojiMessage;
 import EmojiVerse.user.User;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
+import org.jdbi.v3.sqlobject.Handler;
+import org.jdbi.v3.sqlobject.SqlObjects;
 import com.google.gson.Gson;
 import java.util.*;
 
@@ -31,9 +33,10 @@ public class ChannelMapper implements ChatDao {
         return jdbi.withHandle(
                 handle ->
                         handle.createQuery("select chat_name from chat_list where chat_id  = :chat_id")
-                                .bind("chat_id",id)
+                                .bind("chat_id", id)
                                 .map((rs, ctx) -> rs.getString("chat_name"))
-                                .one());
+                                .list().get(0));
+
     }
 
 
@@ -46,7 +49,7 @@ public class ChannelMapper implements ChatDao {
                         handle.createQuery("select chat_id from chat_list where chat_name = :chat_name")
                                 .bind("chat_name",chat_name)
                                 .map((rs, ctx) -> rs.getInt("chat_id"))
-                                .one());
+                                .list().get(0));
         return chat_id;
     }
     
@@ -67,7 +70,7 @@ public class ChannelMapper implements ChatDao {
                         handle.createQuery("select user_id from users where username  = :username")
                                 .bind("username",username)
                                 .map((rs, ctx) -> rs.getInt("user_id"))
-                                .one());
+                                .list().get(0));
 
         jdbi.withHandle(h -> h.createUpdate("INSERT INTO  user_messages" +
                 "(chat_id,user_id, message,datetime) " +
@@ -133,7 +136,7 @@ public class ChannelMapper implements ChatDao {
                         handle.createQuery("select user_id from users where username  = :username")
                                 .bind("username",target_username)
                                 .map((rs, ctx) -> rs.getInt("user_id"))
-                                .one());
+                                .list().get(0));
         jdbi.withHandle(h -> h.createUpdate("INSERT INTO  chat_participants" +
                 "(chat_id,user_id) " +
                 "VALUES (:chat_id, :user_id) ")
@@ -149,7 +152,7 @@ public class ChannelMapper implements ChatDao {
                         handle.createQuery("select user_id from users where username  = :username")
                                 .bind("username",target_username)
                                 .map((rs, ctx) -> rs.getInt("user_id"))
-                                .one());
+                                .list().get(0));
         jdbi.withHandle(h -> h.createUpdate("delete from chat_participants where user_id = :user_id")
                 .bind("user_id",user_id)
                 .execute());
@@ -162,7 +165,7 @@ public class ChannelMapper implements ChatDao {
                 handle ->
                         handle.createQuery("select max(chat_id)+1 as next_chat_id from chat_list")
                                 .map((rs, ctx) -> rs.getInt("next_chat_id"))
-                                .one());
+                                .list().get(0));
         return next_chat_id;
     }
 
@@ -187,7 +190,7 @@ public class ChannelMapper implements ChatDao {
                         handle.createQuery("select user_id from users where username = :username")
                                 .bind("username",requester_username)
                                 .map((rs, ctx) -> rs.getInt("user_id"))
-                                .one());
+                                .list().get(0));
 
         jdbi.withHandle(h -> h.createUpdate("INSERT INTO chat_participants (chat_id, user_id) VALUES (:chat_id, :user_id)  ")
                 .bind("chat_id",chat_id)
@@ -201,7 +204,7 @@ public class ChannelMapper implements ChatDao {
                             handle.createQuery("select user_id from users where username = :username")
                                     .bind("username",username)
                                     .map((rs, ctx) -> rs.getInt("user_id"))
-                                    .one());
+                                    .list().get(0));
 
             jdbi.withHandle(h -> h.createUpdate("INSERT INTO chat_participants (chat_id, user_id) VALUES (:chat_id, :user_id)  ")
                     .bind("chat_id",chat_id)
@@ -239,7 +242,7 @@ public class ChannelMapper implements ChatDao {
                         handle.createQuery("select user_id from users where username = :username")
                                 .bind("username",username)
                                 .map((rs, ctx) -> rs.getInt("user_id"))
-                                .one());
+                                .list().get(0));
 
         List<Integer> channels = jdbi.withHandle(
                 handle ->
@@ -277,7 +280,7 @@ public class ChannelMapper implements ChatDao {
                                         "where user_id = :user_id")
                                         .bind("user_id",id)
                                         .map((rs, ctx) -> rs.getString("username"))
-                                        .one());
+                                        .list().get(0));
                 chat_participants.add(inside_index,participant);
                 inside_index++;
             }
