@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*https://github.com/react-z/react-emojipicker/blob/master/src/Picker.js*/
 /*change send button to async post and get*/
 
