@@ -1,6 +1,6 @@
 
-          
-export async function addFriend(user : string , friend_user : string)
+
+export async function addFriend(user : string , friend_user : string, callback)
 {
 	const response = await fetch("/addFriend", {
 		method: "POST",
@@ -17,17 +17,16 @@ export async function addFriend(user : string , friend_user : string)
 			  response.json().then(data=>{
 				  console.log(data)
 				  localStorage.setItem("friends",data.friends);
-				  window.location.replace("http://localhost:3000/profile")
+				  // window.location.replace("http://localhost:3000/profile")
+				  callback()
 			});
 		  }
-		  else
-		  {
+		  else{
 			  console.log("not found")
-			
-		}
+		  }
 	}
 
-export async function removeFriend(user : string , friend_user : string)
+export async function removeFriend(user : string , friend_user : string, callback)
 {
 	const response = await fetch("/removeFriend", {
 		method: "POST",
@@ -44,7 +43,7 @@ export async function removeFriend(user : string , friend_user : string)
 			  response.json().then(data=>{
 				  console.log(data)
 				  localStorage.setItem("friends",data.friends);
-				  window.location.replace("http://localhost:3000/profile")
+				  callback()
 			});
 		  }
 		  else
@@ -74,7 +73,7 @@ export async function getMessages(chat : string , chat_name : string)
 				console.log(data)
 				localStorage.setItem("message_info",data.message_info);
 				
-				localStorage.setItem("chat",chat);
+				localStorage.setItem("chat",chat_name);
 				
 				window.location.replace("http://localhost:3000/chat")
 			});
@@ -105,8 +104,10 @@ export async function createNewChat(user : string , user_list : string, chat_nam
 			
 			response.json().then(data=>{
 				console.log(data)
-				localStorage.setItem("chat_names",data.chat_names);
-				window.location.replace("http://localhost:3000/chatList")
+				localStorage.setItem("chat_names",data.chat_names)
+
+				// Direct to the chattting page after create a new chat
+				getMessages(chat_name, chat_name.split(" participants: ")[0])
 			});
 				
             }
@@ -198,12 +199,39 @@ export async function removeChat(user : string ,chat_name : string){
 		response.json().then(data=>{
 			console.log(data)
 			localStorage.setItem("chat_names",data.chat_names);
-			window.location.replace("http://localhost:3000/chatList")
+			// window.location.replace("http://localhost:3000/chatList")
 		});
 	}
 	else {
 		console.log("Error removing" + chat_name)
 	}
+}
+
+export async function sendMessage(chat_name: string, userName: string, Message: string,callback, component, doc){
+
+		const response = await fetch("/addMessage", {
+			method: "POST",
+			headers: {
+				"Content_Type": "application/json"
+			},
+			body:
+				JSON.stringify({
+					chatName: chat_name, username : userName, message : Message})
+		})
+
+		if (response.ok) {
+			console.log("Response Worked! ");
+
+			response.json().then(data=>{
+				console.log(data)
+				localStorage.setItem("message_info",data.message_info);
+				callback(arguments[4], arguments[5]);
+			});
+		}
+		else{
+			console.log("not found")
+
+		}
 }
 
 	
@@ -213,8 +241,9 @@ let exports = {
 	getMessages,
 	createNewChat,
 	populateEmojiStore,
+	removeChat,
+	sendMessage,
 	getEmojiStore,
-	removeChat
 
 }
 
