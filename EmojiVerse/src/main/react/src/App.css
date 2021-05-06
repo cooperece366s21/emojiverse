@@ -149,3 +149,26 @@ h1,h2,h3{
     text-align: left;
 }
 
+.profContainer{
+    display: grid;
+    grid-template-columns: auto 500px;
+    grid-template-rows: auto;
+}
+
+.friendsList{
+    height: 300px;
+    overflow-y: scroll;
+    text-align: center;
+    margin-top: 10px;
+
+}
+
+.friendsList h3{
+    font-size: 15px;
+    border-bottom: grey 3px dotted;
+    width: 200px;
+    margin-right: 50px;
+    display: inline-block;
+
+}
+

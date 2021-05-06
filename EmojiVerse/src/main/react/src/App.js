@@ -9,7 +9,7 @@ import {
 import {Login} from './components/authentication/login';
 import {SignUp} from './components/authentication/signup';
 import {Chat} from './components/chats/chat';
-import {ChatList} from './components/chats/chatList';
+import {ChatListPage} from './components/chats/chatListPage';
 import {Profile} from './components/user_interactions/profile';
 import {Store} from './components/user_interactions/store';
 
@@ -22,7 +22,7 @@ function App() {
 			<Route path = "/chat" component = {Chat}/>
 			<Route exact path = "/" component = {Login}/>
 			<Route path = "/signup" component = {SignUp}/>
-			<Route path = "/chatList" component = {ChatList}/>
+			<Route path = "/chatList" component = {ChatListPage}/>
 			<Route path = "/profile" component = {Profile} />
 			<Route path = "/store" component = {Store} />
 		</Switch>

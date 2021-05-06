@@ -1,13 +1,13 @@
 /*https://github.com/react-z/react-emojipicker/blob/master/src/Picker.js*/
 /*change send button to async post and get*/
 
-import React, { Component } from 'react'
+import React, {Component, useState} from 'react'
 import styled from 'styled-components'
 import emojione from 'emojione'
 import PropTypes from 'prop-types'
 import { Form, Input, Button } from 'semantic-ui-react';
 import api from '../../services/api';
-import {Message} from '../message/message';
+import {Message} from '../message/Message';
 
 
 
@@ -16,12 +16,6 @@ import {Message} from '../message/message';
 
 const username = localStorage.getItem("username")
 const chat = localStorage.getItem("chat")
-var message_info = localStorage.getItem("message_info")
-if(message_info!= null)
-{
-	message_info = localStorage.getItem("message_info").split(',')
-}
-
 
 
 
@@ -45,7 +39,8 @@ export default class ChatClass extends Component {
       emojis: PEOPLE_EMOJIS,
       emojiCategory: 'PEOPLE_EMOJIS',
 	  message: "",
-	  username: username
+	  username: username,
+      message_info:localStorage.getItem("message_info").split(',')
 	  
     }
   }
@@ -160,11 +155,12 @@ export default class ChatClass extends Component {
 	
 
 
-        <div className="chatWindow">
+        <div className="chatWindow" id="messageWindow">
 
-            <div>{message_info == null ? message_info : message_info.map(info=>
-                    <Message username={info.split(":")[0].split("(")[0]} content={info.split(") :")[1]} timestamp={info.split(") :")[0].split("(")[1]}/>
-                // <h3 className = "message">{info}</h3>
+            <div>{this.state.message_info == null ? this.state.message_info : this.state.message_info.map(info=>
+                    <Message username={info.split(":")[0].split("(")[0]} content={info.split(") :")[1]}
+                             timestamp={info.split(") :")[0].split("(")[1]}/>
+                    // <h3 className = "message">{info}</h3>
             )}</div>
         </div>
 
@@ -192,35 +188,11 @@ export default class ChatClass extends Component {
         placeholder="Enter Message"
 		value = {this.state.message}
         />
-		<Button onClick = {async () => {
-
-		  const chat_name = chat.split(" participants: ")[0]
-		  const userName = username
-		  const Message = this.state.message
-          const response = await fetch("/addMessage", {
-            method: "POST",
-            headers: {
-              "Content_Type": "application/json"
-            },
-            body:
-              JSON.stringify({
-			  chatName: chat_name, username : userName, message : Message})
-		  })
-			if (response.ok) {
-            console.log("Response Worked! ");
-
-			response.json().then(data=>{
-				console.log(data)
-				localStorage.setItem("message_info",data.message_info);
-				window.location.replace("http://localhost:3000/chat")
-			});
-
-            }
-			else
-			{
-				console.log("not found")
-
-		}}}>Send</Button>
+		<Button onClick = {
+		    async ()=>{
+		        api.sendMessage(chat.split(" participants: ")[0], username, this.state.message,updateChat, this, document)
+		    }
+        }>Send</Button>
 
 
 	 </Form.Field>
@@ -230,6 +202,18 @@ export default class ChatClass extends Component {
 	
   }
 }
+
+function updateChat(component, doc){
+  component.setState({
+    message_info:localStorage.getItem("message_info").split(','),
+    message: ""
+  })
+
+
+  var objDiv = doc.getElementById("messageWindow");
+  objDiv.scrollTop = objDiv.scrollHeight;
+}
+
 
 const Wrapper = styled.div`
   position: relative;

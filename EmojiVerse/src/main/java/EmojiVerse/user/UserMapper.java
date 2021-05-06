@@ -19,7 +19,7 @@ public class UserMapper implements UserDao {
 
     public UserMapper(String jdbcUrl) {
 
-        Jdbi jdbi_prelim = Jdbi.create(jdbcUrl, "root", "new_password");
+        Jdbi jdbi_prelim = Jdbi.create(jdbcUrl, "root", "13362478363");
         jdbi_prelim.installPlugin(new SqlObjectPlugin());
         this.jdbi = jdbi_prelim;
     }
