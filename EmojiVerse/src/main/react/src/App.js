@@ -8,7 +8,6 @@ import {
 } from 'react-router-dom';
 import {Login} from './components/authentication/login';
 import {SignUp} from './components/authentication/signup';
-import {Chat} from './components/chats/chat';
 import {ChatListPage} from './components/chats/chatListPage';
 import {Profile} from './components/user_interactions/profile';
 import {Store} from './components/user_interactions/store';
@@ -19,7 +18,6 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Switch>
-			<Route path = "/chat" component = {Chat}/>
 			<Route exact path = "/" component = {Login}/>
 			<Route path = "/signup" component = {SignUp}/>
 			<Route path = "/chatList" component = {ChatListPage}/>

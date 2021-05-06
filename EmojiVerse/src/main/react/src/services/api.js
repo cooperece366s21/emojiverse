@@ -57,8 +57,6 @@ export async function removeFriend(user : string , friend_user : string, callbac
 // we need a get messages after time function
 export async function getMessages(chat : string , chat_name : string)
 {
-	
-          
           const response = await fetch("/getMessages", {
             method: "POST",
             headers: {
@@ -87,11 +85,9 @@ export async function getMessages(chat : string , chat_name : string)
 			else
 			{
 				console.log("not found")
-			
-		
 		}
 }
-	
+
 export async function createNewChat(user : string , user_list : string, chat_name : string)
 {
 	const response = await fetch("/new", {
@@ -248,7 +244,6 @@ let exports = {
 	removeChat,
 	sendMessage,
 	getEmojiStore,
-
 }
 
 export default exports

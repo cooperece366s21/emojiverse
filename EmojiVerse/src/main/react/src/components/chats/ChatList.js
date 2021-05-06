@@ -41,6 +41,6 @@ function deleteChat(name,component){
 function directToChat(name, component){
 	console.log(name)
 	//component.setState({ chat: "hello there" })
-	component.setState({ chat: < Chat chat={name}/> })
+	component.setState({ chat: < Chat chatName={name}/> })
     //api.getMessages(name,name.split(" participants: ")[0])
 }

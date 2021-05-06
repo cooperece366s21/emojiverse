@@ -17,18 +17,12 @@ import Picker from 'react-emojipicker'
 * new messages can be appended 
 */
 
-const chat = ""//localStorage.getItem("chat")
-//const chat_name = chat.split(" participants: ")[0] // bs
-let chat_name = ""
 const username = localStorage.getItem("username")
 
 export default class Chat extends Component {
 	
 	constructor (props) {
 		super(props) //wtf
-		console.log(props.chat)
-		chat_name = props.chat
-		//console.log(this.chat)
 		this.state = {
 			isFetching: true, // when is fetching==true, grey out message screen
 			messages: [],
@@ -56,8 +50,6 @@ export default class Chat extends Component {
 		//console.log(api.getMessages(chat.split(" participants: ")[0]))
 		//this.setState({ messages: api.getMessages(chat, chat.split(" participants: ")[0])})
 		// gonna go crazy with these chat names lol
-		
-		console.log(chat_name)
 		const res = await fetch("/getMessages", {
 			method: "POST",
 			headers: {
@@ -65,7 +57,7 @@ export default class Chat extends Component {
 			},
 			body:
 			JSON.stringify({
-			chatName: chat_name})
+			chatName: this.props.chatName})
 		});
 		// console.log(res.json())
 		res.json().then( data => {
@@ -93,7 +85,7 @@ export default class Chat extends Component {
 			"Content_Type": "application/json"
 			},
 			body:
-			JSON.stringify({ chatName: chat_name, username : username, message : myMessage })
+			JSON.stringify({ chatName: this.props.chatName, username : username, message : myMessage })
 		})
 		if (res.ok) {
 			console.log("Message sent successfully")
@@ -108,7 +100,7 @@ export default class Chat extends Component {
 		return (
 			<>
 			<Form.Field className = "white-box">
-			<h1>{chat_name}</h1>
+			<h1>{this.props.chatName}</h1>
 			<div className="chatWindow">
 				// this ought to have a spinner while this.state.isFetching==true
 				{this.state.messages.map((data) => <p>{data}</p>)}
