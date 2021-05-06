@@ -18,14 +18,16 @@ import Picker from 'react-emojipicker'
 */
 
 const chat = ""//localStorage.getItem("chat")
-const chat_name = chat.split(" participants: ")[0] // bs
-//const chat_name = ""
+//const chat_name = chat.split(" participants: ")[0] // bs
+let chat_name = ""
 const username = localStorage.getItem("username")
 
 export default class Chat extends Component {
+	
 	constructor (props) {
 		super(props) //wtf
-		console.log(props)
+		console.log(props.chat)
+		chat_name = props.chat
 		//console.log(this.chat)
 		this.state = {
 			isFetching: true, // when is fetching==true, grey out message screen
@@ -106,7 +108,7 @@ export default class Chat extends Component {
 		return (
 			<>
 			<Form.Field className = "white-box">
-			<h1>{chat}</h1>
+			<h1>{chat_name}</h1>
 			<div className="chatWindow">
 				// this ought to have a spinner while this.state.isFetching==true
 				{this.state.messages.map((data) => <p>{data}</p>)}
