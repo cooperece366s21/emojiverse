@@ -18,8 +18,7 @@ public class ChannelMapper implements ChatDao {
 
 
     public ChannelMapper(String jdbcUrl) {
-
-        Jdbi jdbi_prelim = Jdbi.create(jdbcUrl, "root", "new_password");
+        Jdbi jdbi_prelim = Jdbi.create(jdbcUrl, System.getenv("EVERSEDB_USER"), System.getenv("EVERSEDB_PASS"));
         jdbi_prelim.installPlugin(new SqlObjectPlugin());
         this.jdbi = jdbi_prelim;
     }

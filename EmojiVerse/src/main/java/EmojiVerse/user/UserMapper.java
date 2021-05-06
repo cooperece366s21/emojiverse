@@ -18,8 +18,7 @@ public class UserMapper implements UserDao {
     private List<User> userList;
 
     public UserMapper(String jdbcUrl) {
-
-        Jdbi jdbi_prelim = Jdbi.create(jdbcUrl, "root", "13362478363");
+        Jdbi jdbi_prelim = Jdbi.create(jdbcUrl, System.getenv("EVERSEDB_USER"), System.getenv("EVERSEDB_PASS"));
         jdbi_prelim.installPlugin(new SqlObjectPlugin());
         this.jdbi = jdbi_prelim;
     }

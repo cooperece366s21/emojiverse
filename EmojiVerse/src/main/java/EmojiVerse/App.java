@@ -65,10 +65,10 @@ public class App
 				});
 		Gson gson = new Gson();
 
-		ChannelMapper chatMapper = new ChannelMapper("jdbc:mysql://localhost:3306/emojiverse");
+		ChannelMapper chatMapper = new ChannelMapper("jdbc:mysql://localhost:3306/emojiverse?serverTimezone=EST");
 		//UserUtil userUtil = new UserUtil();
-		UserMapper usermapper = new UserMapper("jdbc:mysql://localhost:3306/emojiverse");
-		EmojiMapper emojimapper = new EmojiMapper("jdbc:mysql://localhost:3306/emojiverse");
+		UserMapper usermapper = new UserMapper("jdbc:mysql://localhost:3306/emojiverse?serverTimezone=EST");
+		EmojiMapper emojimapper = new EmojiMapper("jdbc:mysql://localhost:3306/emojiverse?serverTimezone=EST");
 		//User new_user = new User("fgeyfg","gygdygw","wbdwgf",2,"egfiegfyiew","efigeyfewg",1);
 		//usermapper.registerUser(new_user);
 		get("/ping", (req, res) -> "OK");
@@ -239,6 +239,10 @@ public class App
 			String category = json.getString("Category");
 			emojimapper.populateEmojiStore(emojis,price,category);
 			return emojimapper.getEmojisFromStore();
+		});
+
+		post("/getEmojisFromEmojiStore", (req,res)->{
+				return emojimapper.getEmojisFromStore();
 		});
 	}
 }
