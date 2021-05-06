@@ -244,7 +244,6 @@ let exports = {
 	removeChat,
 	sendMessage,
 	getEmojiStore,
-	removeChat
 
 }
 
