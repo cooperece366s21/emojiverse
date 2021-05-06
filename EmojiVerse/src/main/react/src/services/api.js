@@ -53,6 +53,8 @@ export async function removeFriend(user : string , friend_user : string, callbac
 		}
 	}	
 	
+
+// we need a get messages after time function
 export async function getMessages(chat : string , chat_name : string)
 {
 	
@@ -76,6 +78,9 @@ export async function getMessages(chat : string , chat_name : string)
 				localStorage.setItem("chat",chat_name);
 				
 				window.location.replace("http://localhost:3000/chat")
+				// view updating should NOT occur in the api at all
+				// the API should be purely functional, just return requested data
+				// no global state changes 
 			});
 				
             }
@@ -169,13 +174,12 @@ export async function getEmojiStore(username : string)
 			
 				
 			});
-			return 200;
+	
 			
             }
 			else
 			{
 				console.log("not found")
-				return 404;
 				
 			
 }}

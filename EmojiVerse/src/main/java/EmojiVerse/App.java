@@ -170,6 +170,7 @@ public class App
 				return null;
 			}
 		});
+		// no authentication here lol
 		post("/getMessages", (req, res) -> {
 			JSONObject json = new JSONObject(req.body());
 			String chat_name = json.getString("chatName");

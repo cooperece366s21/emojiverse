@@ -10,42 +10,19 @@ import EmojiWrapper from '../chats/chat'
 
 const username = localStorage.getItem("username")
 
-export default class EmojiStore extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      
-	  message: "",
-	  username: username
-	  
-    }
-  }
 
-  componentDidMount()
-  {
-	  {api.getEmojiStore(this.state.username)}
-
-  }
-  render()
-  {
-	  return(
-		<h1></h1>
-	  )
-  }
-}
 export const Store = ()  => {
   const [username, setUsername] = useState(''); //  Empty String
   const [user_password,setPassword] = useState('')
   const [title,setTitle] = useState('')
   const[verified,setVerified] = useState(false)
-  const emojis = localStorage.getItem("emoji_list").split(",")
+ 
   
   return (
     <Form className = "login-container">
 	<NavBar/>
 	  <h1>emojiverse store</h1>
-	  <EmojiStore/>
-	  <h1>{emojis.map(emoji=> <Button>{emoji}</Button>)}</h1>
+	  <h1>{localStorage.getItem("emoji_list").split(",").map(emoji=> <Button>{emoji}</Button>)}</h1>
 	</Form>
 	  )
 }

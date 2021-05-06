@@ -1,20 +1,27 @@
 import React, {useState} from "react";
 import api from "../../services/api";
 import {Button, Form} from "semantic-ui-react";
+import Chat from "./Chat"
 
 export class ChatList extends React.Component{
     state = {
-        chatNames : this.props.chatnames
+        chatNames : this.props.chatnames,
+        chat : null
     }
 
     render() {
         return(
+			<>
             <div>{this.state.chatNames.map(name=>
                 <Form.Field>
-                    <Button onClick = {async () => directToChat(name)}>{name.replace("$","")}</Button>
+                    <Button onClick = {async () => directToChat(name.split(" participants: ")[0], this)}>{name.replace("$","")}</Button>
                     <Button onClick={async () => deleteChat(name, this)}>Remove</Button>
                 </Form.Field>
             )}</div>
+            <Form id="chat_view">
+		{this.state.chat}
+            </Form>
+            </>
         )
     }
 
@@ -31,6 +38,9 @@ function deleteChat(name,component){
     })
 }
 
-function directToChat(name){
-    api.getMessages(name,name.split(" participants: ")[0])
+function directToChat(name, component){
+	console.log(name)
+	//component.setState({ chat: "hello there" })
+	component.setState({ chat: < Chat chat={name}/> })
+    //api.getMessages(name,name.split(" participants: ")[0])
 }
