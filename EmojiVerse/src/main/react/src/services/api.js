@@ -54,6 +54,8 @@ export async function removeFriend(user : string , friend_user : string)
 		}
 	}	
 	
+
+// we need a get messages after time function
 export async function getMessages(chat : string , chat_name : string)
 {
 	
@@ -77,6 +79,9 @@ export async function getMessages(chat : string , chat_name : string)
 				localStorage.setItem("chat",chat);
 				
 				window.location.replace("http://localhost:3000/chat")
+				// view updating should NOT occur in the api at all
+				// the API should be purely functional, just return requested data
+				// no global state changes 
 			});
 				
             }
