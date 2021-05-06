@@ -118,7 +118,7 @@ h1,h2,h3{
 
 .chatWindow{
     margin: 30px;
-    max-height: 400px;
+    height: 40%;
     overflow-y: scroll;
 }
 
