@@ -20,6 +20,7 @@ export const ChatList = ()  => {
   <NavBar/>
 	<Form.Field className = 'white-box'>
 		<h1></h1>
+		<h1></h1>
 		<h1>CHATS FOR {username}</h1>
 		<h3>----------------------------------------------</h3>
 		<Input

@@ -18,4 +18,6 @@ public interface EmojiJDBI {
 
     int getEmojiCoins(String username);
 
+    String getUserEmojis(String username);
+
 }

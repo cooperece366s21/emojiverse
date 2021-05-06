@@ -3,7 +3,7 @@ package EmojiVerse.emoji;
 import com.google.gson.Gson;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
-
+import EmojiVerse.user.UserMapper;
 import java.util.List;
 import java.util.*;
 
@@ -47,7 +47,7 @@ public class EmojiMapper implements EmojiJDBI{
                         handle.createQuery("select emoji_coins from users where username  = :username")
                                 .bind("username",username)
                                 .map((rs, ctx) -> rs.getInt("user_id"))
-                                .one());
+                                .list().get(0));
         return emoji_coins;
     }
 
@@ -58,14 +58,14 @@ public class EmojiMapper implements EmojiJDBI{
                         handle.createQuery("select user_id from users where username  = :username")
                                 .bind("username",username)
                                 .map((rs, ctx) -> rs.getInt("user_id"))
-                                .one());
+                                .list().get(0));
 
         int emoji_id = jdbi.withHandle(
                 handle ->
                         handle.createQuery("select emoji_id from emoji_store where emoji  = :emoji")
                                 .bind("emoji",emoji)
                                 .map((rs, ctx) -> rs.getInt("emoji_id"))
-                                .one());
+                                .list().get(0));
 
         jdbi.withHandle(h -> h.createUpdate("INSERT INTO  emojis" +
                 "(:emoji_id,:user_id) " +
@@ -78,7 +78,7 @@ public class EmojiMapper implements EmojiJDBI{
                         handle.createQuery("select emoji_price from emoji_store inner join emojis where emoji  = :emoji")
                                 .bind("emoji",emoji)
                                 .map((rs, ctx) -> rs.getInt("emoji_price"))
-                                .one());
+                                .list().get(0));
 
         subtractEmojiCoins(username, price);
 
@@ -132,6 +132,25 @@ public class EmojiMapper implements EmojiJDBI{
 
 
 
+    }
+
+    public String getUserEmojis(String username)
+    {
+        Gson gson = new Gson();
+        Map<String, Object> map = new HashMap<>();
+        UserMapper userMapper  = new UserMapper("jdbc:mysql://localhost:3306/emojiverse");
+        int user_id = userMapper.getUserIdFromUserName(username);
+        List<String> user_emoji_list = jdbi.withHandle(
+                handle ->
+                        handle.createQuery("select emoji from emoji_store " +
+                                "inner join emojis on emoji_store.emoji_id = emojis.emoji_id" +
+                                "where user_id = :user_id")
+                                .bind("user_id",user_id)
+
+                                .map((rs, ctx) -> rs.getString("emoji"))
+                                .list());
+        map.put("user_emoji_list",user_emoji_list);
+        return gson.toJson(map);
     }
 
 
