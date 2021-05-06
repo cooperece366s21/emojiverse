@@ -4,7 +4,7 @@ import emojione from 'emojione'
 import PropTypes from 'prop-types'
 import { Form, Input, Button } from 'semantic-ui-react';
 import api from '../../services/api';
-import {Message} from '../message/message';
+//import {Message} from '../message/message';
 import Picker from 'react-emojipicker'
 // listing packages like this is a bit ridiculous
 
@@ -17,15 +17,16 @@ import Picker from 'react-emojipicker'
 * new messages can be appended 
 */
 
-const chat = localStorage.getItem("chat")
-const chat_name = chat.split(" participants: ")[0]
+const chat = ""//localStorage.getItem("chat")
+const chat_name = chat.split(" participants: ")[0] // bs
+//const chat_name = ""
 const username = localStorage.getItem("username")
-let message_info = localStorage.getItem("message_info")
-console.log(message_info)
 
-export default class ChatClass extends Component {
+export default class Chat extends Component {
 	constructor (props) {
 		super(props) //wtf
+		console.log(props)
+		//console.log(this.chat)
 		this.state = {
 			isFetching: true, // when is fetching==true, grey out message screen
 			messages: [],
@@ -122,7 +123,7 @@ export default class ChatClass extends Component {
 		)
 	}
 }
-
+/*
 export const Chat = () =>{
 	return <ChatClass />
-}
+}*/
