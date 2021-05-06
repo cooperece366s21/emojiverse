@@ -5,12 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8dcee704-464d-48d8-90c7-e9ecb95aedc4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/react/src/components/chats/ListContainer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/EmojiVerse/chatChannel/ChannelMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmojiVerse/chatChannel/ChannelMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/EmojiVerse/emoji/EmojiMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmojiVerse/emoji/EmojiMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/EmojiVerse/user/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmojiVerse/user/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/react/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/react/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/react/src/components/message/MesaageList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/react/src/components/message/MesaageList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/react/src/components/chats/Chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/react/src/components/chats/Chat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/react/src/components/chats/ChatList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/react/src/components/chats/ChatList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/react/src/components/chats/chatListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/react/src/components/chats/chatListPage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,6 +82,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="App.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -134,7 +147,7 @@
       <workItem from="1619471110738" duration="8751000" />
       <workItem from="1620247375969" duration="5874000" />
       <workItem from="1620268264485" duration="2493000" />
-      <workItem from="1620293052930" duration="595000" />
+      <workItem from="1620293052930" duration="1777000" />
     </task>
     <servers />
   </component>
