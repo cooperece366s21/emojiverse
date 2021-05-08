@@ -98,18 +98,19 @@ public class EmojiMapper implements EmojiJDBI{
 
     @Override
     public void populateEmojiStore(List<String> emojis, int price, String category) {
-        System.out.println("hello");
+
 
         /*something fishy here. should not have zeros for majority of emojis*/
         if (price == -1) {
             for(int i =0; i < emojis.size(); i++)
             {
                 price = (int) Math.ceil(Math.random()*3000);
-                if(i%10==0)
+                if(price < 100)
                 {
                     price = 0;
                 }
-                System.out.println(emojis.get(i));
+                System.out.println(i);
+                System.out.println(price);
                 addEmojiToStore(emojis.get(i), price,category);
             }
 
@@ -218,6 +219,7 @@ public class EmojiMapper implements EmojiJDBI{
 
 
         System.out.println(PEOPLE_EMOJIS);
+        System.out.println(TRAVEL_PLACES_EMOJIS);
 
         return gson.toJson(map);
 
@@ -248,16 +250,69 @@ public class EmojiMapper implements EmojiJDBI{
         Map<String, Object> map = new HashMap<>();
         UserMapper userMapper  = new UserMapper("jdbc:mysql://localhost:3306/emojiverse");
         int user_id = userMapper.getUserIdFromUserName(username);
-        List<String> user_emoji_list = jdbi.withHandle(
+        List<Emoji> user_emoji_list = jdbi.withHandle(
                 handle ->
-                        handle.createQuery("select emoji from emoji_store " +
+                        handle.createQuery("select emoji,category,emoji_price from emoji_store " +
                                 "inner join emojis on emoji_store.emoji_id = emojis.emoji_id" +
-                                "where user_id = :user_id")
+                                " where user_id = :user_id")
                                 .bind("user_id",user_id)
-
-                                .map((rs, ctx) -> rs.getString("emoji"))
+                                .map(new EmojiRowMapper())
                                 .list());
-        map.put("user_emoji_list",user_emoji_list);
+        List<String> PEOPLE_EMOJIS = new ArrayList<String>();
+        List<String> ANIMALS_NATURE_EMOJIS = new ArrayList<String>();
+        List<String> FOOD_SPORTS_EMOJIS = new ArrayList<String>();
+        List<String> TRAVEL_PLACES_EMOJIS = new ArrayList<String>();
+        List<String> OBJECTS_EMOJIS = new ArrayList<String>();
+        List<String> SYMBOLS_FLAGS_EMOJIS = new ArrayList<String>();
+
+
+
+
+        List<Integer> prices = new ArrayList<Integer>();
+        for(Emoji emoji : user_emoji_list)
+        {
+
+            switch(emoji.getCategory())
+            {
+                case "PEOPLE_EMOJIS":
+                    PEOPLE_EMOJIS.add(emoji.getName());
+
+                    break;
+                case "ANIMALS_NATURE_EMOJIS":
+                    ANIMALS_NATURE_EMOJIS.add(emoji.getName());
+
+                    break;
+                case "FOOD_SPORTS_EMOJIS":
+                    FOOD_SPORTS_EMOJIS.add(emoji.getName());
+
+                    break;
+                case "OBJECTS_EMOJIS":
+                    OBJECTS_EMOJIS.add(emoji.getName());
+
+                    break;
+                case "TRAVEL_PLACES_EMOJIS":
+                    TRAVEL_PLACES_EMOJIS.add(emoji.getName());
+
+                    break;
+                case "SYMBOLS_FLAGS_EMOJIS":
+                    SYMBOLS_FLAGS_EMOJIS.add(emoji.getName());
+
+                    break;
+                default:
+                    System.out.println("Emoji does not exist");
+                    break;
+            }
+
+        }
+        map.put("PEOPLE_EMOJIS",PEOPLE_EMOJIS);
+        map.put("ANIMALS_NATURE_EMOJIS",ANIMALS_NATURE_EMOJIS);
+        map.put("FOOD_SPORTS_EMOJIS",FOOD_SPORTS_EMOJIS);
+        map.put("OBJECTS_EMOJIS", OBJECTS_EMOJIS);
+        map.put("SYMBOLS_FLAGS_EMOJIS",SYMBOLS_FLAGS_EMOJIS);
+        map.put("TRAVEL_PLACES_EMOJIS",TRAVEL_PLACES_EMOJIS);
+
+        System.out.println(TRAVEL_PLACES_EMOJIS);
+
         return gson.toJson(map);
     }
 

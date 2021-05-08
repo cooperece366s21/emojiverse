@@ -200,6 +200,7 @@ public class App
 			System.out.println(message);
 			System.out.println(username);
 			System.out.println(chat_name);
+			emojimapper.addEmojiCoins(username);
 			Date date = new Date();
 			String date_time = date.toString();
 			chatMapper.addMessage(chat_name,message,username,date_time);
@@ -270,6 +271,12 @@ public class App
 			String emoji = json.getString("emoji");
 			System.out.println(emoji);
 			return emojimapper.getEmojiPrice(emoji);
+		});
+
+		post("/getUserEmojis", (req,res)->{
+			JSONObject json = new JSONObject(req.body());
+			String username = json.getString("username");
+			return emojimapper.getUserEmojis(username);
 		});
 	}
 }

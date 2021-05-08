@@ -175,7 +175,8 @@ export async function getEmojiStore(username : string)
 				localStorage.setItem("FOOD_SPORTS_EMOJIS", data.FOOD_SPORTS_EMOJIS)
 				localStorage.setItem("OBJECTS_EMOJIS", data.OBJECTS_EMOJIS)
 				localStorage.setItem("SYMBOLS_FLAGS_EMOJIS", data.SYMBOLS_FLAGS_EMOJIS)
-				localStorage.setItem("TRAVEL_PLACES_EMOJIS", data.ANIMALS_NATURE_EMOJIS)
+				localStorage.setItem("TRAVEL_PLACES_EMOJIS", data.TRAVEL_PLACES_EMOJIS)
+				return data.ANIMALS_NATURE_EMOJIS
 			
 				
 			});
@@ -187,6 +188,40 @@ export async function getEmojiStore(username : string)
 				console.log("not found")
 				
 			
+}}
+
+export async function getUserEmojis(username : string)
+{
+		    const response = await fetch("/getUserEmojis", {
+            method: "POST",
+            headers: {
+              "Content_Type": "application/json"
+            },
+            body:
+              JSON.stringify({
+			  username : username})
+		  })
+			if (response.ok) {
+            console.log("Response Worked! ");
+			
+			response.json().then(data=>{
+				console.log(data)
+				localStorage.setItem("USER_PEOPLE_EMOJIS",data.PEOPLE_EMOJIS)
+				localStorage.setItem("USER_ANIMALS_NATURE_EMOJIS", data.ANIMALS_NATURE_EMOJIS)
+				localStorage.setItem("USER_FOOD_SPORTS_EMOJIS", data.FOOD_SPORTS_EMOJIS)
+				localStorage.setItem("USER_OBJECTS_EMOJIS", data.OBJECTS_EMOJIS)
+				localStorage.setItem("USER_SYMBOLS_FLAGS_EMOJIS", data.SYMBOLS_FLAGS_EMOJIS)
+				localStorage.setItem("USER_TRAVEL_PLACES_EMOJIS", data.TRAVEL_PLACES_EMOJIS)
+				
+			
+				
+			});
+	
+			
+            }
+			else
+			{
+				console.log("not found")
 }}
 
 export async function getEmojiPrice(emoji : string)
@@ -283,7 +318,8 @@ let exports = {
 	removeChat,
 	sendMessage,
 	getEmojiStore,
-	getEmojiPrice
+	getEmojiPrice,
+	getUserEmojis
 
 }
 

@@ -33,7 +33,7 @@ const Navbar = (props) => {
   </div><a class="ui basic left pointing label">
     1,048
   </a>
-			<Button className = "ui inverted button"><a href = "/chatList">ChatList</a></Button>
+			<Button className = "ui inverted button" onClick = {async () => api.getUserEmojis(username)}><a href = "/chatList">ChatList</a></Button>
             <Button className="ui inverted button" onClick = {async () => api.getEmojiStore(username)}><a href="/store">Store</a></Button>
             <Button className = "ui inverted button"><a href="/profile">Profile</a></Button>
 			<Button className="ui inverted button"><a href="/">Log-Out</a></Button>

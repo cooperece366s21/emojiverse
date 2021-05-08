@@ -59,7 +59,7 @@ create table if not exists user_messages(
 
 create table if not exists friends(
     friends_id int primary key not null auto_increment,
-    friend_username varchar(50) not null unique,
+    friend_username varchar(50) not null,
     friend_public_name varchar(50),
     user_id int,
     foreign key(user_id) references users(user_id),
@@ -68,7 +68,7 @@ create table if not exists friends(
 
 create table if not exists blocked(
     blocked_id int primary key not null auto_increment,
-    blocked_username varchar(50) not null unique,
+    blocked_username varchar(50) not null,
     blocked_public_name varchar(50),
     blocked_profile_img varchar(100),
     user_id int,

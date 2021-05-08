@@ -19,7 +19,7 @@ export class Store extends React.Component{
   
 componentDidMount()
   {
-	  this.setState({message : async () => api.getEmojiStore(username)});
+	  
   }	  
   
   render(){
@@ -28,7 +28,7 @@ componentDidMount()
 	<NavBar/>
 	  <h1>emojiverse store</h1>
 	  <h2 className = "emoji-store">People Emojis</h2>
-	  
+	  <h1>{this.state.emojis}</h1>
 	  <h1>{localStorage.getItem("PEOPLE_EMOJIS").split(",").map(emoji=> 
 	  <Button>{emoji.split(" = ")[0]}
 		  <h3>{emoji.split(" = ")[1]}<i class="bitcoin icon"></i></h3></Button>)}</h1>

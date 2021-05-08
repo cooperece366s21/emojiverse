@@ -5,7 +5,7 @@ import {Redirect} from 'react-router-dom';
 import {NavBar} from '../navbar/navbar_implementation'
 import api from '../../services/api'
 import {func} from "prop-types";
-import {ListContainer} from "./ListContainer";
+import {ChatList} from "./chatList";
 
 export const ChatListPage = ()  => {
     const[verified,setVerified] = useState(false)
@@ -38,7 +38,7 @@ export const ChatListPage = ()  => {
 
             <Button basic color = 'blue' onClick = {async () => api.createNewChat(username, users,chatName)}> Create Chat</Button>
             <div className= "chatListContainner">
-                <ListContainer chatnames = {chat_names}/>
+                <ChatList chatnames = {chat_names}/>
             </div>
         </Form.Field>
        </Form>

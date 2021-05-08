@@ -4,14 +4,15 @@ import {Button, Form} from "semantic-ui-react";
 
 export class ChatList extends React.Component{
     state = {
-        chatNames : this.props.chatnames
+        chatNames : this.props.chatnames,
+		username : localStorage.getItem("username")
     }
 
     render() {
         return(
             <div>{this.state.chatNames.map(name=>
                 <Form.Field>
-                    <Button onClick = {async () => directToChat(name)}>{name.replace("$","")}</Button>
+                    <Button onClick = {async () => directToChat(name,this.state.username)}>{name.replace("$","")}</Button>
                     <Button onClick={async () => deleteChat(name, this)}>Remove</Button>
                 </Form.Field>
             )}</div>
@@ -31,6 +32,7 @@ function deleteChat(name,component){
     })
 }
 
-function directToChat(name){
+function directToChat(name,username){
     api.getMessages(name,name.split(" participants: ")[0])
+	api.getUserEmojis(username)
 }
