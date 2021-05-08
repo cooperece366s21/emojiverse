@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import {Login} from './components/authentication/login';
 import {SignUp} from './components/authentication/signup';
-import {Chat} from './components/chats/chat';
+import {Chat} from './components/chats/chats';
 import {ChatListPage} from './components/chats/chatListPage';
 import {Profile} from './components/user_interactions/profile';
 import {Store} from './components/user_interactions/store';

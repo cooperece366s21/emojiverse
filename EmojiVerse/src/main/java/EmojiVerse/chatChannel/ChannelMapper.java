@@ -220,13 +220,15 @@ public class ChannelMapper implements ChatDao {
                 .bind("chat_id",chat_id)
                 .execute());
 
+        jdbi.withHandle(h -> h.createUpdate("DELETE FROM user_messages where chat_id = :chat_id")
+                .bind("chat_id",chat_id)
+                .execute());
+
+
         jdbi.withHandle(h -> h.createUpdate("DELETE FROM chat_list where chat_id = :chat_id")
                 .bind("chat_id",chat_id)
                 .execute());
 
-        jdbi.withHandle(h -> h.createUpdate("DELETE FROM user_messages where chat_id = :chat_id")
-                .bind("chat_id",chat_id)
-                .execute());
 
         System.out.println("Chat channel " + chat_name + " remove successfully");
 

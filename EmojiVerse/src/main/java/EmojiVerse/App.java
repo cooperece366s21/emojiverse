@@ -27,8 +27,15 @@ public class App
 
 
 	private static final String USER_SESSION_ID = "user";
-	
-	public static void main ( String[] args ) 
+	//private static final List<String> PEOPLE_EMOJIS= new ArrayList<String>(Arrays.asList("\uD83D\uDE00", "\uD83D\uDE03"));
+	//private static final List<String> PEOPLE_EMOJIS= new ArrayList<String>(Arrays.asList("\uD83D\uDE00", "\uD83D\uDE03", "\uD83D\uDE04", "\uD83D\uDE01", "\uD83D\uDE06", "\uD83D\uDE05", "\uD83D\uDE02", "\uD83D\uDE07", "\uD83E\uDD23", "☺️", "\uD83D\uDE0A", "\uD83D\uDE42", "\uD83D\uDE43", "\uD83D\uDE09", "\uD83D\uDE0C", "\uD83D\uDE0D", "\uD83D\uDE18", "\uD83D\uDE17", "\uD83D\uDE19", "\uD83D\uDE1A", "\uD83D\uDE0B", "\uD83D\uDE1C","\uD83D\uDC42", "\uD83D\uDC43", "\uD83D\uDC63", "\uD83D\uDC41", "\uD83D\uDC40", "\uD83D\uDC57", "\uD83D\uDC60", "\uD83D\uDC5E", "\uD83D\uDC5F", "\uD83D\uDC52", "\uD83C\uDFA9", "\uD83C\uDF93", "\uD83D\uDC51", "\uD83C\uDF92", "\uD83D\uDC5D", "\uD83D\uDC5B", "\uD83D\uDC5C", "\uD83D\uDCBC", "\uD83D\uDC53", "\uD83D\uDD76", "☂️"));
+	//private static final List<String> ANIMALS_NATURE_EMOJIS = new ArrayList<String>(Arrays.asList("🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐨", "🐯", "🦁", "🐮", "🐷", "🐽", "🐸", "🐵", "🙊", "🙉", "🙊", "🐒", "🐔", "🐧", "🐦", "🐤", "🐣", "🐥", "🦆", "🦅", "🦉", "🦇", "🐺", "🐗", "🐴", "🦄", "🐝", "🐛", "🦋", "🐌", "🐚", "🐞", "🐜", "🕷", "🕸", "🐢", "🐍", "🦎", "🦂", "🦀", "🦑", "🐙", "🦐", "🐠", "🐟", "🐡", "🐬", "🦈", "🐳", "🐋", "🐊", "🐆", "🐅", "🐃", "🐂", "🐄", "🦌", "🐪", "🐫", "🐘", "🦏", "🦍", "🐎", "🐖", "🐐", "🐏", "🐑", "🐕", "🐩", "🐈", "🐓", "🦃", "🕊", "🐇", "🐁", "🐀", "🐿", "🐾", "🐉", "🐲", "🌵", "🎄", "🌲", "🌳", "🌴", "🌱", "🌿", "☘️", "🍀", "🎍", "🎋", "🍃", "🍂", "🍁", "🍄", "🌾", "💐", "🌷", "🌹", "🥀", "🌻", "🌼", "🌸", "🌺", "🌎", "🌍", "🌏", "🌕", "🌖", "🌔", "🌚", "🌝", "🌞", "🌛", "🌜", "🌙", "💫", "⭐️", "🌟", "✨", "⚡️", "🔥", "💥", "☄️", "☀️", "🌤", "⛅️", "🌥", "🌦", "🌈", "☁️", "🌧", "⛈", "🌩", "🌨", "☃️", "⛄️", "❄️", "🌬", "💨", "🌪", "🌫", "🌊", "💧", "💦", "☔️"));
+	//private static final List<String> FOOD_SPORTS_EMOJIS = new ArrayList<String>(Arrays.asList("🍏", "🍎", "🍐", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🍈", "🍒", "🍑", "🍍", "🥝", "🥑", "🍅", "🍆", "🥒", "🥕", "🌽", "🌶", "🥔", "🍠", "🌰", "🥜", "🍯", "🥐", "🍞", "🥖", "🧀", "🥚", "🍳", "🥓", "🥞", "🍤", "🍗", "🍖", "🍕", "🌭", "🍔", "🍟", "🥙", "🌮", "🌯", "🥗", "🥘", "🍝", "🍜", "🍲", "🍥", "🍣", "🍱", "🍛", "🍚", "🍙", "🍘", "🍢", "🍡", "🍧", "🍨", "🍦", "🍰", "🎂", "🍮", "🍭", "🍬", "🍫", "🍿", "🍩", "🍪", "🥛", "🍼", "☕️", "🍵", "🍶", "🍺", "🍻", "🥂", "🍷", "🥃", "🍸", "🍹", "🍾", "🥄", "🍴", "🍽", "⚽️", "🏀", "🏈", "⚾️", "🎾", "🏐", "🏉", "🎱", "🏓", "🏸", "🥅", "🏒", "🏑", "🏏", "⛳️", "🏹", "🎣", "🥊", "🥋", "⛸", "🎿", "⛷", "🏂", "🏋", "🤺", "⛹️", "🏌", "🏄", "🏊", "🤽", "🚣", "🏇", "🚴", "🚵", "🎬", "🎤", "🎧", "🎼", "🎹", "🥁", "🎷", "🎺", "🎸", "🎻", "🎲", "🎯", "🎳", "🎮", "🏳", "🏴", "🏁", "🚩", "🎽", "🥇", "🥈", "🥉", "🏆"));
+	//private static final List<String> TRAVEL_PLACES_EMOJIS = new ArrayList<String>(Arrays.asList("🚗", "🚕", "🚙", "🚌", "🚎", "🏎", "🚓", "🚑", "🚒", "🚐", "🚚", "🚛", "🚜", "🛴", "🚲", "🛵", "🏍", "🚨", "🚔", "🚍", "🚘", "🚖", "🚡", "🚠", "🚟", "🚃", "🚋", "🚞", "🚝", "🚄", "🚅", "🚈", "🚂", "🚆", "🚇", "🚊", "🚉", "🚁", "🛩", "✈️", "🛫", "🛬", "🚀", "🛰", "💺", "🛶", "⛵️", "🛥", "🚤", "🛳", "⛴", "🚢", "⚓️", "🚧", "⛽️", "🚏", "🚦", "🚥", "🗺", "🗿", "🗽", "⛲️", "🗼", "🏰", "🏯", "🏟", "🎡", "🎢", "🎠", "⛱", "🏖", "🏝", "⛰", "🏔", "🗻", "🌋", "🏜", "🏕", "⛺️", "🛤", "🛣", "🏗", "🏭", "🏠", "🏡", "🏘", "🏚", "🏢", "🏬", "🏣", "🏤", "🏥", "🏦", "🏨", "🏪", "🏫", "🏩", "💒", "🏛", "⛪️", "🕌", "🕍", "🕋", "⛩", "🗾", "🎑", "🏞", "🌅", "🌄", "🌠", "🎇", "🎆", "🌇", "🌆", "🏙", "🌃", "🌌", "🌉", "🌁", "🎭", "🎨"));
+	//private static final List<String> OBJECTS_EMOJIS = new ArrayList<String>(Arrays.asList("🆓", "📗", "📕", "⌚️", "📱", "📲", "💻", "⌨️", "🖥", "🖨", "🖱", "🖲", "🕹", "🗜", "💽", "💾", "💿", "📀", "📼", "📷", "📸", "📹", "🎥", "📽", "🎞", "📞", "☎️", "📟", "📠", "📺", "📻", "🎙", "🎚", "🎛", "⏱", "⏲", "⏰", "🕰", "⌛️", "⏳", "📡", "🔋", "🔌", "💡", "🔦", "🕯", "🗑", "🛢", "💸", "💵", "💴", "💶", "💷", "💰", "💳", "💎", "⚖️", "🔧", "🔨", "⚒", "⛏", "⚙️", "💣", "🔪", "🗡", "⚔️", "🛡", "🚬", "⚰️", "⚱️", "🏺", "🔮", "📿", "💈", "⚗️", "🔭", "🔬", "🕳", "💊", "💉", "🌡", "🚽", "🚰", "🚿", "🛁", "🛀", "🛎", "🔑", "🗝", "🚪", "🛋", "🛏", "🖼", "🛍", "🛒", "🎁", "🎈", "🎏", "🎀", "🎊", "🎉", "🎎", "🏮", "🎐", "✉️", "📪", "📮", "📯", "📜", "📃", "📄", "📑", "📊", "📈", "📉", "🗒", "🗓", "📆", "📅", "📇", "🗃", "🗳", "🗄", "📋", "🗞", "📰", "📘", "📚", "📖", "🔖", "🔗", "📎", "📐", "📏", "📍", "📌", "🖊", "🖌", "🖍", "📝", "✏️", "🔍", "🔓"));
+	//private static final List<String> SYMBOLS_FLAGS_EMOJIS = new ArrayList<String>(Arrays.asList("❤️", "💛", "💚", "💙", "💜", "🖤", "💔", "❣️", "💕", "💞", "💓", "💗", "💖", "💘", "💝", "💟", "☮️", "✝️", "☪️", "🕉", "☸️", "✡️", "🔯", "🕎", "☯️", "☦️", "🛐", "⛎", "♈️", "♉️", "♊️", "♋️", "♌️", "♍️", "♎️", "♏️", "♐️", "♑️", "♒️", "♓️", "🆔", "⚛️", "🉑", "☢️", "☣️", "📴", "📳", "🈶", "🈚", "🈸", "🈺", "🈷", "✴️", "🆚", "💮", "🉐", "㊙️", "㊗️", "🈴", "🈵", "🈹", "🈲", "❌", "⭕️", "🛑", "⛔️", "📛", "🚫", "💯", "💢", "♨️", "🚷", "🚯", "🚳", "🚱", "🔞", "📵", "🚭", "❕", "❔", "‼️", "⁉️", "🔅", "🔆", "〽️", "⚠️", "🚸", "🔱", "⚜️", "🔰", "♻️", "✅", "🈯", "💹", "❇️", "✳️", "❎", "🌐", "💠", "Ⓜ️", "🌀", "💤", "🚺", "🚼", "🎵", "🎶", "➕", "➖", "➗", "✖️", "💲", "💱", "™️", "©️", "®️", "〰️", "➰", "➿", "🔚", "🔙", "🔛", "🔝", "✔️", "☑️", "🔈", "🔇", "🔉", "🔊", "🔔", "🔕", "📣", "📢", "🗨", "💬", "💭", "🗯", "♠️", "♣️", "♥️", "♦️", "🃏", "🎴", "🀄"));
+
+	public static void main ( String[] args )
 	{
 		staticFiles.location("/public/SimpleFrontend");
 		get("/hello", (req, res) -> "Hello World");
@@ -71,9 +78,18 @@ public class App
 		EmojiMapper emojimapper = new EmojiMapper("jdbc:mysql://localhost:3306/emojiverse?serverTimezone=EST");
 		//User new_user = new User("fgeyfg","gygdygw","wbdwgf",2,"egfiegfyiew","efigeyfewg",1);
 		//usermapper.registerUser(new_user);
+		//emojimapper.populateEmojiStore(PEOPLE_EMOJIS,-1,"PEOPLE_EMOJIS");
+		//emojimapper.populateEmojiStore(ANIMALS_NATURE_EMOJIS,-1,"ANIMALS_NATURE_EMOJIS");
+		//emojimapper.populateEmojiStore(FOOD_SPORTS_EMOJIS ,-1,"FOOD_SPORTS_EMOJIS ");
+		//emojimapper.populateEmojiStore(OBJECTS_EMOJIS,-1,"OBJECTS_EMOJIS");
+		//emojimapper.populateEmojiStore(TRAVEL_PLACES_EMOJIS,-1,"TRAVEL_PLACES_EMOJIS");
+		//emojimapper.populateEmojiStore(SYMBOLS_FLAGS_EMOJIS,-1,"SYMBOLS_FLAGS_EMOJIS");
+
+
+
 		get("/ping", (req, res) -> "OK");
 		get("/hello", (req, res) -> "Hello World");
-		
+
 		post("/login", (req,res) -> {
 			System.out.println(req.body());
 			JSONObject json = new JSONObject(req.body());
@@ -235,15 +251,25 @@ public class App
 
 		post("/populateEmojiStore", (req, res) -> {
 			JSONObject json = new JSONObject(req.body());
+			String username = json.getString("username");
 			List<String> emojis = Arrays.asList(json.getString("PEOPLE_EMOJIS").split(","));
 			int price = json.getInt("Price");
 			String category = json.getString("Category");
 			emojimapper.populateEmojiStore(emojis,price,category);
-			return emojimapper.getEmojisFromStore();
+			return emojimapper.getEmojisFromStore(username);
 		});
 
 		post("/getEmojisFromEmojiStore", (req,res)->{
-				return emojimapper.getEmojisFromStore();
+			JSONObject json = new JSONObject(req.body());
+			String username = json.getString("username");
+			return emojimapper.getEmojisFromStore(username);
+		});
+
+		post("/getEmojiPrice", (req,res)->{
+			JSONObject json = new JSONObject(req.body());
+			String emoji = json.getString("emoji");
+			System.out.println(emoji);
+			return emojimapper.getEmojiPrice(emoji);
 		});
 	}
 }
