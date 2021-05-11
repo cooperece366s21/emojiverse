@@ -308,6 +308,110 @@ export async function sendMessage(chat_name: string, userName: string, Message: 
 		}
 }
 
+export async function loadChatNames(user : string, new_password : string){
+	const get_response_chats = await fetch("/chats", {
+            method: "POST",
+            headers: {
+              "Content_Type": "application/json"
+            },
+            body:
+              JSON.stringify({
+			  username: user,user_password:new_password})
+            })
+			if (get_response_chats.ok) {
+            console.log("Response Worked! ");
+			get_response_chats.json().then(data=>{
+				console.log(data)
+				
+				
+				
+					
+				localStorage.setItem('chat_names', data.chat_names);
+				
+				});
+          }
+}
+
+export async function loadFriends(user : string, new_password : string){
+	const get_response_friends = await fetch("/getFriend", {
+            method: "POST",
+            headers: {
+              "Content_Type": "application/json"
+            },
+            body:
+              JSON.stringify({
+			  username: user,user_password:new_password})
+            })
+			if (get_response_friends.ok) {
+            console.log("Response Worked! ");
+			get_response_friends.json().then(data=>{
+				console.log(data)
+				
+					
+				localStorage.setItem('friends', data.friends);
+				
+				});
+          }
+}
+
+export async function authenticateCredentials(user : string, new_password : string){
+	const post_response = await fetch("/login", {
+            method: "POST",
+            headers: {
+              "Content_Type": "application/json"
+            },
+            body:
+              JSON.stringify({
+			  username: user,user_password:new_password})
+            })
+		 
+		 
+		  
+          if (post_response.ok) {
+            console.log("Response Worked! ");
+			post_response.json().then(data=>{
+				
+				console.log(data)
+				if(data.authorized===true)
+				{
+					
+					localStorage.setItem('access_token', data.access_token);
+					localStorage.setItem('username', data.username);
+					window.location.replace("http://localhost:3000/chatList")
+				}
+				});
+          }
+          else {
+            console.log("not found") 
+          }
+}
+
+export async function loadEmojiCoins(user : string){
+	const get_response = await fetch("/getEmojiCoins", {
+            method: "POST",
+            headers: {
+              "Content_Type": "application/json"
+            },
+            body:
+              JSON.stringify({
+			  username: user})
+            })
+			if (get_response.ok) {
+            console.log("Response Worked! ");
+			get_response.json().then(data=>{
+				console.log(data)
+				
+					
+				localStorage.setItem('emoji_coins', data.emoji_coins);
+				
+				});
+          }
+		  else
+		  {
+			  console.log('not found');
+		  }
+}
+
 	
 let exports = {
     addFriend,
@@ -319,7 +423,11 @@ let exports = {
 	sendMessage,
 	getEmojiStore,
 	getEmojiPrice,
-	getUserEmojis
+	getUserEmojis,
+	loadChatNames,
+	loadFriends,
+	authenticateCredentials,
+	loadEmojiCoins
 
 }
 

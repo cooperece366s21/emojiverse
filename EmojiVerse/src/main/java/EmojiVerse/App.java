@@ -278,6 +278,12 @@ public class App
 			String username = json.getString("username");
 			return emojimapper.getUserEmojis(username);
 		});
+
+		post("/getEmojiCoins", (req,res)->{
+			JSONObject json = new JSONObject(req.body());
+			String username = json.getString("username");
+			return emojimapper.getEmojiCoins(username);
+		});
 	}
 }
 

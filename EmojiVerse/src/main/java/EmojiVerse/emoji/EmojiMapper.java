@@ -22,8 +22,8 @@ public class EmojiMapper implements EmojiJDBI{
     @Override
     public void addEmojiCoins(String username) {
         jdbi.withHandle(h -> h.createUpdate("update users" +
-                "set emoji_coins = emoji_coins+1" +
-                "where username = :username")
+                " set emoji_coins = emoji_coins+1" +
+                " where username = :username")
                 .bind("username",username)
                 .execute());
 
@@ -41,14 +41,18 @@ public class EmojiMapper implements EmojiJDBI{
     }
 
     @Override
-    public int getEmojiCoins(String username) {
+    public String getEmojiCoins(String username) {
+        Gson gson = new Gson();
+        Map<String, Object> map = new HashMap<>();
         int emoji_coins = jdbi.withHandle(
                 handle ->
                         handle.createQuery("select emoji_coins from users where username  = :username")
                                 .bind("username",username)
-                                .map((rs, ctx) -> rs.getInt("user_id"))
+                                .map((rs, ctx) -> rs.getInt("emoji_coins"))
                                 .list().get(0));
-        return emoji_coins;
+        map.put("emoji_coins",emoji_coins);
+        System.out.println(emoji_coins);
+        return gson.toJson(map);
     }
 
     @Override
