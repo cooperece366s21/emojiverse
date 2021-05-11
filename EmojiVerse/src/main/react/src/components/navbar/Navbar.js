@@ -31,7 +31,7 @@ const Navbar = (props) => {
            <div class="ui yellow button">
     <i class="bitcoin icon"></i>EmojiCoins
   </div><a class="ui basic left pointing label">
-    1,048
+    {props.emojiCoins}
   </a>
 			<Button className = "ui inverted button"><a href = "/chatList">ChatList</a></Button>
             <Button className="ui inverted button" onClick = {async () => api.getEmojiStore(username)}><a href="/store">Store</a></Button>
