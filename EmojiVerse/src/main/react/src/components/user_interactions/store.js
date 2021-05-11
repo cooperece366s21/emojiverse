@@ -4,25 +4,66 @@ import 'semantic-ui-css/semantic.min.css';
 import {Redirect} from 'react-router-dom';
 import {NavBar} from '../navbar/navbar_implementation'
 import api from '../../services/api';
-import EmojiWrapper from '../chats/chat'
+import EmojiWrapper from '../chats/chats'
 /*import { Box, Image, Text, SimpleGrid } from "@chakra-ui/core";*/
 
 
 const username = localStorage.getItem("username")
 
 
-export const Store = ()  => {
-  const [username, setUsername] = useState(''); //  Empty String
-  const [user_password,setPassword] = useState('')
-  const [title,setTitle] = useState('')
-  const[verified,setVerified] = useState(false)
- 
+export class Store extends React.Component{
+  state=
+  {
+	  emojis : ''
+  }
   
+componentDidMount()
+  {
+	  
+  }	  
+  
+  render(){
   return (
     <Form className = "login-container">
 	<NavBar/>
 	  <h1>emojiverse store</h1>
-	  <h1>{localStorage.getItem("emoji_list").split(",").map(emoji=> <Button>{emoji}</Button>)}</h1>
+	  <h2 className = "emoji-store">People Emojis</h2>
+	  <h1>{this.state.emojis}</h1>
+	  <h1>{localStorage.getItem("PEOPLE_EMOJIS").split(",").map(emoji=> 
+	  <Button>{emoji.split(" = ")[0]}
+		  <h3>{emoji.split(" = ")[1]}<i class="bitcoin icon"></i></h3></Button>)}</h1>
+		
+		
+	  <h2 className = "emoji-store">Animals and Nature Emojis</h2>
+	  
+	   <h2>{localStorage.getItem("ANIMALS_NATURE_EMOJIS").split(",").map(emoji=> 
+	  <Button>{emoji.split(" = ")[0]}
+		  <h3>{emoji.split(" = ")[1]}<i class="bitcoin icon"></i></h3></Button>)}</h2>
+		  
+	   <h2 className = "emoji-store">Food and Sports Emojis</h2>
+	  
+	   <h2>{localStorage.getItem("FOOD_SPORTS_EMOJIS").split(",").map(emoji=> 
+	  <Button>{emoji.split(" = ")[0]}
+		  <h3>{emoji.split(" = ")[1]}<i class="bitcoin icon"></i></h3></Button>)}</h2>
+		  
+		  <h2 className = "emoji-store">Objects Emojis</h2>
+	  
+	   <h2>{localStorage.getItem("OBJECTS_EMOJIS").split(",").map(emoji=> 
+	  <Button>{emoji.split(" = ")[0]}
+		  <h3>{emoji.split(" = ")[1]}<i class="bitcoin icon"></i></h3></Button>)}</h2>
+		  
+		    <h2 className = "emoji-store">Symbols and Flags Emojis</h2>
+	  
+	   <h2>{localStorage.getItem("SYMBOLS_FLAGS_EMOJIS").split(",").map(emoji=> 
+	  <Button>{emoji.split(" = ")[0]}
+		  <h3>{emoji.split(" = ")[1]}<i class="bitcoin icon"></i></h3></Button>)}</h2>
+		  
+		    <h2 className = "emoji-store">Travel Emojis</h2>
+	  
+	   <h2>{localStorage.getItem("TRAVEL_PLACES_EMOJIS").split(",").map(emoji=> 
+	  <Button>{emoji.split(" = ")[0]}
+		  <h3>{emoji.split(" = ")[1]}<i class="bitcoin icon"></i></h3></Button>)}</h2>
 	</Form>
 	  )
+  }
 }
