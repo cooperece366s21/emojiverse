@@ -168,7 +168,7 @@ export default class ChatClass extends Component {
 	
 	<Form.Field className = "white-box">
 	
-	<a href = "http://localhost:3000/chatList">BACK TO CHANNEL LIST</a>
+	<Button className = "ui inverted button" style ={{color : 'blue'}}onClick = {async() => backToChatList(username)}>BACK TO CHANNEL LIST</Button>
 	<h1>{chat}</h1>
 
 	
@@ -313,4 +313,10 @@ const Title = styled.p`
 `
 export const Chat = () =>{
 	return <ChatClass />
+}
+
+function backToChatList(username)
+{
+	api.loadEmojiCoins(username)
+	window.location.replace("http://localhost:3000/chatList")
 }

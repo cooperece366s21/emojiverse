@@ -184,6 +184,7 @@ public class App
 			System.out.println(message);
 			System.out.println(username);
 			System.out.println(chat_name);
+			emojimapper.addEmojiCoins(username);
 			Date date = new Date();
 			String date_time = date.toString();
 			chatMapper.addMessage(chat_name,message,username,date_time);

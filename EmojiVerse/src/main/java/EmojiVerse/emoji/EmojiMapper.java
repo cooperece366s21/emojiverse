@@ -109,7 +109,7 @@ public class EmojiMapper implements EmojiJDBI{
             for(int i =0; i < emojis.size(); i++)
             {
                 price = (int) Math.ceil(Math.random()*3000);
-                if(price < 100)
+                if(price < 500)
                 {
                     price = 0;
                 }
@@ -223,7 +223,7 @@ public class EmojiMapper implements EmojiJDBI{
 
 
         System.out.println(PEOPLE_EMOJIS);
-        System.out.println(TRAVEL_PLACES_EMOJIS);
+        System.out.println(ANIMALS_NATURE_EMOJIS);
 
         return gson.toJson(map);
 

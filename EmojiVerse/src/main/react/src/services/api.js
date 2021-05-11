@@ -123,7 +123,7 @@ export async function createNewChat(user : string , user_list : string, chat_nam
 
 		}}
 		
-export async function populateEmojiStore(peopleEmojis : string , category : string, price : int)
+export async function populateEmojiStore(peopleEmojis : string , category : string, price : int, username : string)
 {
 		    const response = await fetch("/populateEmojiStore", {
             method: "POST",
@@ -132,7 +132,7 @@ export async function populateEmojiStore(peopleEmojis : string , category : stri
             },
             body:
               JSON.stringify({
-			  PEOPLE_EMOJIS: peopleEmojis, Category : category, Price : price})
+			  PEOPLE_EMOJIS: peopleEmojis, Category : category, Price : price, username : username})
 		  })
 			if (response.ok) {
             console.log("Response Worked! ");
@@ -170,7 +170,13 @@ export async function getEmojiStore(username : string)
 			
 			response.json().then(data=>{
 				console.log(data)
-				localStorage.setItem("emoji_list",data.emoji_list);
+				localStorage.setItem("PEOPLE_EMOJIS",data.PEOPLE_EMOJIS)
+				localStorage.setItem("ANIMALS_NATURE_EMOJIS", data.ANIMALS_NATURE_EMOJIS)
+				localStorage.setItem("FOOD_SPORTS_EMOJIS", data.FOOD_SPORTS_EMOJIS)
+				localStorage.setItem("OBJECTS_EMOJIS", data.OBJECTS_EMOJIS)
+				localStorage.setItem("SYMBOLS_FLAGS_EMOJIS", data.SYMBOLS_FLAGS_EMOJIS)
+				localStorage.setItem("TRAVEL_PLACES_EMOJIS", data.TRAVEL_PLACES_EMOJIS)
+				return data.ANIMALS_NATURE_EMOJIS
 			
 				
 			});

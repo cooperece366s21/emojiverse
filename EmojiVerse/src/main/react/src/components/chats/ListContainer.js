@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import api from "../../services/api";
 import {Button, Form} from "semantic-ui-react";
 
+const username = localStorage.getItem("username")
+
 export class ListContainer extends React.Component{
     state = {
         chatNames : this.props.chatnames

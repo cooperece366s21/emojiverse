@@ -19,7 +19,7 @@ export class Store extends React.Component{
   
 componentDidMount()
   {
-	  
+	  api.getEmojiStore(username)
   }	  
   
   render(){
