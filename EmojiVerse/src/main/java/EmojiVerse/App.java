@@ -235,15 +235,37 @@ public class App
 
 		post("/populateEmojiStore", (req, res) -> {
 			JSONObject json = new JSONObject(req.body());
+			String username = json.getString("username");
 			List<String> emojis = Arrays.asList(json.getString("PEOPLE_EMOJIS").split(","));
 			int price = json.getInt("Price");
 			String category = json.getString("Category");
 			emojimapper.populateEmojiStore(emojis,price,category);
-			return emojimapper.getEmojisFromStore();
+			return emojimapper.getEmojisFromStore(username);
 		});
 
 		post("/getEmojisFromEmojiStore", (req,res)->{
-				return emojimapper.getEmojisFromStore();
+			JSONObject json = new JSONObject(req.body());
+			String username = json.getString("username");
+			return emojimapper.getEmojisFromStore(username);
+		});
+
+		post("/getEmojiPrice", (req,res)->{
+			JSONObject json = new JSONObject(req.body());
+			String emoji = json.getString("emoji");
+			System.out.println(emoji);
+			return emojimapper.getEmojiPrice(emoji);
+		});
+
+		post("/getUserEmojis", (req,res)->{
+			JSONObject json = new JSONObject(req.body());
+			String username = json.getString("username");
+			return emojimapper.getUserEmojis(username);
+		});
+
+		post("/getEmojiCoins", (req,res)->{
+			JSONObject json = new JSONObject(req.body());
+			String username = json.getString("username");
+			return emojimapper.getEmojiCoins(username);
 		});
 	}
 }
