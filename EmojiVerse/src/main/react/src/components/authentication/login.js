@@ -1,9 +1,4 @@
-
-<<<<<<< HEAD
 import React, { useState} from 'react';
-=======
-  import React, { useState} from 'react';
->>>>>>> 1e3449e4e29fb7c98681dd5e489cec2ad070ca61
 import { Form, Input, Button } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import {Redirect} from 'react-router-dom';
