@@ -259,6 +259,7 @@ public class App
 		post("/getUserEmojis", (req,res)->{
 			JSONObject json = new JSONObject(req.body());
 			String username = json.getString("username");
+			System.out.println("Hello");
 			return emojimapper.getUserEmojis(username);
 		});
 

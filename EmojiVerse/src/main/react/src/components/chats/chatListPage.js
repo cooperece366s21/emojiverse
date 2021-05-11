@@ -36,7 +36,7 @@ export const ChatListPage = ()  => {
             />
             <h3>Note: you must separate each username with a comma</h3>
 
-            <Button basic color = 'blue' onClick = {async () => api.createNewChat(username, users,chatName)}> Create Chat</Button>
+            <Button basic color = 'blue' onClick = {async () => newChat(username, users, chatName)}> Create Chat</Button>
             <div className= "chatListContainner">
                 <ListContainer chatnames = {chat_names}/>
             </div>
@@ -44,4 +44,10 @@ export const ChatListPage = ()  => {
        </Form>
       )
 
+  }
+  
+  function newChat(username, users, chatName)
+  {
+	api.createNewChat(username, users,chatName)
+	api.getUserEmojis(username)
   }

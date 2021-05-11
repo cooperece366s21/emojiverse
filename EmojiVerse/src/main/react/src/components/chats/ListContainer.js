@@ -31,6 +31,7 @@ function deleteChat(name,component){
     })
 }
 
-function directToChat(name){
+function directToChat(name,username){
     api.getMessages(name,name.split(" participants: ")[0])
+	api.getUserEmojis(username)
 }

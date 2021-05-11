@@ -4,7 +4,7 @@ import 'semantic-ui-css/semantic.min.css';
 import {Redirect} from 'react-router-dom';
 import {NavBar} from '../navbar/navbar_implementation'
 import api from '../../services/api';
-import EmojiWrapper from '../chats/chats'
+
 /*import { Box, Image, Text, SimpleGrid } from "@chakra-ui/core";*/
 
 

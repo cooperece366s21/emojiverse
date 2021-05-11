@@ -36,7 +36,7 @@ export default class ChatClass extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      emojis: PEOPLE_EMOJIS,
+      emojis: localStorage.getItem("USER_PEOPLE_EMOJIS").split(','),
       emojiCategory: 'PEOPLE_EMOJIS',
 	  message: "",
 	  username: username,
@@ -44,7 +44,6 @@ export default class ChatClass extends Component {
 	  
     }
   }
-
 
   static get propTypes () {
     return {
@@ -63,59 +62,54 @@ export default class ChatClass extends Component {
   
   componentDidMount()
   {
-	  /*
-	  uncomment to populate. one-time code
-	  
+	/*
 	  PEOPLE_EMOJIS.map(emoji=>
-	  {api.populateEmojiStore(emoji, "PEOPLE_EMOJIS", 0)})
+	  {api.populateEmojiStore(emoji, "PEOPLE_EMOJIS", -1,username)})
 	  
 	  ANIMALS_NATURE_EMOJIS.map(emoji=>
-	  {api.populateEmojiStore(emoji, "ANIMALS_NATURE_EMOJIS", Math.ceil(Math.random()*1000))})
+	  {api.populateEmojiStore(emoji, "ANIMALS_NATURE_EMOJIS", -1,username)})
 	  
 	  FOOD_SPORTS_EMOJIS.map(emoji=>
-	  {api.populateEmojiStore(emoji, "FOOD_SPORTS_EMOJIS", Math.ceil(Math.random()*1500))})
+	  {api.populateEmojiStore(emoji, "FOOD_SPORTS_EMOJIS", -1,username)})
 	  
 	  TRAVEL_PLACES_EMOJIS.map(emoji=>
-	  {api.populateEmojiStore(emoji, "FOOD_SPORTS_EMOJIS", Math.ceil(Math.random()*2000))})
+	  {api.populateEmojiStore(emoji, "TRAVEL_PLACES_EMOJIS", -1, username)})
 	  
 	  OBJECTS_EMOJIS.map(emoji=>
-	  {api.populateEmojiStore(emoji, "FOOD_SPORTS_EMOJIS", Math.ceil(Math.random()*2500))})
+	  {api.populateEmojiStore(emoji, "OBJECTS_EMOJIS", -1,username)})
 	  
 	  SYMBOLS_FLAGS_EMOJIS.map(emoji=>
-	  {api.populateEmojiStore(emoji, "SYMBOLS_FLAGS_EMOJIS", Math.ceil(Math.random()*3000))})
-	  */
-
-    updateChat(this,document);
-
-    setInterval(updateChat, 500,this,document);
-
+	  {api.populateEmojiStore(emoji, "SYMBOLS_FLAGS_EMOJIS", -1,username)})
+	*/
   }
-
+  
+  
 
   toggleEmojis (emoji) {
     switch (emoji) {
       case 'PEOPLE_EMOJIS':
-        this.setState({emojis: PEOPLE_EMOJIS, emojiCategory: 'PEOPLE_EMOJIS'})
+        this.setState({emojis: localStorage.getItem("USER_PEOPLE_EMOJIS").split(','), emojiCategory: 'PEOPLE_EMOJIS'})
         break;
       case 'ANIMALS_NATURE_EMOJIS':
-        this.setState({emojis: ANIMALS_NATURE_EMOJIS, emojiCategory: 'ANIMALS_NATURE_EMOJIS'})
+        this.setState({emojis:  localStorage.getItem("USER_ANIMALS_NATURE_EMOJIS").split(','), emojiCategory: 'ANIMALS_NATURE_EMOJIS'})
         break;
       case 'FOOD_SPORTS_EMOJIS':
-        this.setState({emojis: FOOD_SPORTS_EMOJIS, emojiCategory: 'FOOD_SPORTS_EMOJIS'})
+        this.setState({emojis: localStorage.getItem("USER_FOOD_SPORTS_EMOJIS").split(','), emojiCategory: 'FOOD_SPORTS_EMOJIS'})
         break;
       case 'TRAVEL_PLACES_EMOJIS':
-        this.setState({emojis: TRAVEL_PLACES_EMOJIS, emojiCategory: 'TRAVEL_PLACES_EMOJIS'})
+        this.setState({emojis:  localStorage.getItem("USER_TRAVEL_PLACES_EMOJIS").split(','), emojiCategory: 'TRAVEL_PLACES_EMOJIS'})
         break;
       case 'OBJECTS_EMOJIS':
-        this.setState({emojis: OBJECTS_EMOJIS, emojiCategory: 'OBJECTS_EMOJIS'})
+        this.setState({emojis: localStorage.getItem("USER_OBJECTS_EMOJIS").split(','), emojiCategory: 'OBJECTS_EMOJIS'})
         break;
       case 'SYMBOLS_FLAGS_EMOJIS':
-        this.setState({emojis: SYMBOLS_FLAGS_EMOJIS, emojiCategory: 'SYMBOLS_FLAGS_EMOJIS'})
+        this.setState({emojis: localStorage.getItem("USER_SYMBOLS_FLAGS_EMOJIS").split(','), emojiCategory: 'SYMBOLS_FLAGS_EMOJIS'})
         break;
       default:
-        this.setState({emojis: PEOPLE_EMOJIS, emojiCategory: 'PEOPLE_EMOJIS'})
+        this.setState({emojis:  localStorage.getItem("USER_PEOPLE_EMOJIS").split(','), emojiCategory: 'PEOPLE_EMOJIS'})
     }
   }
+
 
   onEmojiSelect (e) {
     if(e.target.alt === undefined) { return }
