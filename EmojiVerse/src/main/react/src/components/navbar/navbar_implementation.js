@@ -23,8 +23,6 @@ export class NavBar extends React.Component {
 	}
 	componentDidMount() {
 		
-		
-		
 		this.setState({emojiCoins : localStorage.getItem("emoji_coins")})
   }
 	handleNavbar = () => {
