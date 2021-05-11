@@ -1,7 +1,7 @@
 /*https://github.com/react-z/react-emojipicker/blob/master/src/Picker.js*/
 /*change send button to async post and get*/
 
-import React, {Component, useState} from 'react'
+import React, {Component, useState, useEffect} from 'react'
 import styled from 'styled-components'
 import emojione from 'emojione'
 import PropTypes from 'prop-types'
@@ -45,6 +45,7 @@ export default class ChatClass extends Component {
     }
   }
 
+
   static get propTypes () {
     return {
      
@@ -83,12 +84,13 @@ export default class ChatClass extends Component {
 	  SYMBOLS_FLAGS_EMOJIS.map(emoji=>
 	  {api.populateEmojiStore(emoji, "SYMBOLS_FLAGS_EMOJIS", Math.ceil(Math.random()*3000))})
 	  */
-	  
-	  
-	
+
+    updateChat(this,document);
+
+    setInterval(updateChat, 500,this,document);
+
   }
-  
-  
+
 
   toggleEmojis (emoji) {
     switch (emoji) {
@@ -213,7 +215,10 @@ export default class ChatClass extends Component {
         />
 		<Button onClick = {
 		    async ()=>{
-		        api.sendMessage(chat.split(" participants: ")[0], username, this.state.message,updateChat, this, document)
+		        api.sendMessage(chat.split(" participants: ")[0], username, this.state.message,updateChat, this, document);
+		        this.setState({
+                  message: ""
+                });
 		    }
         }>Send</Button>
 
@@ -227,14 +232,16 @@ export default class ChatClass extends Component {
 }
 
 function updateChat(component, doc){
+  const tempMsg = component.state.message_info;
   component.setState({
-    message_info:localStorage.getItem("message_info").split(','),
-    message: ""
+    message_info:localStorage.getItem("message_info").split(',')
   })
 
-
-  var objDiv = doc.getElementById("messageWindow");
-  objDiv.scrollTop = objDiv.scrollHeight;
+  // if there is a change for the current message, scroll to the bottom of the window to show
+  if(component.state.message_info !== tempMsg){
+    var objDiv = doc.getElementById("messageWindow");
+    objDiv.scrollTop = objDiv.scrollHeight;
+  }
 }
 
 
