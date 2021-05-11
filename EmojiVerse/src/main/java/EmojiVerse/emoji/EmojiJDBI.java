@@ -14,9 +14,9 @@ public interface EmojiJDBI {
 
     List<String> getEmojis(String username);
 
-    String getEmojisFromStore();
+    String getEmojisFromStore(String username);
 
-    int getEmojiCoins(String username);
+    String getEmojiCoins(String username);
 
     String getUserEmojis(String username);
 
