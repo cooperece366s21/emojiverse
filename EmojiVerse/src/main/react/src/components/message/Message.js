@@ -8,9 +8,14 @@ export class Message extends React.Component{
 
     render() {
         let messageToRender;
+        let mclassName = `message`;
+        if (this.props.username.trim() === localStorage.getItem("username")) {
+            mclassName += ' fromMe';
+        }
+
         if(this.props.content !== undefined){
             messageToRender =
-                <div className={`message`}>
+                <div className={mclassName}>
                     <div className='username'>
                         <h2>
                             { this.props.username }

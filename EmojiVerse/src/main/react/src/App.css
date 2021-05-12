@@ -154,9 +154,19 @@ Justify-Content: centre;
 }
 
 .messages{
-    text-align: left;
+    text-align: center;
 }
 
+.fromMe .username h2{
+    text-align: right;
+    margin-right: 10px;
+}
+
+.fromMe .message-body{
+    margin-left: auto;
+    margin-right: 30px;
+    border: darkgray 5px dotted;
+}
 .profContainer{
     display: grid;
     grid-template-columns: auto 500px;

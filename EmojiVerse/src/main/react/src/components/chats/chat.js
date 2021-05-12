@@ -230,6 +230,7 @@ export default class ChatClass extends Component {
 
 function updateChat(component, doc){
   const tempMsg = component.state.message_info;
+  api.updateMessages(localStorage.getItem("chat"));
   component.setState({
     message_info:localStorage.getItem("message_info").split(',')
   })
