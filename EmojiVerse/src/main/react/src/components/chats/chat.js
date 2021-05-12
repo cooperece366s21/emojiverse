@@ -81,6 +81,9 @@ export default class ChatClass extends Component {
 	  SYMBOLS_FLAGS_EMOJIS.map(emoji=>
 	  {api.populateEmojiStore(emoji, "SYMBOLS_FLAGS_EMOJIS", -1,username)})
 	*/
+    updateChat(this,document);
+
+    setInterval(updateChat, 500,this,document);
   }
   
   
