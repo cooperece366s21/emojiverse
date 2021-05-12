@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="8dcee704-464d-48d8-90c7-e9ecb95aedc4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/react/src/components/chats/chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/react/src/components/chats/chat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/EmojiVerse/emoji/EmojiRowMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmojiVerse/emoji/EmojiRowMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/react/src/services/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/react/src/services/api.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,6 +144,8 @@
       <workItem from="1620293052930" duration="2412000" />
       <workItem from="1620425803945" duration="2838000" />
       <workItem from="1620720051407" duration="2611000" />
+      <workItem from="1620722733632" duration="135000" />
+      <workItem from="1620817268315" duration="2944000" />
     </task>
     <servers />
   </component>

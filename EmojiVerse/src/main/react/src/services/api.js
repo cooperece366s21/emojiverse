@@ -16,11 +16,12 @@ export async function addFriend(user : string , friend_user : string, callback)
 			  
 			  response.json().then(data=>{
 				  console.log(data)
-				  if(data!== false)
-				  {
+				  if(data.verified!== false) {
 					  localStorage.setItem("friends",data.friends);
 				  // window.location.replace("http://localhost:3000/profile")
 					  callback()
+				  }else{
+				  	alert("Warning: No registered user with given input name!")
 				  }
 				  
 			});
