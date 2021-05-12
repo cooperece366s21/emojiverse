@@ -32,6 +32,7 @@ export class Store extends React.Component{
     <Form className = "login-container">
 	<NavBar/>
 	<h2>{ getStore(username)}</h2>
+  <h2>{getEmojiCoins(username)}</h2>
 	  <h1>emojiverse store</h1>
 	   <div class="ui yellow button">
     <i class="bitcoin icon"></i>EmojiCoins
@@ -245,4 +246,8 @@ export class Store extends React.Component{
 
 function getStore(username){
     api.getEmojiStore(username)
+}
+
+function getEmojiCoins(username){
+	api.loadEmojiCoins(username)
 }
