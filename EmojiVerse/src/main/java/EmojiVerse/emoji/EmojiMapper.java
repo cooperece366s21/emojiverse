@@ -299,7 +299,7 @@ public class EmojiMapper implements EmojiJDBI{
         map.put("SYMBOLS_FLAGS_EMOJIS",SYMBOLS_FLAGS_EMOJIS);
         map.put("TRAVEL_PLACES_EMOJIS",TRAVEL_PLACES_EMOJIS);
 
-        
+
 
         return gson.toJson(map);
     }

@@ -41,7 +41,7 @@ export class Store extends React.Component{
   </a>
 	  <h2 className = "emoji-store">People Emojis</h2>
 	  <h1>{this.state.emojis}</h1>
-	  <h1>{localStorage.getItem("PEOPLE_EMOJIS").split(",").map(emoji=> 
+	  <h1 className = "center-col">{localStorage.getItem("PEOPLE_EMOJIS").split(",").map(emoji=> 
 	  <Button onClick = {async() => {
 	  const user = username
 	  const emojis = emoji.split(" = ")[0]
@@ -77,7 +77,7 @@ export class Store extends React.Component{
 		
 	  <h2 className = "emoji-store">Animals and Nature Emojis</h2>
 	  
-	   <h2>{localStorage.getItem("ANIMALS_NATURE_EMOJIS").split(",").map(emoji=> 
+	   <h2  className = "center-col">{localStorage.getItem("ANIMALS_NATURE_EMOJIS").split(",").map(emoji=> 
 	  <Button onClick = {async() => {
 	  const user = username
 	  const emojis = emoji.split(" = ")[0]
@@ -110,7 +110,7 @@ export class Store extends React.Component{
 		  
 	   <h2 className = "emoji-store">Food and Sports Emojis</h2>
 	  
-	   <h2>{localStorage.getItem("FOOD_SPORTS_EMOJIS").split(",").map(emoji=> 
+	   <h2  className = "center-col">{localStorage.getItem("FOOD_SPORTS_EMOJIS").split(",").map(emoji=> 
 	  <Button onClick = {async() => {
 	  const user = username
 	  const emojis = emoji.split(" = ")[0]
@@ -143,7 +143,7 @@ export class Store extends React.Component{
 		  
 		  <h2 className = "emoji-store">Objects Emojis</h2>
 	  
-	   <h2>{localStorage.getItem("OBJECTS_EMOJIS").split(",").map(emoji=> 
+	   <h2  className = "center-col">{localStorage.getItem("OBJECTS_EMOJIS").split(",").map(emoji=> 
 	  <Button onClick = {async() => {
 	  const user = username
 	  const emojis = emoji.split(" = ")[0]
@@ -176,7 +176,7 @@ export class Store extends React.Component{
 		  
 		    <h2 className = "emoji-store">Symbols and Flags Emojis</h2>
 	  
-	   <h2>{localStorage.getItem("SYMBOLS_FLAGS_EMOJIS").split(",").map(emoji=> 
+	   <h2  className = "center-col">{localStorage.getItem("SYMBOLS_FLAGS_EMOJIS").split(",").map(emoji=> 
 	  <Button onClick = {async() => {
 	  const user = username
 	  const emojis = emoji.split(" = ")[0]
@@ -209,7 +209,7 @@ export class Store extends React.Component{
 		  
 		    <h2 className = "emoji-store">Travel Emojis</h2>
 	  
-	   <h2>{localStorage.getItem("TRAVEL_PLACES_EMOJIS").split(",").map(emoji=> 
+	   <h2  className = "center-col">{localStorage.getItem("TRAVEL_PLACES_EMOJIS").split(",").map(emoji=> 
 	  <Button onClick = {async() => {
 	  const user = username
 	  const emojis = emoji.split(" = ")[0]

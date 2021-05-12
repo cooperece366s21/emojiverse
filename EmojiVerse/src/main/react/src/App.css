@@ -194,3 +194,9 @@ Justify-Content: centre;
 	font-family: Poppins;
 	
 }
+
+.center-col {
+	overflow-y: scroll;
+	height : 200px;
+	flex: 1;
+}
