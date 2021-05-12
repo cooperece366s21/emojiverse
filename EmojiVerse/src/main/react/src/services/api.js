@@ -16,11 +16,12 @@ export async function addFriend(user : string , friend_user : string, callback)
 			  
 			  response.json().then(data=>{
 				  console.log(data)
-				  if(data!== false)
-				  {
+				  if(data.verified!== false) {
 					  localStorage.setItem("friends",data.friends);
 				  // window.location.replace("http://localhost:3000/profile")
 					  callback()
+				  }else{
+				  	alert("Warning: No registered user with given input name!")
 				  }
 				  
 			});
@@ -252,6 +253,36 @@ export async function sendMessage(chat_name: string, userName: string, Message: 
 		}
 }
 
+export async function updateMessages(chat_name : string)
+{
+	const response = await fetch("/getMessages", {
+		method: "POST",
+		headers: {
+			"Content_Type": "application/json"
+		},
+		body:
+			JSON.stringify({
+				chatName: chat_name})
+	})
+	if (response.ok) {
+		console.log("Response Worked! ");
+
+		response.json().then(data=>{
+			console.log(data)
+			localStorage.setItem("message_info",data.message_info);
+
+			localStorage.setItem("chat",chat_name);
+
+		});
+
+	}
+	else {
+		console.log("not found")
+
+
+	}
+}
+
 
 	
 export async function getUserEmojis(user : string)
@@ -434,7 +465,8 @@ let exports = {
 	loadFriends,
 	authenticateCredentials,
 	loadEmojiCoins,
-	buyEmoji
+	buyEmoji,
+	updateMessages
 
 }
 

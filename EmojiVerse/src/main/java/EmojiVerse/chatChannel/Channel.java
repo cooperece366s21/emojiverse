@@ -12,7 +12,6 @@ public class Channel {
     private int id;
     private String channelName;
 	private List<String> userList; // This should be a unique collection
-    // TODO: this message should be combination of Emoji ids?
     List<EmojiMessage> messages;
     // we need to limit the number of messages fetched otherwise this gets expensive
     //    Use to track last updated message

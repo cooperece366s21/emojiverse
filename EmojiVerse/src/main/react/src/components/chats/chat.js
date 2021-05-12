@@ -81,6 +81,9 @@ export default class ChatClass extends Component {
 	  SYMBOLS_FLAGS_EMOJIS.map(emoji=>
 	  {api.populateEmojiStore(emoji, "SYMBOLS_FLAGS_EMOJIS", -1,username)})
 	*/
+    updateChat(this,document);
+
+    setInterval(updateChat, 500,this,document);
   }
   
   
@@ -227,12 +230,13 @@ export default class ChatClass extends Component {
 
 function updateChat(component, doc){
   const tempMsg = component.state.message_info;
+  api.updateMessages(localStorage.getItem("chat"));
   component.setState({
     message_info:localStorage.getItem("message_info").split(',')
   })
 
   // if there is a change for the current message, scroll to the bottom of the window to show
-  if(component.state.message_info !== tempMsg){
+  if(JSON.stringify(component.state.message_info) !== JSON.stringify(tempMsg)){
     var objDiv = doc.getElementById("messageWindow");
     objDiv.scrollTop = objDiv.scrollHeight;
   }
