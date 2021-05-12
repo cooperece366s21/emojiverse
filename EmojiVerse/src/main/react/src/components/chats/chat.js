@@ -235,7 +235,7 @@ function updateChat(component, doc){
   })
 
   // if there is a change for the current message, scroll to the bottom of the window to show
-  if(component.state.message_info !== tempMsg){
+  if(JSON.stringify(component.state.message_info) !== JSON.stringify(tempMsg)){
     var objDiv = doc.getElementById("messageWindow");
     objDiv.scrollTop = objDiv.scrollHeight;
   }
