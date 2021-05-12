@@ -11,7 +11,7 @@ export class ListContainer extends React.Component{
 
     render() {
         return(
-            <div>{this.state.chatNames.map(name=>
+            <div>{this.state.chatNames[0] === ""?console.log("No chat to show"):this.state.chatNames.map(name=>
                 <Form.Field>
                     <Button onClick = {async () => directToChat(name, username)}>{name.replace("$","")}</Button>
                     <Button onClick={async () => deleteChat(name, this)}>Remove</Button>
