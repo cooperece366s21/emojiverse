@@ -4,7 +4,7 @@ EmojiVerse is an exciting new social media network that allows you to connect
 with your friend using the power of emoji. By using these fun and friendly 
 characters you can ensure to have the most fun. 
 
-## Initial Implementation instructions
+## Final Implementation instructions
 
 To start up the server run App.java in EmojiVerse/src/main/java/EmojiVerse/App.java
 The front end can be initialized by running **yarn start** at the react directory EmojiVerse/src/main/react.
