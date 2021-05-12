@@ -21,6 +21,7 @@ export class Store extends React.Component{
 	  emojiCoins : localStorage.getItem("emoji_coins")
   }
   componentDidMount(){
+	  this.setState({emojis : async() => api.loadEmojiCoins(username)})
 	  this.setState({ emojiCoins : localStorage.getItem("emoji_coins")})
   }
 	
