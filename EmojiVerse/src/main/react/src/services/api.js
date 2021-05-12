@@ -16,9 +16,13 @@ export async function addFriend(user : string , friend_user : string, callback)
 			  
 			  response.json().then(data=>{
 				  console.log(data)
-				  localStorage.setItem("friends",data.friends);
+				  if(data!== false)
+				  {
+					  localStorage.setItem("friends",data.friends);
 				  // window.location.replace("http://localhost:3000/profile")
-				  callback()
+					  callback()
+				  }
+				  
 			});
 		  }
 		  else{
@@ -109,10 +113,14 @@ export async function createNewChat(user : string , user_list : string, chat_nam
 			
 			response.json().then(data=>{
 				console.log(data)
-				localStorage.setItem("chat_names",data.chat_names)
+				if(data.verified !== false)
+				{
+					localStorage.setItem("chat_names",data.chat_names)
 
 				// Direct to the chattting page after create a new chat
-				getMessages(chat_name, chat_name.split(" participants: ")[0])
+					getMessages(chat_name, chat_name.split(" participants: ")[0])
+				}
+				
 			});
 				
             }
@@ -410,7 +418,8 @@ export async function buyEmoji(user : string, emoji : string){
 			  console.log('not found');
 		  }
 }
-	
+
+
 let exports = {
      addFriend,
 	removeFriend,

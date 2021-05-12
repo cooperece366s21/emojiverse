@@ -1,12 +1,8 @@
 package EmojiVerse.chatChannel;
 
 import EmojiVerse.dao.ChatDao;
-import EmojiVerse.emoji.EmojiMessage;
-import EmojiVerse.user.User;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
-import org.jdbi.v3.sqlobject.Handler;
-import org.jdbi.v3.sqlobject.SqlObjects;
 import com.google.gson.Gson;
 import java.util.*;
 
@@ -176,7 +172,7 @@ public class ChannelMapper implements ChatDao {
     
     
     @Override
-    public void addChannel(Channel channel, String requester_username) {
+    public boolean addChannel(Channel channel, String requester_username) {
         System.out.println(channel.getUserList());
 
         System.out.println(channel.getUserList());
@@ -198,19 +194,30 @@ public class ChannelMapper implements ChatDao {
                 .execute());
 
         for(String username : channel.getUserList())
-        {
-            int user_id =  jdbi.withHandle(
-                    handle ->
-                            handle.createQuery("select user_id from users where username = :username")
-                                    .bind("username",username)
-                                    .map((rs, ctx) -> rs.getInt("user_id"))
-                                    .list().get(0));
+        {   int user_id = 0;
+            try {
+                user_id = jdbi.withHandle(
+                        handle ->
+                                handle.createQuery("select user_id from users where username = :username")
+                                        .bind("username", username)
+                                        .map((rs, ctx) -> rs.getInt("user_id"))
+                                        .list().get(0));
+            }
+            catch(IndexOutOfBoundsException e)
+            {
+                removeChannel(channel.getChannelName());
+                return false;
+            }
 
+
+            int finalUser_id = user_id;
             jdbi.withHandle(h -> h.createUpdate("INSERT INTO chat_participants (chat_id, user_id) VALUES (:chat_id, :user_id)  ")
                     .bind("chat_id",chat_id)
-                    .bind("user_id",user_id)
+                    .bind("user_id", finalUser_id)
                     .execute());
+
         }
+        return true;
     }
     
     @Override
@@ -229,6 +236,7 @@ public class ChannelMapper implements ChatDao {
                 .execute());
 
         System.out.println("Chat channel " + chat_name + " remove successfully");
+
 
     }
 

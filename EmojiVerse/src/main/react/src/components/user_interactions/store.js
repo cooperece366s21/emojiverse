@@ -57,9 +57,12 @@ export class Store extends React.Component{
 			get_response.json().then(data=>{
 				console.log(data)
 				
-				localStorage.setItem('emoji_coins', data.emoji_coins);
-				this.setState({emojiCoins : data.emoji_coins})
-				window.location.replace("http://localhost:3000/store");
+				if(data.verified !== false)
+				{
+					localStorage.setItem('emoji_coins', data.emoji_coins);
+					this.setState({emojiCoins : data.emoji_coins})
+					window.location.replace("http://localhost:3000/store");
+				}
 				
 			});
           }
@@ -89,11 +92,12 @@ export class Store extends React.Component{
             console.log("Response Worked! ");
 			get_response.json().then(data=>{
 				console.log(data)
-				
-				localStorage.setItem('emoji_coins', data.emoji_coins);
-				this.setState({emojiCoins : data.emoji_coins})
-				window.location.replace("http://localhost:3000/store");
-				
+				if(data.verified !== false)
+				{
+					localStorage.setItem('emoji_coins', data.emoji_coins);
+					this.setState({emojiCoins : data.emoji_coins})
+					window.location.replace("http://localhost:3000/store");
+				}
 			});
           }
 		  else
@@ -121,11 +125,12 @@ export class Store extends React.Component{
             console.log("Response Worked! ");
 			get_response.json().then(data=>{
 				console.log(data)
-				
-				localStorage.setItem('emoji_coins', data.emoji_coins);
-				this.setState({emojiCoins : data.emoji_coins})
-				window.location.replace("http://localhost:3000/store");
-				
+				if(data.verified !== false)
+				{
+					localStorage.setItem('emoji_coins', data.emoji_coins);
+					this.setState({emojiCoins : data.emoji_coins})
+					window.location.replace("http://localhost:3000/store");
+				}
 			});
           }
 		  else
@@ -153,11 +158,12 @@ export class Store extends React.Component{
             console.log("Response Worked! ");
 			get_response.json().then(data=>{
 				console.log(data)
-				
-				localStorage.setItem('emoji_coins', data.emoji_coins);
-				this.setState({emojiCoins : data.emoji_coins})
-				window.location.replace("http://localhost:3000/store");
-				
+				if(data.verified !== false)
+				{
+					localStorage.setItem('emoji_coins', data.emoji_coins);
+					this.setState({emojiCoins : data.emoji_coins})
+					window.location.replace("http://localhost:3000/store");
+				}
 			});
           }
 		  else
@@ -185,11 +191,12 @@ export class Store extends React.Component{
             console.log("Response Worked! ");
 			get_response.json().then(data=>{
 				console.log(data)
-				
-				localStorage.setItem('emoji_coins', data.emoji_coins);
-				this.setState({emojiCoins : data.emoji_coins})
-				window.location.replace("http://localhost:3000/store");
-				
+				if(data.verified !== false)
+				{
+					localStorage.setItem('emoji_coins', data.emoji_coins);
+					this.setState({emojiCoins : data.emoji_coins})
+					window.location.replace("http://localhost:3000/store");
+				}
 			});
           }
 		  else
@@ -217,11 +224,12 @@ export class Store extends React.Component{
             console.log("Response Worked! ");
 			get_response.json().then(data=>{
 				console.log(data)
-				
-				localStorage.setItem('emoji_coins', data.emoji_coins);
-				this.setState({emojiCoins : data.emoji_coins})
-				window.location.replace("http://localhost:3000/store");
-				
+				if(data.verified !== false)
+				{
+					localStorage.setItem('emoji_coins', data.emoji_coins);
+					this.setState({emojiCoins : data.emoji_coins})
+					window.location.replace("http://localhost:3000/store");
+				}
 			});
           }
 		  else

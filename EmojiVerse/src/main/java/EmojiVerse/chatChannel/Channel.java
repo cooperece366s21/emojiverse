@@ -22,8 +22,8 @@ public class Channel {
     public Channel(int id) {
     	this.id = id;
     }
-    public Channel(int id, List<String> userList, String channelName) {
-    	this.id = id;
+    public Channel(List<String> userList, String channelName) {
+
     	this.userList = userList;
     	this.channelName = channelName;
     	// for e in userList, send message to user dao to add to list

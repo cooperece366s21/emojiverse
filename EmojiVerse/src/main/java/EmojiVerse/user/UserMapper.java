@@ -78,14 +78,26 @@ public class UserMapper implements UserDao {
     /*friend funcs*/
 
     @Override
-    public void addFriend(String username, String friend_username) {
+    public boolean addFriend(String username, String friend_username) {
         int user_id = getUserIdFromUserName(username);
+
+        List<Integer> friend_usernames = jdbi.withHandle(
+                handle ->
+                        handle.createQuery("select user_id from users where username  = :friend_username")
+                                .bind("friend_username",friend_username)
+                                .map((rs, ctx) -> rs.getInt("user_id"))
+                                .list());
+        if(friend_usernames.isEmpty())
+        {
+            return false;
+        }
         jdbi.withHandle(h -> h.createUpdate("INSERT INTO friends " +
                 "(friend_username, user_id) " +
                 "VALUES (:friend_username, :user_id) ")
                 .bind("friend_username",friend_username)
                 .bind("user_id",user_id)
                 .execute());
+        return true;
     }
 
     @Override

@@ -26,7 +26,7 @@ public interface ChatDao {
 	
 	/* channel funcs*/
 	
-	void addChannel(Channel channel, String requester_username);
+	boolean addChannel(Channel channel, String requester_username);
 	String getChannelList(String username);
 	public void removeChannel(String chat_name);
 

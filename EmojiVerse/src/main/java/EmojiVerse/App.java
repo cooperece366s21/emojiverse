@@ -139,16 +139,24 @@ public class App
 			List<String> unameList = Arrays.asList(json.getString("users").split(","));
 			String chat_name = json.getString("chatName");
 			System.out.println(unameList);
+			Map<String, Object> map = new HashMap<>();
 
-			int id = chatMapper.getNextChatId();
-			System.out.println(id);
-			Channel channel = new Channel(id,unameList,chat_name);
+			Channel channel = new Channel(unameList,chat_name);
 
 			//			Map<String, Object> map = new HashMap<>();
 			// 			I think this line is not needed? --Bonny
 
-			chatMapper.addChannel(channel,username);
-			return chatMapper.getChannelList(username);
+			boolean verified = chatMapper.addChannel(channel,username);
+			if(verified == true)
+			{
+				return chatMapper.getChannelList(username);
+			}
+			else
+			{
+				map.put("verified",false);
+				return gson.toJson(map);
+			}
+
 		});
 		
 		post("/chats", (req, res) -> {
@@ -200,11 +208,20 @@ public class App
 
 
 		post("/addFriend", (req, res) -> {
+			Map<String, Object> map = new HashMap<>();
 			JSONObject json = new JSONObject(req.body());
 			String friend_username = json.getString("friend_username");
 			String username = json.getString("username");
-			usermapper.addFriend(username, friend_username);
-			return usermapper.getFriendList(username);
+			boolean verified = usermapper.addFriend(username, friend_username);
+			if(verified == true)
+			{
+				return usermapper.getFriendList(username);
+			}
+			else {
+				map.put("verified", false);
+				return gson.toJson(map);
+			}
+
 		});
 
 		post("/removeFriend", (req, res) -> {
@@ -266,12 +283,23 @@ public class App
 		});
 
 		post("/buyEmoji", (req,res)->{
+			Map<String, Object> map = new HashMap<>();
+
 			JSONObject json = new JSONObject(req.body());
 			String username = json.getString("username");
 			String emoji = json.getString("emoji");
 			System.out.println("hello");
 			boolean verified = emojimapper.buyEmoji(username,emoji);
-			return emojimapper.getEmojiCoins(username);
+			if(verified == true)
+			{
+				return emojimapper.getEmojiCoins(username);
+			}
+			else
+			{
+				map.put("verified", false);
+				return gson.toJson(map);
+			}
+
 		});
 	}
 }

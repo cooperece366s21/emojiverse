@@ -15,7 +15,7 @@ public interface UserDao {
 	
 	/*friend funcs*/
 	
-	void addFriend(String username, String friend_username);
+	boolean addFriend(String username, String friend_username);
 	void removeFriend(String username, String friend_username);
 	boolean isFriendsWith(User source, User target);
 	String getFriendList(String username);
