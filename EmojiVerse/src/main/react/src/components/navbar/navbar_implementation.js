@@ -11,31 +11,24 @@ export class NavBar extends React.Component {
 	constructor(props)
 	{
 		super(props);
-		this.state = {navbarOpen: false, emojiCoins : localStorage.getItem("emoji_coins"), test : ''};
+		this.state = {navbarOpen: false, test : ''};
 		this.handleNavbar = this.handleNavbar.bind(this);
-	}
-	
-	
-	componentWillUpdate(nextProps, nextState) {
-		if (nextState.status != this.state.status) {
-			this.setState({emojiCoins : localStorage.getItem("emoji_coins")})
-		}
-	}
-	componentDidMount() {
 		
-		this.setState({emojiCoins : localStorage.getItem("emoji_coins")})
-  }
+	}
+	
+	
 	handleNavbar = () => {
 		this.setState({ navbarOpen: !this.state.navbarOpen });
 	}
 	render() {
 		return (
 		<>
-		<h1>localStorage.getItem("emoji_coins")</h1>
+			
 			<Navbar 
 			navbarState={this.state.navbarOpen} 
 			handleNavbar={this.handleNavbar}
-			emojiCoins = {this.state.emojiCoins}
+			
+			
 			/>
 			<GlobalStyles />
 		</>

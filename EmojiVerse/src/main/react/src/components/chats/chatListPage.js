@@ -12,8 +12,9 @@ export const ChatListPage = ()  => {
     const[chatName,setChatName] = useState('')
     const[users,setUsers] = useState('')
     const[chatNames,setChatNames] = useState('')
-    const username = localStorage.getItem("username")
+	const username = localStorage.getItem("username")
     const chat_names = localStorage.getItem("chat_names").split("$,")
+	
 
 
 
@@ -22,6 +23,8 @@ export const ChatListPage = ()  => {
       <Form>
       <NavBar/>
         <Form.Field className = 'white-box'>
+		<br></br>
+		<br></br>
             <h1>CHATS FOR {username}</h1>
             <h3>----------------------------------------------</h3>
             <Input

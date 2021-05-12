@@ -6,6 +6,7 @@ import BurgerMenu from "./BurgerMenu";
 import CollapseMenu from "./CollapseMenu";
 import { Form, Input, Button } from 'semantic-ui-react';
 import api from '../../services/api'
+
 const Navbar = (props) => {
   const barAnimation = useSpring({
     from: { transform: 'translate3d(0, -10rem, 0)' },
@@ -28,12 +29,8 @@ const Navbar = (props) => {
           <Brand />
 		  
           <NavLinks style={linkAnimation}>
-           <div class="ui yellow button">
-    <i class="bitcoin icon"></i>EmojiCoins
-  </div><a class="ui basic left pointing label">
-    {props.emojiCoins}
-  </a>
-			<Button className = "ui inverted button"><a href = "/chatList">ChatList</a></Button>
+          
+			<Button className = "ui inverted button" ><a href = "/chatList">ChatList</a></Button>
             <Button className="ui inverted button" onClick = {async () => api.getEmojiStore(username)}><a href="/store">Store</a></Button>
             <Button className = "ui inverted button"><a href="/profile">Profile</a></Button>
 			<Button className="ui inverted button"><a href="/">Log-Out</a></Button>

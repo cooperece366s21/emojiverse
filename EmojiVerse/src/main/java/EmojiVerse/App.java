@@ -250,23 +250,27 @@ public class App
 			return emojimapper.getEmojisFromStore(username);
 		});
 
-		post("/getEmojiPrice", (req,res)->{
-			JSONObject json = new JSONObject(req.body());
-			String emoji = json.getString("emoji");
-			System.out.println(emoji);
-			return emojimapper.getEmojiPrice(emoji);
-		});
-
 		post("/getUserEmojis", (req,res)->{
 			JSONObject json = new JSONObject(req.body());
+
 			String username = json.getString("username");
-			System.out.println("Hello");
+
+			//System.out.println(username);
 			return emojimapper.getUserEmojis(username);
 		});
 
 		post("/getEmojiCoins", (req,res)->{
 			JSONObject json = new JSONObject(req.body());
 			String username = json.getString("username");
+			return emojimapper.getEmojiCoins(username);
+		});
+
+		post("/buyEmoji", (req,res)->{
+			JSONObject json = new JSONObject(req.body());
+			String username = json.getString("username");
+			String emoji = json.getString("emoji");
+			System.out.println("hello");
+			boolean verified = emojimapper.buyEmoji(username,emoji);
 			return emojimapper.getEmojiCoins(username);
 		});
 	}

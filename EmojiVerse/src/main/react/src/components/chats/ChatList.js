@@ -5,6 +5,8 @@ import {Redirect} from 'react-router-dom';
 import {NavBar} from '../navbar/navbar_implementation'
 import api from '../../services/api'
 
+const username = localStorage.getItem("username")
+
 export const ChatList = ()  => {
 const[verified,setVerified] = useState(false)
 const[chatName,setChatName] = useState('')

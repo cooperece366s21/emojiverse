@@ -32,13 +32,16 @@ public class EmojiMapper implements EmojiJDBI{
     @Override
     public void subtractEmojiCoins(String username, int price) {
         jdbi.withHandle(h -> h.createUpdate("update users" +
-                "set emoji_coins = emoji_coins-price" +
-                "where username = :username")
+                " set emoji_coins = emoji_coins- :price" +
+                " where username = :username")
+                .bind("price",price)
                 .bind("username",username)
                 .execute());
 
 
     }
+
+
 
     @Override
     public String getEmojiCoins(String username) {
@@ -53,39 +56,6 @@ public class EmojiMapper implements EmojiJDBI{
         map.put("emoji_coins",emoji_coins);
         System.out.println(emoji_coins);
         return gson.toJson(map);
-    }
-
-    @Override
-    public void addEmoji(String emoji, String username) {
-        int user_id = jdbi.withHandle(
-                handle ->
-                        handle.createQuery("select user_id from users where username  = :username")
-                                .bind("username",username)
-                                .map((rs, ctx) -> rs.getInt("user_id"))
-                                .list().get(0));
-
-        int emoji_id = jdbi.withHandle(
-                handle ->
-                        handle.createQuery("select emoji_id from emoji_store where emoji  = :emoji")
-                                .bind("emoji",emoji)
-                                .map((rs, ctx) -> rs.getInt("emoji_id"))
-                                .list().get(0));
-
-        jdbi.withHandle(h -> h.createUpdate("INSERT INTO  emojis" +
-                "(:emoji_id,:user_id) " +
-                "VALUES (:emoji_id, :user_id) ")
-                .bind("emoji_id",emoji_id)
-                .bind("user_id",user_id)
-                .execute());
-        int price = jdbi.withHandle(
-                handle ->
-                        handle.createQuery("select emoji_price from emoji_store inner join emojis where emoji  = :emoji")
-                                .bind("emoji",emoji)
-                                .map((rs, ctx) -> rs.getInt("emoji_price"))
-                                .list().get(0));
-
-        subtractEmojiCoins(username, price);
-
     }
 
     @Override
@@ -231,7 +201,7 @@ public class EmojiMapper implements EmojiJDBI{
 
     }
 
-    public String getEmojiPrice(String emoji)
+    public int getEmojiPrice(String emoji)
     {
         Gson gson = new Gson();
         Map<String, Object> map = new HashMap<>();
@@ -243,9 +213,24 @@ public class EmojiMapper implements EmojiJDBI{
                                 .bind("emoji",emoji)
                                 .map((rs, ctx) -> rs.getInt("emoji_price"))
                                 .list().get(0));
-        map.put("price",price);
-        System.out.println(price);
-        return gson.toJson(map);
+
+        return price;
+    }
+
+    public String getEmojiCategory(String emoji)
+    {
+        Gson gson = new Gson();
+        Map<String, Object> map = new HashMap<>();
+
+        String category = jdbi.withHandle(
+                handle ->
+                        handle.createQuery("select category from emoji_store" +
+                                " where emoji = :emoji")
+                                .bind("emoji",emoji)
+                                .map((rs, ctx) -> rs.getString("category"))
+                                .list().get(0));
+
+        return category;
     }
 
     public String getUserEmojis(String username)
@@ -319,6 +304,54 @@ public class EmojiMapper implements EmojiJDBI{
 
         return gson.toJson(map);
     }
+    @Override
+    public boolean buyEmoji(String username, String emoji) {
+        Map<String, Object> map = new HashMap<>();
+        int price = getEmojiPrice(emoji);
 
+        int emoji_coins = jdbi.withHandle(
+                handle ->
+                        handle.createQuery("select emoji_coins from users where username  = :username")
+                                .bind("username",username)
+                                .map((rs, ctx) -> rs.getInt("emoji_coins"))
+                                .list().get(0));
+        if(emoji_coins < price)
+        {
+            System.out.println(emoji_coins < price);
+            return false;
+        }
+        else
+        {
+            map.put("verified",true);
+
+            subtractEmojiCoins(username, price);
+
+            int emoji_id = jdbi.withHandle(
+                    handle ->
+                            handle.createQuery("select emoji_id from emoji_store where emoji  = :emoji")
+                                    .bind("emoji",emoji)
+                                    .map((rs, ctx) -> rs.getInt("emoji_id"))
+                                    .list().get(0));
+            int user_id = jdbi.withHandle(
+                    handle ->
+                            handle.createQuery("select user_id from users where username  = :username")
+                                    .bind("username",username)
+                                    .map((rs, ctx) -> rs.getInt("user_id"))
+                                    .list().get(0));
+
+            jdbi.withHandle(h -> h.createUpdate("INSERT INTO  emojis" +
+                    " (emoji_id,user_id) " +
+                    "VALUES (:emoji_id, :user_id) ")
+                    .bind("emoji_id",emoji_id)
+                    .bind("user_id",user_id)
+                    .execute());
+
+            return true;
+
+
+        }
+
+
+    }
 
 }

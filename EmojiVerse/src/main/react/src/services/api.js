@@ -154,7 +154,7 @@ export async function populateEmojiStore(peopleEmojis : string , category : stri
 			
 }}
 
-export async function getEmojiStore(username : string)
+export async function getEmojiStore(user : string)
 {
 		    const response = await fetch("/getEmojisFromEmojiStore", {
             method: "POST",
@@ -163,7 +163,7 @@ export async function getEmojiStore(username : string)
             },
             body:
               JSON.stringify({
-			  username : username})
+			  username: user,users:'user_list', chatName: 'chat_name'})
 		  })
 			if (response.ok) {
             console.log("Response Worked! ");
@@ -244,47 +244,19 @@ export async function sendMessage(chat_name: string, userName: string, Message: 
 		}
 }
 
-export async function getEmojiPrice(emoji : string)
-{
-		    const response = await fetch("/getEmojiPrice", {
-            method: "POST",
-            headers: {
-              "Content_Type": "application/json"
-            },
-            body:
-              JSON.stringify({
-			  emoji : emoji})
-		  })
-			if (response.ok) {
-            console.log("Response Worked! ");
-			
-			response.json().then(data=>{
-				console.log(data)
-				return data.price
-			
-				
-			});
+
 	
-			
-            }
-			else
-			{
-				console.log("not found")
-				
-			
-}}
-	
-export async function getUserEmojis(username : string)
+export async function getUserEmojis(user : string)
 {
-		    const response = await fetch("/getUserEmojis", {
-            method: "POST",
-            headers: {
-              "Content_Type": "application/json"
-            },
-            body:
-              JSON.stringify({
-			  username : username})
-		  })
+		const response = await fetch("/getUserEmojis", {
+		method: "POST",
+		headers: {
+			"Content_Type": "application/json"
+		},
+		body:
+			JSON.stringify({
+				username: user, chatName: 'chat_name'})
+	})
 			if (response.ok) {
             console.log("Response Worked! ");
 			
@@ -411,6 +383,33 @@ export async function loadEmojiCoins(user : string){
 			  console.log('not found');
 		  }
 }
+
+export async function buyEmoji(user : string, emoji : string){
+	const get_response = await fetch("/buyEmoji", {
+            method: "POST",
+            headers: {
+              "Content_Type": "application/json"
+            },
+            body:
+              JSON.stringify({
+			  username: user, emoji : emoji})
+            })
+			if (get_response.ok) {
+            console.log("Response Worked! ");
+			get_response.json().then(data=>{
+				console.log(data)
+				if(data.verified===true)
+				{
+					localStorage.setItem('emoji_coins', data.emoji_coins);
+					window.location.replace("http://localhost:3000/store");
+				}
+			});
+          }
+		  else
+		  {
+			  console.log('not found');
+		  }
+}
 	
 let exports = {
      addFriend,
@@ -421,12 +420,12 @@ let exports = {
 	removeChat,
 	sendMessage,
 	getEmojiStore,
-	getEmojiPrice,
 	getUserEmojis,
 	loadChatNames,
 	loadFriends,
 	authenticateCredentials,
-	loadEmojiCoins
+	loadEmojiCoins,
+	buyEmoji
 
 }
 

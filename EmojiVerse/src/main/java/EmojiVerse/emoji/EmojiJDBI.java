@@ -6,7 +6,9 @@ public interface EmojiJDBI {
 
     void subtractEmojiCoins(String username, int price);
 
-    void addEmoji(String emoji, String username);
+    boolean buyEmoji(String username, String emoji);
+
+
 
     void addEmojiToStore(String emoji,int price, String category);
 
